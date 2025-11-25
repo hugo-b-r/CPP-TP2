@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Test  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined ( XXX_H )
-#define XXX_H
+//---------- Interface de la classe <Test> (fichier Test.h) ----------------
+#if ! defined ( TEST_H )
+#define TEST_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,26 +17,26 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
+// Rôle de la classe <Test>
 //
 //
 //------------------------------------------------------------------------
 
-class Xxx : public Ancetre
+class Test 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    static void TestTous();
+  // Mode d'emploi :
+  //    Quand appelée, realise tout le test de catalogue
+  // Contrat :
+  //
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Xxx & operator = ( const Xxx & unXxx );
+    Test & operator = ( const Test & unTest );
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,19 +44,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Xxx ( const Xxx & unXxx );
+    Test ( const Test & unTest );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Xxx ( );
+    Test ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Xxx ( );
+    virtual ~Test ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -67,11 +67,14 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+
+
+
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
+//-------------------------------- Autres définitions dépendantes de <Test>
 
-#endif // XXX_H
+#endif // TEST_H
 

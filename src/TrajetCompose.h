@@ -30,19 +30,19 @@ class TrajetCompose : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    virtual char * VilleDepart ();
+    virtual char * VilleDepart () const override;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual char * VilleArrivee ();
+    virtual char * VilleArrivee () const override;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void Afficher ();
+    virtual void Afficher () const override;
     // Mode d'emploi :
     //
     // Contrat :
@@ -59,6 +59,12 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     TrajetCompose ( const TrajetCompose & unTrajetCompose );
+    // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+
+    TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
@@ -82,8 +88,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+    int nbTrajets;  
     TrajetSimple * trajets;
-    int nbTrajets;
+    
 
 };
 

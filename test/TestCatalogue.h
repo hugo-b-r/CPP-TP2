@@ -1,14 +1,14 @@
 /*************************************************************************
-                           TestTrajetCompose  -  description
+                           TestCatalogue  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <TestTrajetCompose> (fichier TestTrajetCompose.h) ----------------
-#if ! defined ( TESTTRAJETCOMPOSE_H )
-#define TESTTRAJETCOMPOSE_H
+//---------- Interface de la classe <TestCatalogue> (fichier TestCatalogue.h) ----------------
+#if ! defined ( TESTCATALOGUE_H )
+#define TESTCATALOGUE_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,27 +17,26 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <TestTrajetCompose>
+// Rôle de la classe <TestCatalogue>
 //
 //
 //------------------------------------------------------------------------
 
-class TestTrajetCompose
+class TestCatalogue 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    static void TestTous();
+    void TestTous();
+  // Mode d'emploi :
+  //    Quand appelée, realise tout le test de catalogue
+  // Contrat :
+  //
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    TestTrajetCompose & operator = ( const TestTrajetCompose & unTestTrajetCompose );
+    TestCatalogue & operator = ( const TestCatalogue & unTestCatalogue );
     // Mode d'emploi :
     //
     // Contrat :
@@ -45,19 +44,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    TestTrajetCompose ( const TestTrajetCompose & unTestTrajetCompose );
+    TestCatalogue ( const TestCatalogue & unTestCatalogue );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    TestTrajetCompose ( );
+    TestCatalogue ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~TestTrajetCompose ( );
+    virtual ~TestCatalogue ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,11 +67,33 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+    void testAfficher();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonctio nafficher de catalogue
+  // Contrat :
+    void testRechercheParcours1();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
+  // Contrat :
+    void testRechercheParcours2();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
+  // Contrat :
+  //
+    void testAjouterTrajet();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonction d'ajout de traj de catalogue
+  // Contrat :
+  //
+
+
+
+
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <TestTrajetCompose>
+//-------------------------------- Autres définitions dépendantes de <TestCatalogue>
 
-#endif // TESTTRAJETCOMPOSE_H
+#endif // TESTCATALOGUE_H
 

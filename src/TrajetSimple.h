@@ -30,31 +30,31 @@ class TrajetSimple : public Trajet
 public:
 //----------------------------------------------------- Méthodes publiques
 
-virtual char * VilleDepart ();
+    virtual char * VilleDepart () const override;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual char * VilleArrivee ();
+    virtual char * VilleArrivee () const override;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual char * MoyenDeTransport ();
+    virtual char * MoyenDeTransport () const;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void Afficher ();
+    virtual void Afficher () const override;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    
+
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -77,6 +77,11 @@ virtual char * VilleDepart ();
     //
     // Contrat :
     //
+    TrajetSimple ( char * uneVilleDepart, char * uneVilleArrivee, char * moyenTransport );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //  les chaines char * sont allouées sur le tas dynamiquement
 
     virtual ~TrajetSimple ( );
     // Mode d'emploi :
@@ -99,4 +104,3 @@ char * moyenDeTransport;
 //-------------------------------- Autres définitions dépendantes de <TrajetSimple>
 
 #endif // TRAJETSIMPLE_H
-

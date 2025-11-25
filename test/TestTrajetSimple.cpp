@@ -1,71 +1,78 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TestTrajetSimple  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <TestTrajetSimple> (fichier TestTrajetSimple.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
-#include <iostream>
+
 
 //------------------------------------------------------ Include personnel
-#include "Xxx.h"
+#include "TestTrajetSimple.h"
+
+#include <iostream>
+using namespace std;
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
+// type TestTrajetSimple::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
+void TestTrajetSimple::TestTous()
+{
+
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
-Xxx & Xxx::operator = ( const Xxx & unXxx )
+TestTrajetSimple & TestTrajetSimple::operator = ( const TestTrajetSimple & unTestTrajetSimple )
 // Algorithme :
 //
 {
+    return *this;
 } //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Xxx::Xxx ( const Xxx & unXxx )
+TestTrajetSimple::TestTrajetSimple ( const TestTrajetSimple & unTestTrajetSimple )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de copie de <TestTrajetSimple>" << endl;
 #endif
-} //----- Fin de Xxx (constructeur de copie)
+} //----- Fin de TestTrajetSimple (constructeur de copie)
 
 
-Xxx::Xxx ( )
+TestTrajetSimple::TestTrajetSimple ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <TestTrajetSimple>" << endl;
 #endif
-} //----- Fin de Xxx
+} //----- Fin de TestTrajetSimple
 
 
-Xxx::~Xxx ( )
+TestTrajetSimple::~TestTrajetSimple ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <TestTrajetSimple>" << endl;
 #endif
-} //----- Fin de ~Xxx
+} //----- Fin de ~TestTrajetSimple
 
 
 //------------------------------------------------------------------ PRIVE

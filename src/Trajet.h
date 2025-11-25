@@ -28,24 +28,23 @@ class Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    virtual char * VilleDepart ();
+    virtual char * VilleDepart () const;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual char * VilleArrivee ();
+    virtual char * VilleArrivee () const;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void Afficher ();
+    virtual void Afficher () const;
     // Mode d'emploi :
     //
     // Contrat :
     //
-
 
 //------------------------------------------------- Surcharge d'opérateurs
     Trajet & operator = ( const Trajet & unTrajet );
@@ -66,7 +65,7 @@ public:
     // Mode d'emploi :
     //
     // Contrat :
-    //
+    // 
 
     virtual ~Trajet ( );
     // Mode d'emploi :

@@ -13,41 +13,83 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-#include <cstdio>
-using namespace std;
 #include <iostream>
 #include <cstring>
 
+using namespace std;
+
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
+#include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
+const int NB_TRAJET_DEFAUT_CATA = 10;
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void Catalogue::Afficher()
+void Catalogue::Afficher() const
+// Algorithme :
+//
 {
+    #ifdef MAP
+    std::cout << "Appel à la méthode Afficher de <Catalogue>" << std::endl;
+    #endif
     for (int i =0; i< nbTrajets; i++){
-        Trajet Traj = trajets[i];
-        Traj.Afficher();
+        trajets[i]->Afficher();
     } //----- Fin de Méthode
 }
 
-void Catalogue::RechercheParcours(const char * VilleA, const char * VilleB)
+void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) const
+// Algorithme :
+//
 {
+    int compt =0;
     for (int i =0; i< nbTrajets; i++){
-        Trajet Traj = trajets[i];
-        if (Traj.VilleDepart()== VilleA)
-        {
-            // mqen,fMQKEf IHEDJKEFDJOKLEZDJOKLEFZSDPOJJEZFSDOJEZFDJOEFDIJHBJESFDIHBJEFSDIHBJESDIHB ESDJILJEFSDVJPOPLKN.nSFDXJPL.EFSFXOJMKEZFSDPOJEZFSDùOSDFVOJJNEDSVIJJLBKSDFSHJBDSclAKQSN
-            //EPIHAKLFJQDVopNKMefL AjVQDO¨nEFKmVqdjoNEFZKmVGNmlKLGJDVIPKEJMLGN
-            // ( il y avait PPP ici)
+        if (!strcmp(trajets[i]->VilleDepart(), VilleA) && !strcmp(trajets[i]->VilleArrivee(), VilleB)){
+            compt +=1;
+            cout << compt << " : ";
+            trajets[i]->Afficher();
         }
-        Traj.Afficher();
-    } //----- Fin de Méthode
+
+    }
 }
 
+void Catalogue::RechercheParcours2 ( const char * VilleA, const char * VilleB ) const
+// Algorithme :
+//
+{
+    for (int i =0; i< nbTrajets; i++){
+        Trajet *Traj = trajets[i];
+        if (Traj->VilleDepart()== VilleA && Traj->VilleArrivee()== VilleB){
+            Traj->Afficher();
+        }
+
+    }
+}
+
+
+void Catalogue::AjouterTrajet ( Trajet * traj )
+{
+    #ifdef MAP
+    std::cout << "Appel à l'ajout d'un trajet dans Catalogue" << std::endl;
+    #endif
+
+    trajets[nbTrajets] = traj;
+    if (nbTrajets == tailleTrajets) {
+        // On ne change que si on veut vraiment
+        tailleTrajets *= 2;
+        Trajet ** newtrajets =  new Trajet*[tailleTrajets];
+        for (int i = 0; i < nbTrajets-1; i++) {
+            newtrajets[i] = trajets[i];
+        }
+        delete[] trajets;
+        trajets = newtrajets;
+    }
+    nbTrajets +=1;
+    //Trajet * oldtrajets = trajets;
+
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
@@ -57,8 +99,9 @@ Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
     #ifdef MAP
         cout << "Appel à l'opérateur d'affectation de <Catalogue>" << endl;
     #endif
-    trajets = new Trajet[nbTrajets];
+    trajets = new Trajet*[nbTrajets];
     nbTrajets = unCatalogue.nbTrajets;
+    tailleTrajets = unCatalogue.tailleTrajets;
     for (int i = 0; i < unCatalogue.nbTrajets; i++) {
         this->trajets[i] = unCatalogue.trajets[i];
     }
@@ -74,16 +117,21 @@ Catalogue::Catalogue ( const Catalogue & unCatalogue )
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Catalogue>" << endl;
 #endif
+
 } //----- Fin de Catalogue (constructeur de copie)
 
 
-Catalogue::Catalogue ( )
+Catalogue::Catalogue ( ) : nbTrajets(0), tailleTrajets(NB_TRAJET_DEFAUT_CATA)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
+    trajets = new Trajet*[NB_TRAJET_DEFAUT_CATA];
+    if (!trajets) {
+        std::cerr << "N'a pas pu initialiser le catalogue"<< std::endl;
+    }
 } //----- Fin de Catalogue
 
 
@@ -94,10 +142,12 @@ Catalogue::~Catalogue ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
+    if (trajets) {
+        delete[] trajets;
+    }
 } //----- Fin de ~Catalogue
 
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

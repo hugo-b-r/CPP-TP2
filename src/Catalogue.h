@@ -30,17 +30,27 @@ class Catalogue {
 
 public:
   //----------------------------------------------------- Méthodes publiques
-  void Afficher();
+  void Afficher() const;
   // Mode d'emploi :
   //    Quand appelée, affiche tout les trajets du catalogue
   // Contrat :
   //
 
-  void RechercheParcours(const char * VilleA, const char * VilleB);
+  void RechercheParcours1(const char * VilleA, const char * VilleB) const;
   // Mode d'emploi :
   //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
   // Contrat :
   //
+  void RechercheParcours2(const char * VilleA, const char * VilleB) const;
+  // Mode d'emploi :
+  //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
+  // Contrat :
+  //
+  void AjouterTrajet(Trajet * Traj);
+  // Mode d'emploi :
+  //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
+  // Contrat :
+  //  Prend la possession du trajet passé par pointeur
 
   //------------------------------------------------- Surcharge d'opérateurs
   Catalogue &operator=(const Catalogue &uCatalogue);
@@ -75,7 +85,8 @@ protected:
 
   //----------------------------------------------------- Attributs protégés
   int nbTrajets;
-  Trajet *trajets;
+  int tailleTrajets;
+  Trajet **trajets;
 };
 
 //-------------------------------- Autres définitions dépendantes de Catalogue>

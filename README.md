@@ -71,12 +71,13 @@ classDiagram
         #Trajet * trajets
         #int nbTrajets
         
-        +Catalogue()
+        +Catalogue() - OK
         +Catalogue(const Catalog & c)
-        +~Catalogue()
+        +~Catalogue() - OK
         +void Afficher() - OK
-        +Catalogue RechercheParcours(Ville A, Ville B)
-        +void AjouterTrajet(const Trajet traj)
+        +Catalogue RechercheParcours1(Ville A, Ville B) - OK
+        +Catalogue RechercheParcours2(Ville A, Ville B)
+        +void AjouterTrajet(const Trajet traj) - OK
     }
 
     class Trajet {
@@ -92,8 +93,8 @@ classDiagram
         #char * villeArrivee
         #char * moyenDeTransport
 
-        +Trajet()
-        +~Trajet()
+        +TrajetSimple()  OK
+        +~TrajetSimple() - OK
         +void Afficher() - OK
 
         +virtual char * VilleDepart() - OK
@@ -106,8 +107,8 @@ classDiagram
         #TrajetSimple * trajets
         #int nbTrajets
 
-        +TrajetCompose()
-        +~TrajetCompose()
+        +TrajetCompose() - OK
+        +~TrajetCompose() - OK
         +void Afficher() - OK
         +virtual char * VilleDepart() - OK
         +virtual char * VilleArrivee() - OK

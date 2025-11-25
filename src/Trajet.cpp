@@ -11,8 +11,10 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
+
 #include <iostream>
+
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
@@ -22,22 +24,33 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void Trajet::Afficher ()
+void Trajet::Afficher () const
 // Algorithme :
 //
-{ 
+{
+    #ifdef MAP
+        std::cout << "Appel à la méthode Afficher de trajet (celle que l'on ne veut pas appeler)" << std::endl;
+    #endif
 } //----- Fin de Méthode
 
-char * Trajet::VilleDepart ()
+char * Trajet::VilleDepart () const
 // Algorithme :
 //
-{ 
+{
+    #ifdef MAP
+        std::cout << "Appel à la méthode VilleDepart" << std::endl;
+    #endif
+    return nullptr;
 } //----- Fin de Méthode
 
-char * Trajet::VilleArrivee ()
+char * Trajet::VilleArrivee () const
 // Algorithme :
 //
-{ 
+{
+    #ifdef MAP
+        std::cout << "Appel à la méthode VilleArrivee" << std::endl;
+    #endif
+    return nullptr;
 } //----- Fin de Méthode
 
 
@@ -46,6 +59,10 @@ Trajet & Trajet::operator = ( const Trajet & unTrajet )
 // Algorithme :
 //
 {
+    #ifdef MAP
+        std::cout << "Appel à l'opérateur =" << std::endl;
+    #endif
+    return *this;
 } //----- Fin de operator =
 
 
@@ -83,4 +100,3 @@ Trajet::~Trajet ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

@@ -11,19 +11,20 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
+
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "TrajetCompose.h"
 
 //------------------------------------------------------------- Constantes
-const int DEFAULT_NB_TRAJETS = 10;
+const int NB_TRAJET_DEFAUT_COMP = 10;
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void TrajetCompose::Afficher ()
+void TrajetCompose::Afficher () const
 // Algorithme :
 //
 { 
@@ -33,12 +34,12 @@ void TrajetCompose::Afficher ()
     }
     cout << "\r\n";
 } //----- Fin de Méthode
-char * TrajetCompose:: VilleDepart()
+char * TrajetCompose:: VilleDepart() const
 {
     return trajets[0].VilleDepart();
 }//----- Fin de Méthode
 
-char * TrajetCompose:: VilleArrivee()
+char * TrajetCompose:: VilleArrivee() const
 {
     return trajets[nbTrajets-1].VilleArrivee();
 }//----- Fin de Méthode
@@ -63,7 +64,7 @@ TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompos
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose )
+TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTrajets(unTrajetCompose.nbTrajets)
 // Algorithme :
 //
 {
@@ -75,17 +76,30 @@ TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose )
     {
         trajets[i] = unTrajetCompose.trajets[i];
     }
-    nbTrajets = unTrajetCompose.nbTrajets;
 } //----- Fin de TrajetCompose (constructeur de copie)
 
+TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau), trajets(trajetsSimples) 
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
+#endif
 
-TrajetCompose::TrajetCompose ( ) : nbTrajets(0), trajets(new TrajetSimple[DEFAULT_NB_TRAJETS])
+}
+
+TrajetCompose::TrajetCompose ( ) : nbTrajets(0)
 // Algorithme :
 //TrajetSimple
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
+    trajets = new TrajetSimple[NB_TRAJET_DEFAUT_COMP];
+    if (!trajets) {
+        std::cerr << "N'a pas pu initialiser les trajets" << std::endl;
+    }
+
 } //----- Fin de TrajetCompose
 
 
@@ -96,7 +110,9 @@ TrajetCompose::~TrajetCompose ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
-    delete [] trajets;
+    if (trajets != nullptr) {
+        delete [] trajets;
+    }
 } //----- Fin de ~TrajetCompose
 
 

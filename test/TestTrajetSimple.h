@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TestTrajetSimple  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined ( XXX_H )
-#define XXX_H
+//---------- Interface de la classe <TestTrajetSimple> (fichier TestTrajetSimple.h) ----------------
+#if ! defined ( TESTTRAJETSIMPLE_H )
+#define TESTTRAJETSIMPLE_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
+// Rôle de la classe <TestTrajetSimple>
 //
 //
 //------------------------------------------------------------------------
 
-class Xxx : public Ancetre
+class TestTrajetSimple
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -33,10 +33,10 @@ public:
     //
     // Contrat :
     //
-
+    static void TestTous();
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Xxx & operator = ( const Xxx & unXxx );
+    TestTrajetSimple & operator = ( const TestTrajetSimple & unTestTrajetSimple );
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,19 +44,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Xxx ( const Xxx & unXxx );
+    TestTrajetSimple ( const TestTrajetSimple & unTestTrajetSimple );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Xxx ( );
+    TestTrajetSimple ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Xxx ( );
+    virtual ~TestTrajetSimple ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -71,7 +71,7 @@ protected:
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
+//-------------------------------- Autres définitions dépendantes de <TestTrajetSimple>
 
-#endif // XXX_H
+#endif // TESTTRAJETSIMPLE_H
 

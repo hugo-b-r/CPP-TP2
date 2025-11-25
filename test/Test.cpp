@@ -1,71 +1,83 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Test  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <Test> (fichier Test.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+
 using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Xxx.h"
+#include "Test.h"
+#include "TestCatalogue.h"
+#include "TestTrajetCompose.h"
+#include "TestTrajetSimple.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
+// type Test::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
+void Test::TestTous() {
+    TestCatalogue test_catalogue;
+    test_catalogue.TestTous();
+
+    TestTrajetSimple test_trajet_simple;
+    test_trajet_simple.TestTous();
+}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Xxx & Xxx::operator = ( const Xxx & unXxx )
+Test & Test::operator = ( const Test & unTest )
 // Algorithme :
 //
 {
+    return *this;
 } //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Xxx::Xxx ( const Xxx & unXxx )
+Test::Test ( const Test & unTest )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de copie de <Test>" << endl;
 #endif
-} //----- Fin de Xxx (constructeur de copie)
+} //----- Fin de Test (constructeur de copie)
 
 
-Xxx::Xxx ( )
+Test::Test ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <Test>" << endl;
 #endif
-} //----- Fin de Xxx
+} //----- Fin de Test
 
 
-Xxx::~Xxx ( )
+Test::~Test ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <Test>" << endl;
 #endif
-} //----- Fin de ~Xxx
+} //----- Fin de ~Test
 
 
 //------------------------------------------------------------------ PRIVE
