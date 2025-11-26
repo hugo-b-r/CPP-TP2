@@ -117,3 +117,11 @@ classDiagram
 
 
 ```
+
+## To-do 
+
+[ ] Finir l'alog complexe
+[ ] Finir tests TrajetCompose
+[ ] Finir tests TrajetSimple
+[ ] Finir tests TrajetSimple
+[ ] Checker la mémoire

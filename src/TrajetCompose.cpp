@@ -27,7 +27,7 @@ const int NB_TRAJET_DEFAUT_COMP = 10;
 void TrajetCompose::Afficher () const
 // Algorithme :
 //
-{ 
+{
     for (int i =0 ; i< nbTrajets ; i++){
         TrajetSimple traj = trajets[i];
         cout << "de"<< traj.VilleDepart() << "à" << traj.VilleArrivee() << "en" << traj.MoyenDeTransport() << "||";
@@ -78,13 +78,14 @@ TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTraje
     }
 } //----- Fin de TrajetCompose (constructeur de copie)
 
-TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau), trajets(trajetsSimples) 
+TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau), trajets(trajetsSimples)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
 #endif
+
 
 }
 
@@ -119,4 +120,3 @@ TrajetCompose::~TrajetCompose ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

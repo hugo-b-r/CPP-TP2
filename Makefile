@@ -9,14 +9,14 @@ TEST_TARGET = $(BUILD_DIR)/test_catalogue_interactif
 
 SRC:= $(wildcard src/*.cpp)
 
-#SRC := src/main.cpp src/Catalogue.cpp src/Trajet.cpp src/TrajetCompose.cpp src/TrajetSimple.cpp
+#SRC := src/main.cpp src/Catalogue.cpp src/TrajetCompose.cpp src/TrajetSimple.cpp
 
 OBJ := $(SRC:%.cpp=$(BUILD_DIR)/%.o)
 SRC_TEST := src/Trajet.cpp src/TrajetCompose.cpp src/TrajetSimple.cpp src/Catalogue.cpp test/TestCatalogue.cpp test/Test.cpp test/TestTrajetSimple.cpp test/TestTrajetCompose.cpp test/main.cpp
 OBJ_TEST := $(SRC_TEST:%.cpp=$(BUILD_DIR)/%.o)
 
 CFLAGS := -ansi -pedantic -Wall -std=c++11 -Isrc -Itest
-# LDFLAGS := 
+# LDFLAGS :=
 ifdef MAP
 	CFLAGS += -DMAP
 endif
@@ -42,7 +42,7 @@ $(TARGET): $(OBJ) | $(BUILD_DIR)
 $(BUILD_DIR)/%.o: %.cpp
 	@echo $(@D)
 	mkdir -p $(@D)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 
 test: $(TEST_TARGET)

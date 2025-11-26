@@ -76,7 +76,7 @@ public:
     // Contrat :
     //
 
-    virtual ~TrajetCompose ( );
+    virtual ~TrajetCompose ( ) override;
     // Mode d'emploi :
     //
     // Contrat :
@@ -88,13 +88,12 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    int nbTrajets;  
+    int nbTrajets;
     TrajetSimple * trajets;
-    
+
 
 };
 
 //-------------------------------- Autres définitions dépendantes de <TrajetCompose>
 
 #endif // TRAJETCOMPOSE_H
-

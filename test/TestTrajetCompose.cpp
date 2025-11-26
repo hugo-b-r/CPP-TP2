@@ -30,51 +30,11 @@ using namespace std;
 
 void TestTrajetCompose::TestTous()
 {
-    
+
 }
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-TestTrajetCompose & TestTrajetCompose::operator = ( const TestTrajetCompose & unTestTrajetCompose )
-// Algorithme :
-//
-{
-    return *this;
-} //----- Fin de operator =
-
-
-//-------------------------------------------- Constructeurs - destructeur
-TestTrajetCompose::TestTrajetCompose ( const TestTrajetCompose & unTestTrajetCompose )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <TestTrajetCompose>" << endl;
-#endif
-} //----- Fin de TestTrajetCompose (constructeur de copie)
-
-
-TestTrajetCompose::TestTrajetCompose ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <TestTrajetCompose>" << endl;
-#endif
-} //----- Fin de TestTrajetCompose
-
-
-TestTrajetCompose::~TestTrajetCompose ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <TestTrajetCompose>" << endl;
-#endif
-} //----- Fin de ~TestTrajetCompose
 
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

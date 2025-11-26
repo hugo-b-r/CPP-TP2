@@ -35,33 +35,6 @@ public:
     //
     static void TestTous();
 
-//------------------------------------------------- Surcharge d'opérateurs
-    TestTrajetSimple & operator = ( const TestTrajetSimple & unTestTrajetSimple );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    TestTrajetSimple ( const TestTrajetSimple & unTestTrajetSimple );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    TestTrajetSimple ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~TestTrajetSimple ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -74,4 +47,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <TestTrajetSimple>
 
 #endif // TESTTRAJETSIMPLE_H
-

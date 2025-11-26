@@ -35,47 +35,6 @@ void TestTrajetSimple::TestTous()
 
 }
 
-//------------------------------------------------- Surcharge d'opérateurs
-TestTrajetSimple & TestTrajetSimple::operator = ( const TestTrajetSimple & unTestTrajetSimple )
-// Algorithme :
-//
-{
-    return *this;
-} //----- Fin de operator =
-
-
-//-------------------------------------------- Constructeurs - destructeur
-TestTrajetSimple::TestTrajetSimple ( const TestTrajetSimple & unTestTrajetSimple )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <TestTrajetSimple>" << endl;
-#endif
-} //----- Fin de TestTrajetSimple (constructeur de copie)
-
-
-TestTrajetSimple::TestTrajetSimple ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <TestTrajetSimple>" << endl;
-#endif
-} //----- Fin de TestTrajetSimple
-
-
-TestTrajetSimple::~TestTrajetSimple ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <TestTrajetSimple>" << endl;
-#endif
-} //----- Fin de ~TestTrajetSimple
-
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

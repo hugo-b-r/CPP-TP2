@@ -143,6 +143,10 @@ Catalogue::~Catalogue ( )
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
     if (trajets) {
+        for (int i = 0; i < nbTrajets; i++) {
+            if (trajets[i])
+                delete trajets[i];
+        }
         delete[] trajets;
     }
 } //----- Fin de ~Catalogue

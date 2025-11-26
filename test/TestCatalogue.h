@@ -22,13 +22,13 @@
 //
 //------------------------------------------------------------------------
 
-class TestCatalogue 
+class TestCatalogue
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void TestTous();
+    static void TestTous();
   // Mode d'emploi :
   //    Quand appelée, realise tout le test de catalogue
   // Contrat :
@@ -36,51 +36,26 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    TestCatalogue & operator = ( const TestCatalogue & unTestCatalogue );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    TestCatalogue ( const TestCatalogue & unTestCatalogue );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    TestCatalogue ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~TestCatalogue ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-    void testAfficher();
+    static void testAfficher();
   // Mode d'emploi :
   //    Quand appelée, affiche des tests de la fonctio nafficher de catalogue
   // Contrat :
-    void testRechercheParcours1();
+    static void testRechercheParcours1();
   // Mode d'emploi :
   //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
   // Contrat :
-    void testRechercheParcours2();
+    static void testRechercheParcours2();
   // Mode d'emploi :
   //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
   // Contrat :
   //
-    void testAjouterTrajet();
+    static void testAjouterTrajet();
   // Mode d'emploi :
   //    Quand appelée, affiche des tests de la fonction d'ajout de traj de catalogue
   // Contrat :
@@ -96,4 +71,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <TestCatalogue>
 
 #endif // TESTCATALOGUE_H
-

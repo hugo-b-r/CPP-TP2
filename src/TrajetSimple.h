@@ -83,7 +83,7 @@ public:
     // Contrat :
     //  les chaines char * sont allouées sur le tas dynamiquement
 
-    virtual ~TrajetSimple ( );
+    virtual ~TrajetSimple ( ) override;
     // Mode d'emploi :
     //
     // Contrat :

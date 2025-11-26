@@ -7,26 +7,27 @@
 *************************************************************************/
 
 #include <iostream>
+using namespace std;
 #include <cstring>
 
 #include "Catalogue.h"
+#include "Trajet.h"
 #include "TrajetCompose.h"
 #include "TrajetSimple.h"
 
 // nombre mximal de caractères dans les chaines qui sont des noms de villes
-const int NB_CHAR_MAX_VILLE = 20; 
+const int NB_CHAR_MAX_VILLE = 20;
 
 void AfficherMenu(bool afficher_menu)
 {
     if (afficher_menu)
-        std::cout << "Bienvenue dans ce calculateur d'itinéraire !" << std::endl;
-    std::cout << "Vous avez le choix parmis les options suivantes:" << std::endl;
-    std::cout << "(0) Construction du catalogue - ajouter des trajets au catalogue " << std::endl;
-    std::cout << "(1) Affichage du catalogue courant" << std::endl;
-    std::cout << "(2) Recherche de parcours" << std::endl;
-    std::cout << "(3) Recherche de parcours constitué de plusieurs trajets enregistrés" << std::endl;
-    std::cout << "(4) Quitter le logiciel" << std::endl;
-
+        cout << "Bienvenue dans ce calculateur d'itinéraire !" << endl;
+    cout << "Vous avez le choix parmis les options suivantes:" << endl;
+    cout << "(0) Construction du catalogue - ajouter des trajets au catalogue " << endl;
+    cout << "(1) Affichage du catalogue courant" << endl;
+    cout << "(2) Recherche de parcours" << endl;
+    cout << "(3) Recherche de parcours constitué de plusieurs trajets enregistrés" << endl;
+    cout << "(4) Quitter le logiciel" << endl;
 }
 
 
@@ -40,20 +41,20 @@ void demanderAjoutTrajet(Catalogue & c)
         char ** villes = new char*[taille_tableau_trajets];
         char * ville_tmp = nullptr;
         TrajetSimple * trajetsSimples = nullptr;
-        
-        
-        std::cout << "(0) Ajouter une ville" << std::endl;
-        std::cout << "(1) Définir le moyen de transport" << std::endl;
-        std::cout << "(2) Enregistre le trajet définition/Sortie" << std::endl;
+
+
+        cout << "(0) Ajouter une ville" << endl;
+        cout << "(1) Définir le moyen de transport" << endl;
+        cout << "(2) Enregistre le trajet définition/Sortie" << endl;
         int choix;
-        std::cin >> choix;
+        cin >> choix;
         // on gère chacun des cas
         switch (choix) {
             case 0:
                 // ajout d'une ville
-                std::cout << "Nom de la ville ?" << std::endl;
+                cout << "Nom de la ville ?" << endl;
                 ville_tmp = new char[NB_CHAR_MAX_VILLE];
-                std::cin >> ville_tmp;
+                cin >> ville_tmp;
                 if (nb_villes < taille_tableau_trajets) {
                     villes[nb_villes] = ville_tmp;
                 } else {
@@ -73,18 +74,18 @@ void demanderAjoutTrajet(Catalogue & c)
             case 1:
                 // Définition du moyen de transport
                 moyen = new char[NB_CHAR_MAX_VILLE];
-                std::cin >> moyen;
+                cin >> moyen;
                 break;
             case 2:
                 if (nb_villes <2) {
-                    std::cout << "Il faut au moins 2 villes pour créer un trajet !" <<std::endl,
-                    std::cout << "Le trajet n'est pas enregistré, veuillez réessayer." << std::endl;
+                    cout << "Il faut au moins 2 villes pour créer un trajet !" <<endl,
+                    cout << "Le trajet n'est pas enregistré, veuillez réessayer." << endl;
                 } else if (!moyen) {
-                    std::cout << "Vous devez préciser un moyen de transport !" << std::endl;
-                    std::cout << "Le trajet n'est pas enregistré, veuillez réessayer." << std::endl;
+                    cout << "Vous devez préciser un moyen de transport !" << endl;
+                    cout << "Le trajet n'est pas enregistré, veuillez réessayer." << endl;
                 } else if (nb_villes == 2) {
                     // trajet simple
-                    TrajetSimple trS(villes[0], villes[1], moyen);
+                    TrajetSimple *trS = new TrajetSimple(villes[0], villes[1], moyen);
                     c.AjouterTrajet(trS);
                     delete[] villes;
                     doitContinuer = false;
@@ -92,26 +93,26 @@ void demanderAjoutTrajet(Catalogue & c)
                     // On crée un trajet composé
                     trajetsSimples = new TrajetSimple[nb_villes-1];
                     for (int i = 0; i < nb_villes-1; i++) {
-                        TrajetSimple trS(villes[i], villes[i+1], moyen);
+                        TrajetSimple trS = TrajetSimple(villes[i], villes[i+1], moyen);
                         trajetsSimples[i] = trS;
                     }
-                    TrajetCompose trC(trajetsSimples, nb_villes-1);
+                    TrajetCompose *trC = new TrajetCompose(trajetsSimples, nb_villes-1);
                     c.AjouterTrajet(trC);
                     delete[] villes;
                     delete[] trajetsSimples;
                     doitContinuer = false;
                 }
-                
+
                 break;
         }
     }
-    std::cout << "Quelle est la ville de départ ?" << std::endl;
+    cout << "Quelle est la ville de départ ?" << endl;
     char * villeA = new char[NB_CHAR_MAX_VILLE];
-    std::cin >> villeA;
+    cin >> villeA;
 
-    std::cout << "Quelle est la ville d'arrivée ?" << std::endl;
+    cout << "Quelle est la ville d'arrivée ?" << endl;
     char * villeB = new char[NB_CHAR_MAX_VILLE];
-    std::cin >> villeB;
+    cin >> villeB;
 
 }
 
@@ -125,13 +126,13 @@ void demanderRechercheBasique( const Catalogue & cata)
     char buffer[1000];
     int len;
 
-    std::cout << "Entrez le nom de la ville de départ : " << std::endl;
-    std::cin >> buffer;
+    cout << "Entrez le nom de la ville de départ : " << endl;
+    cin >> buffer;
     len = strlen(buffer);
     char * villeA = new char[len + 1];
 
-    std::cout << "Entrez le nom de la ville d'arrivée: " << std::endl;
-    std::cin >> buffer;
+    cout << "Entrez le nom de la ville d'arrivée: " << endl;
+    cin >> buffer;
     len = strlen(buffer);
     char * villeB = new char[len + 1];
 
@@ -143,14 +144,14 @@ void demanderRechercheComplexe( const Catalogue & cata)
 {
     char buffer[1000];
     int len;
-    
-    std::cout << "Entrez le nom de la ville de départ : " << std::endl;
-    std::cin >> buffer;
+
+    cout << "Entrez le nom de la ville de départ : " << endl;
+    cin >> buffer;
     len = strlen(buffer);
     char * villeA = new char[len + 1];
 
-    std::cout << "Entrez le nom de la ville d'arrivée: " << std::endl;
-    std::cin >> buffer;
+    cout << "Entrez le nom de la ville d'arrivée: " << endl;
+    cin >> buffer;
     len = strlen(buffer);
     char * villeB = new char[len + 1];
 
@@ -161,11 +162,11 @@ int main() {
 
     bool doitContinuer = true;
     int choix;
-    
+
     Catalogue cata;
     while (doitContinuer) {
         AfficherMenu(false);
-        std::cin >> choix;
+        cin >> choix;
         switch (choix) {
             case 0:
                 // ajout d'un trajet au catalogue

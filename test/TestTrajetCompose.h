@@ -36,33 +36,6 @@ public:
     static void TestTous();
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-    TestTrajetCompose & operator = ( const TestTrajetCompose & unTestTrajetCompose );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    TestTrajetCompose ( const TestTrajetCompose & unTestTrajetCompose );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    TestTrajetCompose ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~TestTrajetCompose ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -75,4 +48,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <TestTrajetCompose>
 
 #endif // TESTTRAJETCOMPOSE_H
-

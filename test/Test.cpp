@@ -32,11 +32,9 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 void Test::TestTous() {
-    TestCatalogue test_catalogue;
-    test_catalogue.TestTous();
+    TestCatalogue::TestTous();
 
-    TestTrajetSimple test_trajet_simple;
-    test_trajet_simple.TestTous();
+    TestTrajetSimple::TestTous();
 }
 
 
@@ -83,4 +81,3 @@ Test::~Test ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

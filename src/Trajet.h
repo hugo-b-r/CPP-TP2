@@ -28,19 +28,19 @@ class Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    virtual char * VilleDepart () const;
+    virtual char * VilleDepart () const = 0;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual char * VilleArrivee () const;
+    virtual char * VilleArrivee () const = 0;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void Afficher () const;
+    virtual void Afficher () const = 0;
     // Mode d'emploi :
     //
     // Contrat :
@@ -65,7 +65,7 @@ public:
     // Mode d'emploi :
     //
     // Contrat :
-    // 
+    //
 
     virtual ~Trajet ( );
     // Mode d'emploi :
@@ -85,4 +85,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <Trajet>
 
 #endif // TRAJET_H
-
