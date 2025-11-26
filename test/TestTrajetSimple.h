@@ -39,6 +39,7 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+    static void TestCreation();
 
 //----------------------------------------------------- Attributs protégés
 

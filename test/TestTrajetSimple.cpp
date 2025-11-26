@@ -11,13 +11,15 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-
+#include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "TestTrajetSimple.h"
+#include "TrajetSimple.h"
+#include "Test.h"
 
-#include <iostream>
-using namespace std;
+
 
 //------------------------------------------------------------- Constantes
 
@@ -32,7 +34,17 @@ using namespace std;
 
 void TestTrajetSimple::TestTous()
 {
+    TestCreation();
+}
 
+void TestTrajetSimple::TestCreation()
+{
+    Test::TestHeader("Afficher", "TrajetSimple");
+    cout << "de Paris à Brest en pédalo"<< endl;
+    Test::etAffiche();
+    TrajetSimple *s = new TrajetSimple("Paris", "Brest", "pédalo");
+    s->Afficher();
+    delete s;
 }
 
 //------------------------------------------------------------------ PRIVE

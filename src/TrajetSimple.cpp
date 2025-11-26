@@ -106,7 +106,7 @@ TrajetSimple::TrajetSimple ( ): villeDepart(nullptr), villeArrivee(nullptr), moy
 
 } //----- Fin de TrajetSimple
 
-TrajetSimple::TrajetSimple ( char * uneVilleDepart, char * uneVilleArrivee, char * unMoyenTransport )
+TrajetSimple::TrajetSimple ( const char * uneVilleDepart, const char * uneVilleArrivee, const char * unMoyenTransport )
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetSimple>" << endl;

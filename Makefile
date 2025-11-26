@@ -21,6 +21,10 @@ ifdef MAP
 	CFLAGS += -DMAP
 endif
 
+ifdef COLORS
+	CFLAGS += -DCOLORS
+endif
+
 ifeq ($(TARGET), DEBUG)
 	CFLAGS += -g
 endif

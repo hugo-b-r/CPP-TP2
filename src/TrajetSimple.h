@@ -77,7 +77,7 @@ public:
     //
     // Contrat :
     //
-    TrajetSimple ( char * uneVilleDepart, char * uneVilleArrivee, char * moyenTransport );
+    TrajetSimple ( const char * uneVilleDepart, const char * uneVilleArrivee, const char * moyenTransport );
     // Mode d'emploi :
     //
     // Contrat :

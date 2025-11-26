@@ -23,6 +23,7 @@ using namespace std;
 #include "TestCatalogue.h"
 #include "TrajetCompose.h"
 #include "TrajetSimple.h"
+#include "Test.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -32,40 +33,36 @@ using namespace std;
 void TestCatalogue::TestTous()
 // Algo:
 {
-  TestCatalogue::testAfficher();
-  TestCatalogue::testRechercheParcours1();
-  TestCatalogue::testRechercheParcours2();
-  TestCatalogue::testAjouterTrajet();
-  TestCatalogue::testAjouterAucunTrajet();
+  testAfficher();
+  testRechercheParcours1();
+  testRechercheParcours2();
+  testAjouterTrajet();
+  testAjouterAucunTrajet();
 }
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
 void TestCatalogue::testAfficher() {
-  cout << "--- TEST AFFICHER de Catalogue.cpp ---" << endl;
-  cout << "Test 1:" << endl;
-  cout << "    est censé afficher :" << endl;
+    Test::TestHeader("Afficher", "Catalogue");
   cout << "de Paris à Brest en Gateau" << "\r\n";
   Catalogue C1 = Catalogue();
   TrajetSimple *traj1 = new TrajetSimple("Paris", "Brest", "Gateau");
   C1.AjouterTrajet(traj1);
-  cout << "    et affiche :" << endl;
+  Test::etAffiche();
   C1.Afficher();
 }
 
 void TestCatalogue::testRechercheParcours1()
 // Algo:
 {
-  cout << "--- TEST Recherche de Parcours 1 de Catalogue.cpp ---" << endl;
-  cout << "Test 1:" << endl;
-  cout << "    est censé afficher :" << endl;
+  Test::TestHeader("Recherche Parcours 1", "Catalogue");
   cout << "1 : de Paris à Brest en Gateau" << std::endl;
   Catalogue C1 = Catalogue();
 
   TrajetSimple * traj1 = new TrajetSimple("Paris", "Brest", "Gateau");
   C1.AjouterTrajet(traj1);
-  cout << "    et affiche :" << endl;
+  Test::etAffiche();
   C1.RechercheParcours1("Paris", "Brest");
 }
 
@@ -77,9 +74,7 @@ void TestCatalogue::testRechercheParcours2()
 void TestCatalogue::testAjouterTrajet()
 // Algo:
 {
-    cout << "--- TEST AjouterTrajet de Catalogue.cpp ---" << endl;
-    cout << "Test 1:" << endl;
-    cout << "    est censé afficher :" << endl;
+    Test::TestHeader("Ajouter Trajet", "Catalogue");
     cout << "de Paris à Brest en Gateau" << "\r\n";
     cout << "de Chambéry à Lyon en Vélo" << "\r\n";
     cout << "de Berlin à Berlin en Canapé" << "\r\n";
@@ -92,19 +87,15 @@ void TestCatalogue::testAjouterTrajet()
     traj1 = new TrajetSimple("Berlin", "Berlin", "Canapé");
     C1.AjouterTrajet(traj1);
 
-    cout << "    et affiche :" << endl;
+    Test::etAffiche();
     C1.Afficher();
-    cout << "--------------------------------------" << endl;
 }
 
 void TestCatalogue::testAjouterAucunTrajet()
 // Algo:
 {
-    cout << "--- TEST AjouterTrajet de Catalogue.cpp ---" << endl;
-    cout << "Test 1:" << endl;
-    cout << "    est censé afficher :" << endl;
+    Test::TestHeader("Aucun ajout de trajet", "Catalogue");
     Catalogue C1 = Catalogue();
-    cout << "    et affiche :" << endl;
+    Test::etAffiche();
     C1.Afficher();
-    cout << "--------------------------------------" << endl;
 }

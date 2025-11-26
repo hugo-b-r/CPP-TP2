@@ -22,7 +22,7 @@
 //
 //------------------------------------------------------------------------
 
-class Test 
+class Test
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -33,34 +33,11 @@ public:
   //    Quand appelée, realise tout le test de catalogue
   // Contrat :
   //
+  static void TestHeader(const char * nomTest, const char * nomClasse);
+  // Utiliser cette fonction pour ajouter un header de tes
 
+  static void etAffiche();
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Test & operator = ( const Test & unTest );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    Test ( const Test & unTest );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    Test ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~Test ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 
@@ -77,4 +54,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <Test>
 
 #endif // TEST_H
-
