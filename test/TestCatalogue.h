@@ -55,11 +55,12 @@ protected:
   //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
   // Contrat :
   //
-    static void testAjouterTrajet();
+  static void testAjouterTrajet();
   // Mode d'emploi :
   //    Quand appelée, affiche des tests de la fonction d'ajout de traj de catalogue
   // Contrat :
   //
+  static void testAjouterAucunTrajet();
 
 
 
