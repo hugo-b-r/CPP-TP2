@@ -6,6 +6,7 @@
     e-mail               : perrine.blouin-lauvergne@insa-lyon.fr, brhugo@proton.me
 *************************************************************************/
 
+#include <cstdint>
 #include <iostream>
 using namespace std;
 #include <cstring>
@@ -35,8 +36,8 @@ void demanderAjoutTrajet(Catalogue & c)
 {
     bool doitContinuer = true;
     while (doitContinuer) {
-        int nb_villes = 0;
-        int taille_tableau_trajets = 10;
+        unsigned int nb_villes = 0;
+        unsigned int taille_tableau_trajets = 10;
         char * moyen = nullptr;
         char ** villes = new char*[taille_tableau_trajets];
         char * ville_tmp = nullptr;
@@ -61,7 +62,7 @@ void demanderAjoutTrajet(Catalogue & c)
                     // on réalloue un tableau de taille 2*
                     taille_tableau_trajets *= 2;
                     char ** villesB = new char*[taille_tableau_trajets];
-                    for (int i = 0; i < nb_villes; i++) {
+                    for (unsigned int i = 0; i < nb_villes; i++) {
                         villesB[i] = villes[i];
                     }
                     delete [] villes;
@@ -92,7 +93,7 @@ void demanderAjoutTrajet(Catalogue & c)
                 } else {
                     // On crée un trajet composé
                     trajetsSimples = new TrajetSimple[nb_villes-1];
-                    for (int i = 0; i < nb_villes-1; i++) {
+                    for (unsigned int i = 0; i < nb_villes-1; i++) {
                         TrajetSimple trS = TrajetSimple(villes[i], villes[i+1], moyen);
                         trajetsSimples[i] = trS;
                     }
