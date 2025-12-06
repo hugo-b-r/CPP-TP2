@@ -35,6 +35,7 @@ using namespace std;
 void TestTrajetSimple::TestTous()
 {
     TestCreation();
+    TestOperateurEgal();
 }
 
 void TestTrajetSimple::TestCreation()
@@ -45,6 +46,17 @@ void TestTrajetSimple::TestCreation()
     TrajetSimple *s = new TrajetSimple("Paris", "Brest", "pédalo");
     s->Afficher();
     delete s;
+}
+
+void TestTrajetSimple::TestOperateurEgal()
+{
+    Test::TestHeader("Operateur =", "TrajetSimple");
+    cout << "de Paris à Brest en pédalo"<< endl;
+    Test::etAffiche();
+    TrajetSimple *s =new TrajetSimple("Paris", "Brest", "pédalo");
+    TrajetSimple s2 = *s;
+    delete s;
+    s2.Afficher();
 }
 
 //------------------------------------------------------------------ PRIVE
