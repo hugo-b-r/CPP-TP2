@@ -25,7 +25,7 @@ ifdef COLORS
 	CFLAGS += -DCOLORS
 endif
 
-ifeq ($(TARGET), DEBUG)
+ifdef DEBUG
 	CFLAGS += -g -fsanitize=address
 	LDFLAGS += -lasan
 endif
