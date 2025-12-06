@@ -34,9 +34,12 @@ public:
   // Contrat :
   //
   static void TestHeader(const char * nomTest, const char * nomClasse);
-  // Utiliser cette fonction pour ajouter un header de tes
+  // Utiliser cette fonction pour ajouter un header de test avec les bonnes couleurs
+  //
 
   static void etAffiche();
+  // Utiliser cette fonction pour ajouter en bonne couleur le texte de séparation
+  // entre ce qui est attendu et ce qui est retourné par le test
 
 
 //------------------------------------------------------------------ PRIVE
