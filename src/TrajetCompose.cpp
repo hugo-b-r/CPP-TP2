@@ -30,9 +30,9 @@ void TrajetCompose::Afficher () const
 {
     for (int i =0 ; i< nbTrajets ; i++){
         TrajetSimple traj = trajets[i];
-        cout << "de"<< traj.VilleDepart() << "à" << traj.VilleArrivee() << "en" << traj.MoyenDeTransport() << "||";
+        cout << "de "<< traj.VilleDepart() << " à " << traj.VilleArrivee() << " en " << traj.MoyenDeTransport() << " - ";
     }
-    cout << "\r\n";
+    cout << endl;
 } //----- Fin de Méthode
 char * TrajetCompose:: VilleDepart() const
 {
@@ -78,15 +78,17 @@ TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTraje
     }
 } //----- Fin de TrajetCompose (constructeur de copie)
 
-TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau), trajets(trajetsSimples)
-// Algorithme :
+TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau)
+// Algorithme
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
 #endif
-
-
+    trajets = new TrajetSimple[taille_tableau];
+    for (int i = 0; i < taille_tableau; i++) {
+        trajets[i] = trajetsSimples[i];
+    }
 }
 
 TrajetCompose::TrajetCompose ( ) : nbTrajets(0)

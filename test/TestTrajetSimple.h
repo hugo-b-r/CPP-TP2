@@ -39,6 +39,9 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+    static void TestCreation();
+
+    static void TestOperateurEgal();
 
 //----------------------------------------------------- Attributs protégés
 

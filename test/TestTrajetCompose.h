@@ -41,6 +41,12 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+static void testOperateurEgal();
+
+static void testCopie();
+
+static void testAffiche();
+
 //----------------------------------------------------- Attributs protégés
 
 };

@@ -1,0 +1,5 @@
+-Isrc
+-Itest
+-Wall
+-xc++
+-DCOLORS

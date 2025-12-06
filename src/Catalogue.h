@@ -82,6 +82,11 @@ public:
 
 protected:
   //----------------------------------------------------- Méthodes protégées
+  void RechercheParcours2Recursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
+  // Mode d'emploi :
+  //
+  // Contrat :
+  //
 
   //----------------------------------------------------- Attributs protégés
   int nbTrajets;

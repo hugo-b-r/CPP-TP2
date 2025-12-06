@@ -11,9 +11,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-
-using namespace std;
 #include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Test.h"
@@ -23,6 +22,15 @@ using namespace std;
 
 //------------------------------------------------------------- Constantes
 
+#ifdef COLORS
+const char * debutBleu = "\033[34m";
+const char * debutJaune = "\033[33m";
+const char * finCouleur = "\033[0m";
+#else
+const char * debutBleu = "";
+const char * debutJaune = "";
+const char * finCouleur = "";
+#endif
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
@@ -31,52 +39,23 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-void Test::TestTous() {
+void Test::TestTous()
+{
     TestCatalogue::TestTous();
-
     TestTrajetSimple::TestTous();
+    TestTrajetCompose::TestTous();
 }
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-Test & Test::operator = ( const Test & unTest )
-// Algorithme :
-//
-{
-    return *this;
-} //----- Fin de operator =
+void Test::TestHeader(const char * nomTest, const char * nomClasse) {
+    cout << debutBleu <<"--- TEST " << nomTest <<" de " << nomClasse <<" ---\033[0m" << endl;
+    cout << debutJaune <<"     est censé afficher :" << finCouleur << endl;
+}
 
 
-//-------------------------------------------- Constructeurs - destructeur
-Test::Test ( const Test & unTest )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Test>" << endl;
-#endif
-} //----- Fin de Test (constructeur de copie)
-
-
-Test::Test ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Test>" << endl;
-#endif
-} //----- Fin de Test
-
-
-Test::~Test ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Test>" << endl;
-#endif
-} //----- Fin de ~Test
-
+void Test::etAffiche() {
+    cout << debutJaune <<"     et affiche :" << finCouleur << endl;
+}
 
 //------------------------------------------------------------------ PRIVE
 

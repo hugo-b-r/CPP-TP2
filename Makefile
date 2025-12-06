@@ -3,8 +3,8 @@
 CC = g++
 
 BUILD_DIR = build
-TARGET = $(BUILD_DIR)/catalogue_interactif
-TEST_TARGET = $(BUILD_DIR)/test_catalogue_interactif
+TARGET = trajets
+TEST_TARGET = test_trajets
 
 
 SRC:= $(wildcard src/*.cpp)
@@ -21,8 +21,13 @@ ifdef MAP
 	CFLAGS += -DMAP
 endif
 
-ifeq ($(TARGET), DEBUG)
-	CFLAGS += -g
+ifdef COLORS
+	CFLAGS += -DCOLORS
+endif
+
+ifdef DEBUG
+	CFLAGS += -g -fsanitize=address
+	LDFLAGS += -lasan
 endif
 
 
