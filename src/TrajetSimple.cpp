@@ -63,6 +63,9 @@ TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )
 #ifdef MAP
     cout << "Appel à l'opérateur d'assignement <TrajetSimple>" << endl;
 #endif
+    delete[] this->villeDepart;
+    delete[] this->villeArrivee;
+    delete[] this->moyenDeTransport;
     this->villeDepart = new char[strlen(unTrajetSimple.villeDepart) + 1];
     strcpy(this->villeDepart, unTrajetSimple.villeDepart);
 
@@ -127,18 +130,14 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
-    if (villeDepart != nullptr) {
-        delete[] villeDepart;
-    }
-    if (villeArrivee != nullptr) {
-        delete[] villeArrivee;
-    }
-    if (moyenDeTransport != nullptr) {
-        delete[] moyenDeTransport;
-    }
-    #ifdef MAP
+
+    delete[] villeDepart;
+    delete[] villeArrivee;
+    delete[] moyenDeTransport;
+
+#ifdef MAP
     std::cout << "Fin du destructeur de trajet simple" << std::endl;
-    #endif
+#endif
 } //----- Fin de ~TrajetSimple
 
 
