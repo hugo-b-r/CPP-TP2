@@ -26,7 +26,8 @@ ifdef COLORS
 endif
 
 ifeq ($(TARGET), DEBUG)
-	CFLAGS += -g
+	CFLAGS += -g -fsanitize=address
+	LDFLAGS += -lasan
 endif
 
 
