@@ -41,7 +41,7 @@ void Catalogue::Afficher() const
 }
 
 void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) const
-// Algorithme :
+// Algorithme : Simple itération, si le départ et l'arrivée correspondent, alors on l'affiche
 //
 {
     int compt =0;
@@ -56,15 +56,54 @@ void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) 
 }
 
 void Catalogue::RechercheParcours2 ( const char * VilleA, const char * VilleB ) const
-// Algorithme :
+// Algorithme : cette fonction membre appelle seulement une autre fonction s'occupant de la récursion
+// et alloue les tableaux dont elle a besoin pour fonctionner
 //
 {
-    for (int i =0; i< nbTrajets; i++){
-        Trajet *Traj = trajets[i];
-        if (Traj->VilleDepart()== VilleA && Traj->VilleArrivee()== VilleB){
-            Traj->Afficher();
-        }
+    bool * utilises = new bool[nbTrajets];
+    int * ordre = new int[nbTrajets];
 
+    RechercheParcours2Recursion(VilleA, VilleB, ordre, utilises, 0);
+
+    delete[] ordre;
+    delete[] utilises;
+
+}
+
+void Catalogue::RechercheParcours2Recursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const
+// Algorithme : Ajoute des trajets à la liste des utilises, les ajoute à ordre et si le trajet ajouté finit par VilleB, alors il affiche tout
+//
+{
+    if (nbAjoutes == 0 ) {
+        for (int i = 0; i < nbTrajets; i++) {
+            // si non utilisé et ville de départ matche avec l'arrivée du chemin en construction
+            if (strcmp(VilleA, trajets[i]->VilleDepart()) == 0) {
+                utilises[i] = true;
+                ordre[nbAjoutes] = i;
+                ++nbAjoutes;
+                RechercheParcours2Recursion(VilleA, VilleB, ordre, utilises, nbAjoutes);
+            }
+        }
+    } else {
+        if (strcmp(trajets[ordre[nbAjoutes-1]]->VilleArrivee(), VilleB) == 0) {
+            cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+            for (int i = 0; i < nbAjoutes; i++) {
+                trajets[ordre[i]]->Afficher();
+            }
+
+        } else if (nbAjoutes < nbTrajets) {
+            // si on a ajouté autant de trajets qu'il y en a et que ca ne mene pas à un trajet comme on le veut, ca ne sert à rien de continuer
+
+            for (int i = 0; i < nbTrajets; i++) {
+                // si non utilisé et ville de départ matche avec l'arrivée du chemin en construction
+                if (!utilises[i] && strcmp(trajets[ordre[nbAjoutes-1]]->VilleArrivee(), trajets[i]->VilleDepart()) == 0) {
+                    utilises[i] = true;
+                    ordre[nbAjoutes] = i;
+                    ++nbAjoutes;
+                    RechercheParcours2Recursion(VilleA, VilleB, ordre, utilises, nbAjoutes);
+                }
+            }
+        }
     }
 }
 

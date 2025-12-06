@@ -6,7 +6,6 @@
     e-mail               : perrine.blouin-lauvergne@insa-lyon.fr, brhugo@proton.me
 *************************************************************************/
 
-#include <cstdint>
 #include <iostream>
 using namespace std;
 #include <cstring>
@@ -20,6 +19,7 @@ using namespace std;
 const int NB_CHAR_MAX_VILLE = 20;
 
 void AfficherMenu(bool afficher_menu)
+// Un simple affichage qui peut facilement être répété
 {
     if (afficher_menu)
         cout << "Bienvenue dans ce calculateur d'itinéraire !" << endl;
@@ -33,6 +33,10 @@ void AfficherMenu(bool afficher_menu)
 
 
 void demanderAjoutTrajet(Catalogue & c)
+// Algorithme
+// On demande à 'utilisateur diverses actions qui pas à pas permettent de construire
+// un trajet. Au moment de quitter, on regarde si les informations entrées sufficent
+// à définir un trajet et on le crée. Sinon, on le mentionne à l'utilisateur
 {
     bool doitContinuer = true;
     while (doitContinuer) {
