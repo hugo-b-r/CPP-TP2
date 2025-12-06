@@ -11,7 +11,6 @@ using namespace std;
 #include <cstring>
 
 #include "Catalogue.h"
-#include "Trajet.h"
 #include "TrajetCompose.h"
 #include "TrajetSimple.h"
 
@@ -39,15 +38,14 @@ void demanderAjoutTrajet(Catalogue & c)
 // à définir un trajet et on le crée. Sinon, on le mentionne à l'utilisateur
 {
     bool doitContinuer = true;
+    unsigned int nb_villes = 0;
+    unsigned int taille_tableau_trajets = 10;
+    char * moyen = nullptr;
+    char ** villes = new char*[taille_tableau_trajets];
+    char * ville_tmp = nullptr;
+    TrajetSimple * trajetsSimples = nullptr;
     while (doitContinuer) {
-        unsigned int nb_villes = 0;
-        unsigned int taille_tableau_trajets = 10;
-        char * moyen = nullptr;
-        char ** villes = new char*[taille_tableau_trajets];
-        char * ville_tmp = nullptr;
-        TrajetSimple * trajetsSimples = nullptr;
-
-
+        cout << "Actuellement " << nb_villes << " villes ajoutées" << endl;
         cout << "(0) Ajouter une ville" << endl;
         cout << "(1) Définir le moyen de transport" << endl;
         cout << "(2) Enregistre le trajet définition/Sortie" << endl;
@@ -61,7 +59,8 @@ void demanderAjoutTrajet(Catalogue & c)
                 ville_tmp = new char[NB_CHAR_MAX_VILLE];
                 cin >> ville_tmp;
                 if (nb_villes < taille_tableau_trajets) {
-                    villes[nb_villes] = ville_tmp;
+                    villes[nb_villes] = new char[strlen(ville_tmp) + 1];
+                    strcpy(villes[nb_villes], ville_tmp);
                 } else {
                     // on réalloue un tableau de taille 2*
                     taille_tableau_trajets *= 2;
@@ -71,9 +70,8 @@ void demanderAjoutTrajet(Catalogue & c)
                     }
                     delete [] villes;
                     villes = villesB;
-
                 }
-                nb_villes++;
+                nb_villes+=1;
                 delete[] ville_tmp;
                 break;
             case 1:
@@ -92,6 +90,9 @@ void demanderAjoutTrajet(Catalogue & c)
                     // trajet simple
                     TrajetSimple *trS = new TrajetSimple(villes[0], villes[1], moyen);
                     c.AjouterTrajet(trS);
+                    for (unsigned int i = 0; i < nb_villes; i++) {
+                        delete[] villes[i];
+                    }
                     delete[] villes;
                     doitContinuer = false;
                 } else {
@@ -103,6 +104,9 @@ void demanderAjoutTrajet(Catalogue & c)
                     }
                     TrajetCompose *trC = new TrajetCompose(trajetsSimples, nb_villes-1);
                     c.AjouterTrajet(trC);
+                    for (unsigned int i = 0; i < nb_villes; i++) {
+                        delete[] villes[i];
+                    }
                     delete[] villes;
                     delete[] trajetsSimples;
                     doitContinuer = false;
@@ -111,14 +115,6 @@ void demanderAjoutTrajet(Catalogue & c)
                 break;
         }
     }
-    cout << "Quelle est la ville de départ ?" << endl;
-    char * villeA = new char[NB_CHAR_MAX_VILLE];
-    cin >> villeA;
-
-    cout << "Quelle est la ville d'arrivée ?" << endl;
-    char * villeB = new char[NB_CHAR_MAX_VILLE];
-    cin >> villeB;
-
 }
 
 void demanderAfficher(const Catalogue & cata)
@@ -160,7 +156,7 @@ void demanderRechercheComplexe( const Catalogue & cata)
     len = strlen(buffer);
     char * villeB = new char[len + 1];
 
-    cata.RechercheParcours1(villeA, villeB);
+    cata.RechercheParcours2(villeA, villeB);
 }
 
 int main() {
@@ -192,7 +188,8 @@ int main() {
             case 4:
                 // quitter le logiciel
                 doitContinuer = false;
-        }       break;
+                break;
+        }
     }
 
     return 0;
