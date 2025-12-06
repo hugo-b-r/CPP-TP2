@@ -30,9 +30,9 @@ void TrajetCompose::Afficher () const
 {
     for (int i =0 ; i< nbTrajets ; i++){
         TrajetSimple traj = trajets[i];
-        cout << "de"<< traj.VilleDepart() << "à" << traj.VilleArrivee() << "en" << traj.MoyenDeTransport() << "||";
+        cout << "de"<< traj.VilleDepart() << "à" << traj.VilleArrivee() << "en" << traj.MoyenDeTransport() << " - ";
     }
-    cout << "\r\n";
+    cout << endl;
 } //----- Fin de Méthode
 char * TrajetCompose:: VilleDepart() const
 {
