@@ -37,6 +37,10 @@ protected:
 
     static void TestOperateurEgal();
 
+    static void TestAfficherNonBords();
+    static void TestIndependanceChar();
+    static void TestVille();
+
 //----------------------------------------------------- Attributs protégés
 
 };
