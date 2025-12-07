@@ -25,35 +25,28 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void TrajetSimple::Afficher () const
-// Algorithme :
-//
+// Affiche un trajet simple sous forme lisible, ex =: "de Paris à Lyon en Train"
 {
 cout << "de " << this -> villeDepart << " à " << this -> villeArrivee << " en " << this -> moyenDeTransport << endl;
-} //----- Fin de Méthode //----- Fin de Méthode
+} 
 
 char * TrajetSimple:: VilleDepart() const
-// Algorithme :
-//
+// Retourne la ville de départ
 {
     return this -> villeDepart;
-} //----- Fin de Méthode //----- Fin de Méthode
+}
 
 char * TrajetSimple:: VilleArrivee() const
-// Algorithme :
-//
+// Retourne la ville de d'arrivee
 {
     return this -> villeArrivee;
-} //----- Fin de Méthode //----- Fin de Méthode
+} 
 
 char * TrajetSimple:: MoyenDeTransport() const
-// Algorithme :
-//
+// Retourne le moyen de transport
 {
     return this -> moyenDeTransport;
-} //----- Fin de Méthode //----- Fin de Méthode
-
-
-
+} 
 
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )
