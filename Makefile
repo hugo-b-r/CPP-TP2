@@ -26,7 +26,12 @@ ifdef COLORS
 endif
 
 ifdef DEBUG
-	CFLAGS += -g -fsanitize=address
+	CFLAGS += -g
+
+endif
+
+ifdef SAN
+	CFLAGS += -fsanitize=address
 	LDFLAGS += -lasan
 endif
 
