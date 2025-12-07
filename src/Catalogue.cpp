@@ -44,6 +44,9 @@ void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) 
 // Algorithme : Simple itération, si le départ et l'arrivée correspondent, alors on l'affiche
 //
 {
+    #ifdef MAP
+    std::cout << "Appel à la méthode RechercheParcours1 de <Catalogue>" << std::endl;
+    #endif
     int compt =0;
     for (int i =0; i< nbTrajets; i++){
         if (!strcmp(trajets[i]->VilleDepart(), VilleA) && !strcmp(trajets[i]->VilleArrivee(), VilleB)){
@@ -60,6 +63,10 @@ void Catalogue::RechercheParcoursAvecComposition ( const char * VilleA, const ch
 // et alloue les tableaux dont elle a besoin pour fonctionner
 //
 {
+    #ifdef MAP
+    std::cout << "Appel à la méthode RechercheParcoursAvecComposition de <Catalogue>" << std::endl;
+    #endif
+  
     bool * utilises = new bool[nbTrajets];
     int * ordre = new int[nbTrajets];
     for (int i = 0; i < nbTrajets; i++) {
@@ -140,15 +147,13 @@ void Catalogue::AjouterTrajet ( Trajet * traj )
 
 //------------------------------------------------- Surcharge d'opérateurs
 Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
-// Algorithme :
-//
 {
     #ifdef MAP
-        cout << "Appel à l'opérateur d'affectation de <Catalogue>" << endl;
+        cout << "Appel à l'opérateur d'affectation (=) de <Catalogue>" << endl;
     #endif
-    trajets = new Trajet*[nbTrajets];
     nbTrajets = unCatalogue.nbTrajets;
     tailleTrajets = unCatalogue.tailleTrajets;
+    trajets = new Trajet*[nbTrajets];
     for (int i = 0; i < unCatalogue.nbTrajets; i++) {
         this->trajets[i] = unCatalogue.trajets[i];
     }
@@ -158,8 +163,6 @@ Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue ( const Catalogue & unCatalogue )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Catalogue>" << endl;
@@ -169,8 +172,6 @@ Catalogue::Catalogue ( const Catalogue & unCatalogue )
 
 
 Catalogue::Catalogue ( ) : nbTrajets(0), tailleTrajets(NB_TRAJET_DEFAUT_CATA)
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
@@ -183,8 +184,6 @@ Catalogue::Catalogue ( ) : nbTrajets(0), tailleTrajets(NB_TRAJET_DEFAUT_CATA)
 
 
 Catalogue::~Catalogue ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
