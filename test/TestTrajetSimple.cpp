@@ -18,20 +18,11 @@ using namespace std;
 #include "TestTrajetSimple.h"
 #include "TrajetSimple.h"
 #include "Test.h"
-
-
-
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type TestTrajetSimple::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
-
 void TestTrajetSimple::TestTous()
 {
     TestCreation();
