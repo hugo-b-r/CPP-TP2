@@ -1,9 +1,9 @@
 /*************************************************************************
                            TestTrajetSimple  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 18/11/2025
+    copyright            : (C) 2025 par Perrine Blouin-Lauvergne et Hugo Berthet-Rambaud
+    e-mail               : perrine.blouin-lauvergne@insa-lyon.fr, brhugo@proton.me
 *************************************************************************/
 
 //---------- Réalisation de la classe <TestTrajetSimple> (fichier TestTrajetSimple.cpp) ------------
@@ -48,6 +48,58 @@ void TestTrajetSimple::TestOperateurEgal()
     TrajetSimple s2 = *s;
     delete s;
     s2.Afficher();
+}
+
+void TestTrajetSimple::TestAfficherNonBords()
+{
+    Test::TestHeader("Afficher non-crash", "TrajetSimple");
+    cout << "Affichage simple (vérification visuelle)" << endl;
+    Test::etAffiche();
+
+    TrajetSimple t1("Nice", "Marseille", "bus");
+    TrajetSimple t2("Lyon", "Grenoble", "moto");
+
+    // on appelle plusieurs fois pour s'assurer qu'il n'y a pas d'effet de bord
+    t1.Afficher();
+    t2.Afficher();
+    t1.Afficher();
+}
+
+void TestTrajetSimple::TestIndependanceChar()
+{
+    Test::TestHeader("Indépendance des char", "TrajetSimple");
+    cout << "Les chaînes originales modifiées après création ne doivent pas affecter l'objet" << endl;
+    Test::etAffiche();
+
+    char dep[20] = "Lille";
+    char arr[20] = "Bruxelles";
+    TrajetSimple *t = new TrajetSimple(dep, arr, "voiture");
+    // on modifie les originaux
+    strcpy(dep, "XXXX");
+    strcpy(arr, "YYYY");
+
+    // si la classe a copié les chaînes, l'affichage reste correct
+    t->Afficher();
+    delete t;
+}
+
+void TestTrajetSimple::TestVille()
+{
+    Test::TestHeader("Ville_Depart/Arrivee", "TrajetSimple");
+    cout << "Vérifie que VilleDepart() et VilleArrivee() retournent les bonnes chaînes" << endl;
+    Test::etAffiche();
+
+    TrajetSimple ts("A", "B", "bus");
+    if (ts.VilleDepart()=="A"){
+      cout << "VilleDepart()   --> c'est bon" << endl;
+    } else{
+      cout << "VilleDepart()   -->  erreur, rend:"<< ts.VilleDepart() << "au lieu de 'A' " << endl;
+    }
+    if (ts.VilleArrivee()=="B"){
+      cout << "VilleArrivee()   --> c'est bon" << endl;
+    }else{
+      cout << "VilleArrivee()   -->  erreur, rend:"<< ts.VilleArrivee() << "au lieu de 'B' " << endl;
+    }
 }
 
 //------------------------------------------------------------------ PRIVE
