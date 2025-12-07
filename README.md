@@ -120,8 +120,10 @@ classDiagram
 
 ## To-do 
 
-- [] Finir l'alog complexe
-- [] Finir tests TrajetCompose
-- [] Finir tests TrajetSimple
-- [] Finir tests TrajetSimple
-- [] Checker la mémoire
+- [ ] Corriger l'algo complexe qui doit presque fonctionner
+- [ ] Correctement documenter chaque classe et fonction, commenter
+Si on a le temps:
+- [ ] Rajouter tests TrajetCompose
+- [ ] Rajoutertests TrajetSimple
+- [ ] Rajoutertests TrajetSimple
+- [ ] Checker la mémoire
