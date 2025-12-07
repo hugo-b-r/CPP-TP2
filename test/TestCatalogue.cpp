@@ -13,7 +13,6 @@
 
 //-------------------------------------------------------- Include système
 
-#include <cstring>
 #include <iostream>
 
 using namespace std;
@@ -35,7 +34,11 @@ void TestCatalogue::TestTous()
 {
   testAfficher();
   testRechercheParcours1();
-  testRechercheParcours2();
+  testRechercheParcoursAvecComposition();
+  testRechercheParcoursAvecComposition2();
+  testRechercheParcoursAvecComposition3();
+  testRechercheParcoursAvecComposition4();
+  testRechercheParcoursAvecComposition5();
   testAjouterTrajet();
   testAjouterAucunTrajet();
 }
@@ -74,7 +77,7 @@ void TestCatalogue::testRechercheParcours1()
   C1.RechercheParcours1("Paris", "Brest");
 }
 
-void TestCatalogue::testRechercheParcours2()
+void TestCatalogue::testRechercheParcoursAvecComposition()
 // Algo:
 {
     Test::TestHeader(" Recherche parcours composes", "Catalogue");
@@ -92,7 +95,7 @@ void TestCatalogue::testRechercheParcours2()
 
     TrajetSimple ts12 ("Marseille", "Bruxelles", "Velo");
     TrajetSimple ts22 ("Bruxelles", "Nantes", "Voiture");
-    TrajetSimple ts32 ("Nantes", " Rennes", "Train");
+    TrajetSimple ts32 ("Nantes", "Rennes", "Train");
     tab = new TrajetSimple[3];
     tab[0] = ts12;
     tab[1] = ts22;
@@ -114,9 +117,96 @@ void TestCatalogue::testRechercheParcours2()
 
     Test::etAffiche();
     // ce qu'il affiche vraiment
-    C1.RechercheParcours2("Chambéry", "Rennes");
+    C1.RechercheParcoursAvecComposition("Chambéry", "Rennes");
 
 }
+
+
+void TestCatalogue::testRechercheParcoursAvecComposition2()
+// Algo: test de l'ajout d'un seul trajet compose et voir s'il est trouvé
+{
+    Test::TestHeader(" Recherche parcours composes n°2", "Catalogue");
+    Catalogue C1 = Catalogue();
+    TrajetSimple ts1 ("Chambéry", "Paris", "Velo");
+    TrajetSimple ts2 ("Paris", "Londres", "Voiture");
+    TrajetSimple ts3 ("Londres", "Marseille", "Train");
+    TrajetSimple *tab = new TrajetSimple[3];
+    tab[0] = ts1;
+    tab[1] = ts2;
+    tab[2] = ts3;
+    TrajetCompose *t1 = new TrajetCompose(tab, 3);
+    delete[] tab;
+    C1.AjouterTrajet(t1);
+
+    // ce que le test doit afficher
+    cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+    cout << "de Chambéry à Paris en Velo - de Paris à Londres en Voiture - de Londres à Marseille en Train - " << endl;
+
+    Test::etAffiche();
+    // ce qu'il affiche vraiment
+    C1.RechercheParcoursAvecComposition("Chambéry", "Marseille");
+
+}
+
+
+void TestCatalogue::testRechercheParcoursAvecComposition3()
+// Algo: test de l'ajout d'un seul trajet compose et voir s'il n'est pas trouvé
+{
+    Test::TestHeader(" Recherche parcours composes n°3", "Catalogue");
+    Catalogue C1 = Catalogue();
+    TrajetSimple ts1 ("Chambéry", "Paris", "Velo");
+    TrajetSimple ts2 ("Paris", "Londres", "Voiture");
+    TrajetSimple ts3 ("Londres", "Marseille", "Train");
+    TrajetSimple *tab = new TrajetSimple[3];
+    tab[0] = ts1;
+    tab[1] = ts2;
+    tab[2] = ts3;
+    TrajetCompose *t1 = new TrajetCompose(tab, 3);
+    delete[] tab;
+    C1.AjouterTrajet(t1);
+
+
+    Test::etAffiche();
+    // ce qu'il affiche vraiment
+    C1.RechercheParcoursAvecComposition("Chambéry", "Rennes");
+
+}
+
+
+void TestCatalogue::testRechercheParcoursAvecComposition4()
+// Algo: test de l'ajout d'un seul trajet simple et voir s'il est bien trouvé
+{
+    Test::TestHeader(" Recherche parcours composes n°4", "Catalogue");
+    Catalogue C1 = Catalogue();
+    TrajetSimple *ts1  = new TrajetSimple ("Chambéry", "Paris", "Velo");
+    C1.AjouterTrajet(ts1);
+
+    cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+    cout << "de Chambéry à Paris en Velo" << endl;
+
+
+    Test::etAffiche();
+    // ce qu'il affiche vraiment
+    C1.RechercheParcoursAvecComposition("Chambéry", "Paris");
+}
+
+
+
+void TestCatalogue::testRechercheParcoursAvecComposition5()
+// Algo: test de l'ajout d'un seul trajet simple et voir s'il n'est pas trouvé
+{
+    Test::TestHeader(" Recherche parcours composes n°5", "Catalogue");
+    Catalogue C1 = Catalogue();
+    TrajetSimple *ts1  = new TrajetSimple ("Chambéry", "Lyon", "Velo");
+    C1.AjouterTrajet(ts1);
+
+
+    Test::etAffiche();
+    // ce qu'il affiche vraiment
+    C1.RechercheParcoursAvecComposition("Chambéry", "Paris");
+}
+
+
 
 
 void TestCatalogue::testAjouterTrajet()
