@@ -27,6 +27,9 @@ void TestTrajetSimple::TestTous()
 {
     TestCreation();
     TestOperateurEgal();
+    TestAfficherNonBords();
+    TestIndependanceChar();
+    TestVille();
 }
 
 void TestTrajetSimple::TestCreation()
