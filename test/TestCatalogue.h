@@ -42,17 +42,37 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-    static void testAfficher();
+  static void testAfficher();
   // Mode d'emploi :
   //    Quand appelée, affiche des tests de la fonctio nafficher de catalogue
   // Contrat :
-    static void testRechercheParcours1();
+  static void testRechercheParcours1();
   // Mode d'emploi :
   //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
   // Contrat :
-    static void testRechercheParcours2();
+  static void testRechercheParcoursAvecComposition();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
+  //    Quand appelée, affiche des tests de la fonction recherche de parcours2 de catalogue
+  // Contrat :
+  //
+  static void testRechercheParcoursAvecComposition2();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
+  // Contrat :
+  //
+  static void testRechercheParcoursAvecComposition3();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
+  // Contrat :
+  //
+  static void testRechercheParcoursAvecComposition4();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
+  // Contrat :
+  //
+  static void testRechercheParcoursAvecComposition5();
+  // Mode d'emploi :
+  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
   // Contrat :
   //
   static void testAjouterTrajet();
@@ -61,6 +81,8 @@ protected:
   // Contrat :
   //
   static void testAjouterAucunTrajet();
+
+
 
 
 

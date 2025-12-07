@@ -41,7 +41,7 @@ public:
   //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
   // Contrat :
   //
-  void RechercheParcours2(const char * VilleA, const char * VilleB) const;
+  void RechercheParcoursAvecComposition(const char * VilleA, const char * VilleB) const;
   // Mode d'emploi :
   //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
   // Contrat :
@@ -82,7 +82,7 @@ public:
 
 protected:
   //----------------------------------------------------- Méthodes protégées
-  void RechercheParcours2Recursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
+  void RechercheParcoursAvecCompositionRecursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
   // Mode d'emploi :
   //
   // Contrat :

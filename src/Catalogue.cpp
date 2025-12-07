@@ -55,56 +55,64 @@ void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) 
     }
 }
 
-void Catalogue::RechercheParcours2 ( const char * VilleA, const char * VilleB ) const
+void Catalogue::RechercheParcoursAvecComposition ( const char * VilleA, const char * VilleB ) const
 // Algorithme : cette fonction membre appelle seulement une autre fonction s'occupant de la récursion
 // et alloue les tableaux dont elle a besoin pour fonctionner
 //
 {
     bool * utilises = new bool[nbTrajets];
     int * ordre = new int[nbTrajets];
+    for (int i = 0; i < nbTrajets; i++) {
+        utilises[i] = false;
+        ordre[i] = -1;
+    }
 
-    RechercheParcours2Recursion(VilleA, VilleB, ordre, utilises, 0);
+    for (int i = 0; i < nbTrajets; i++) {
+        if (strcmp(VilleA, trajets[i]->VilleDepart()) == 0) {
+            utilises[i] = true;
+            ordre[0] = i;
+            RechercheParcoursAvecCompositionRecursion(VilleA, VilleB, ordre, utilises, 1);
+            ordre[0] = -1;
+            utilises[i] = false;
+        }
+    }
+
 
     delete[] ordre;
     delete[] utilises;
 
 }
 
-void Catalogue::RechercheParcours2Recursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const
+void Catalogue::RechercheParcoursAvecCompositionRecursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const
 // Algorithme : Ajoute des trajets à la liste des utilises, les ajoute à ordre et si le trajet ajouté finit par VilleB, alors il affiche tout
 //
 {
-    if (nbAjoutes == 0 ) {
+    // si le chemin passé correspond
+    if (strcmp(trajets[ordre[nbAjoutes-1]]->VilleArrivee(), VilleB) == 0) {
+        cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+        for (int i = 0; i < nbAjoutes; i++) {
+            trajets[ordre[i]]->Afficher();
+        }
+    // sinon si on peut encore tester d'autres trajets
+    } else if (nbAjoutes < nbTrajets) {
+        // si on a ajouté autant de trajets qu'il y en a et que ca ne mene pas à un trajet comme on le veut, ca ne sert à rien de continuer
+        ++nbAjoutes;
+
         for (int i = 0; i < nbTrajets; i++) {
             // si non utilisé et ville de départ matche avec l'arrivée du chemin en construction
-            if (strcmp(VilleA, trajets[i]->VilleDepart()) == 0) {
+            if (!utilises[i] && strcmp(trajets[ordre[nbAjoutes-2]]->VilleArrivee(), trajets[i]->VilleDepart()) == 0) {
+
                 utilises[i] = true;
-                ordre[nbAjoutes] = i;
-                ++nbAjoutes;
-                RechercheParcours2Recursion(VilleA, VilleB, ordre, utilises, nbAjoutes);
+                ordre[nbAjoutes-1] = i;
+
+                RechercheParcoursAvecCompositionRecursion(VilleA, VilleB, ordre, utilises, nbAjoutes);
+                ordre[nbAjoutes-1] = -1;
+                utilises[i] = false;
             }
         }
-    } else {
-        if (strcmp(trajets[ordre[nbAjoutes-1]]->VilleArrivee(), VilleB) == 0) {
-            cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
-            for (int i = 0; i < nbAjoutes; i++) {
-                trajets[ordre[i]]->Afficher();
-            }
-
-        } else if (nbAjoutes < nbTrajets) {
-            // si on a ajouté autant de trajets qu'il y en a et que ca ne mene pas à un trajet comme on le veut, ca ne sert à rien de continuer
-
-            for (int i = 0; i < nbTrajets; i++) {
-                // si non utilisé et ville de départ matche avec l'arrivée du chemin en construction
-                if (!utilises[i] && strcmp(trajets[ordre[nbAjoutes-1]]->VilleArrivee(), trajets[i]->VilleDepart()) == 0) {
-                    utilises[i] = true;
-                    ordre[nbAjoutes] = i;
-                    ++nbAjoutes;
-                    RechercheParcours2Recursion(VilleA, VilleB, ordre, utilises, nbAjoutes);
-                }
-            }
-        }
+        --nbAjoutes;
     }
+    // condition de sortie: on a etudie tous les trajets qui peuvent se suivre
 }
 
 

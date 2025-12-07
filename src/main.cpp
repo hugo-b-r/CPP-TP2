@@ -156,7 +156,7 @@ void demanderRechercheComplexe( const Catalogue & cata)
     len = strlen(buffer);
     char * villeB = new char[len + 1];
 
-    cata.RechercheParcours2(villeA, villeB);
+    cata.RechercheParcoursAvecComposition(villeA, villeB);
 }
 
 int main() {
