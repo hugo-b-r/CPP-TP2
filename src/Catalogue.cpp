@@ -32,23 +32,26 @@ void Catalogue::Afficher() const
 // Algorithme :
 //
 {
-    #ifdef MAP
-    std::cout << "Appel à la méthode Afficher de <Catalogue>" << std::endl;
-    #endif
+#ifdef MAP
+    cout << "Appel à la méthode Afficher de <Catalogue>" << endl;
+#endif
+    cout << "---------" << endl;
+    cout << "Le catalogue comprend les trajets suivants : " << endl;
     for (int i =0; i< nbTrajets; i++){
+        cout << " - ";
         trajets[i]->Afficher();
     } //----- Fin de Méthode
+    cout << "---------" << endl;
 }
 
 void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) const
 // Algorithme : Simple itération, si le départ et l'arrivée correspondent, alors on l'affiche
 //
 {
-    int compt =0;
+    cout << "La recherche a trouvé les trajets suivants :" << endl;
     for (int i =0; i< nbTrajets; i++){
         if (!strcmp(trajets[i]->VilleDepart(), VilleA) && !strcmp(trajets[i]->VilleArrivee(), VilleB)){
-            compt +=1;
-            cout << compt << " : ";
+            cout << " - ";
             trajets[i]->Afficher();
         }
 
@@ -67,6 +70,7 @@ void Catalogue::RechercheParcoursAvecComposition ( const char * VilleA, const ch
         ordre[i] = -1;
     }
 
+    cout << "La recherche a mené à ces résultats :" << endl;
     for (int i = 0; i < nbTrajets; i++) {
         if (strcmp(VilleA, trajets[i]->VilleDepart()) == 0) {
             utilises[i] = true;
@@ -89,8 +93,9 @@ void Catalogue::RechercheParcoursAvecCompositionRecursion ( const char * VilleA,
 {
     // si le chemin passé correspond
     if (strcmp(trajets[ordre[nbAjoutes-1]]->VilleArrivee(), VilleB) == 0) {
-        cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+        cout << " - Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
         for (int i = 0; i < nbAjoutes; i++) {
+            cout << "   - ";
             trajets[ordre[i]]->Afficher();
         }
     // sinon si on peut encore tester d'autres trajets

@@ -143,6 +143,7 @@ void demanderRechercheBasique( const Catalogue & cata)
     strcpy(villeB, buffer);
 
     cata.RechercheParcours1(villeA, villeB);
+    cout << endl;
 }
 
 
@@ -165,6 +166,7 @@ void demanderRechercheComplexe( const Catalogue & cata)
     strcpy(villeB, buffer);
 
     cata.RechercheParcoursAvecComposition(villeA, villeB);
+    cout << endl;
 }
 
 int main() {
