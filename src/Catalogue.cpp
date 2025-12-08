@@ -122,7 +122,7 @@ void Catalogue::AjouterTrajet ( Trajet * traj )
     std::cout << "Appel à l'ajout d'un trajet dans Catalogue" << std::endl;
     #endif
 
-    trajets[nbTrajets] = traj;
+    trajets[nbTrajets] = traj->Clone();
     if (nbTrajets == tailleTrajets) {
         // On ne change que si on veut vraiment
         tailleTrajets *= 2;
@@ -157,7 +157,7 @@ Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Catalogue::Catalogue ( const Catalogue & unCatalogue )
+Catalogue::Catalogue ( const Catalogue & unCatalogue ) : nbTrajets(unCatalogue.nbTrajets), tailleTrajets(unCatalogue.tailleTrajets)
 // Algorithme :
 //
 {
@@ -165,6 +165,11 @@ Catalogue::Catalogue ( const Catalogue & unCatalogue )
     cout << "Appel au constructeur de copie de <Catalogue>" << endl;
 #endif
 
+    // On doit copier tous les trajets dans trajets
+    this->trajets = new Trajet*[tailleTrajets];
+    for (int i = 0; i < nbTrajets; i++) {
+        this->trajets[i] = unCatalogue.trajets[i]->Clone();
+    }
 } //----- Fin de Catalogue (constructeur de copie)
 
 

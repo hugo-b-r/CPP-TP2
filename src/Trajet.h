@@ -46,6 +46,8 @@ public:
     // Contrat :
     //
 
+    virtual Trajet* Clone() const = 0;
+
 //------------------------------------------------- Surcharge d'opérateurs
     Trajet & operator = ( const Trajet & unTrajet );
     // Mode d'emploi :

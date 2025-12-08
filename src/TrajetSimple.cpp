@@ -29,30 +29,32 @@ void TrajetSimple::Afficher () const
 //
 {
 cout << "de " << this -> villeDepart << " à " << this -> villeArrivee << " en " << this -> moyenDeTransport << endl;
-} //----- Fin de Méthode //----- Fin de Méthode
+} //----- Fin de Méthode
 
-char * TrajetSimple:: VilleDepart() const
+char * TrajetSimple::VilleDepart() const
 // Algorithme :
 //
 {
     return this -> villeDepart;
-} //----- Fin de Méthode //----- Fin de Méthode
+} //----- Fin de Méthode
 
-char * TrajetSimple:: VilleArrivee() const
+char * TrajetSimple::VilleArrivee() const
 // Algorithme :
 //
 {
     return this -> villeArrivee;
-} //----- Fin de Méthode //----- Fin de Méthode
+} //----- Fin de Méthode
 
-char * TrajetSimple:: MoyenDeTransport() const
+char * TrajetSimple::MoyenDeTransport() const
 // Algorithme :
 //
 {
     return this -> moyenDeTransport;
-} //----- Fin de Méthode //----- Fin de Méthode
+} //----- Fin de Méthode
 
-
+Trajet* TrajetSimple::Clone() const {
+    return new TrajetSimple(*this);
+} //----- Fin de Méthode
 
 
 //------------------------------------------------- Surcharge d'opérateurs
