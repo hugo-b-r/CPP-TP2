@@ -51,6 +51,7 @@ void demanderAjoutTrajet(Catalogue & c)
         cout << "(2) Enregistre le trajet définition/Sortie" << endl;
         int choix;
         cin >> choix;
+        cout << endl;
         // on gère chacun des cas
         switch (choix) {
             case 0:
@@ -175,6 +176,7 @@ int main() {
     while (doitContinuer) {
         AfficherMenu(false);
         cin >> choix;
+        cout << endl;
         switch (choix) {
             case 0:
                 // ajout d'un trajet au catalogue
