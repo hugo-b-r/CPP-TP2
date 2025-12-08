@@ -1,9 +1,9 @@
 /*************************************************************************
                            TestTrajetSimple  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+                           /  -------------------
+    début                : 18/11/2025
+    copyright            : (C) 2025 par Perrine Blouin-Lauvergne et Hugo Berthet-Rambaud
+    e-mail               : perrine.blouin-lauvergne@insa-lyon.fr, brhugo@proton.me
 *************************************************************************/
 
 //---------- Interface de la classe <TestTrajetSimple> (fichier TestTrajetSimple.h) ----------------
@@ -25,14 +25,8 @@
 class TestTrajetSimple
 {
 //----------------------------------------------------------------- PUBLIC
-
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     static void TestTous();
 
 //------------------------------------------------------------------ PRIVE
@@ -42,6 +36,10 @@ protected:
     static void TestCreation();
 
     static void TestOperateurEgal();
+
+    static void TestAfficherNonBords();
+    static void TestIndependanceChar();
+    static void TestVille();
 
 //----------------------------------------------------- Attributs protégés
 

@@ -68,22 +68,26 @@ Deuxieme version de modules du projet, qui sera celle utilisée:
 
 classDiagram
     class Catalogue {
-        #Trajet * trajets
+        #Trajet ** trajets
         #int nbTrajets
+        #int tailleTrajets
         
         +Catalogue() - OK
         +Catalogue(const Catalog & c)
         +~Catalogue() - OK
         +void Afficher() - OK
-        +Catalogue RechercheParcours1(Ville A, Ville B) - OK
-        +Catalogue RechercheParcours2(Ville A, Ville B)
-        +void AjouterTrajet(const Trajet traj) - OK
+        +void RechercheParcours1(const char * VilleA, const char * VilleB) const - OK
+        +void RechercheParcoursAvecComposition(const char * VilleA, const char * VilleB) const
+        -void RechercheParcoursAvecCompositionRecursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
+        +void AjouterTrajet(Trajet * traj) - OK
     }
 
     class Trajet {
+        +Trajet ( const Trajet & unTrajet )
+        +Trajet ( )
+        +virtual ~Trajet ( )
         +virtual char * VilleDepart()
         +virtual char * VilleArrivee()
-        +virtual char * MoyenDeTransport()
         +virtual void Afficher()
     }
 
@@ -93,13 +97,13 @@ classDiagram
         #char * villeArrivee
         #char * moyenDeTransport
 
+        +TrajetSimple(const TrajetSimple & unTrajetSimple)
         +TrajetSimple()  OK
-        +~TrajetSimple() - OK
-        +void Afficher() - OK
-
+        +virtual ~TrajetSimple() - OK
         +virtual char * VilleDepart() - OK
         +virtual char * VilleArrivee() - OK
         +virtual char * MoyendeTransport() - OK
+        +virtual void Afficher () - OK
     }
     Trajet-->TrajetSimple
     
@@ -108,8 +112,10 @@ classDiagram
         #int nbTrajets
 
         +TrajetCompose() - OK
-        +~TrajetCompose() - OK
-        +void Afficher() - OK
+        +TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau )
+        +TrajetCompose ( const TrajetCompose & unTrajetCompose )
+        +virtual ~TrajetCompose() - OK
+        +virtual void Afficher() - OK
         +virtual char * VilleDepart() - OK
         +virtual char * VilleArrivee() - OK
     }

@@ -25,10 +25,9 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void TrajetSimple::Afficher () const
-// Algorithme :
-//
+// Affiche un trajet simple sous forme lisible, ex =: "de Paris à Lyon en Train"
 {
-cout << "de " << this -> villeDepart << " à " << this -> villeArrivee << " en " << this -> moyenDeTransport << endl;
+    cout << "de " << this -> villeDepart << " à " << this -> villeArrivee << " en " << this -> moyenDeTransport << endl;
 } //----- Fin de Méthode
 
 char * TrajetSimple::VilleDepart() const

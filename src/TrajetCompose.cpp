@@ -25,24 +25,26 @@ const int NB_TRAJET_DEFAUT_COMP = 10;
 
 //----------------------------------------------------- Méthodes publiques
 void TrajetCompose::Afficher () const
-// Algorithme :
-//
+// Affiche tous les segments du trajet composé, dans l'ordre.
 {
     for (int i =0 ; i< nbTrajets ; i++){
         TrajetSimple traj = trajets[i];
         cout << "de "<< traj.VilleDepart() << " à " << traj.VilleArrivee() << " en " << traj.MoyenDeTransport() << " - ";
     }
     cout << endl;
-} //----- Fin de Méthode
+} 
+
 char * TrajetCompose:: VilleDepart() const
+// Retourne la ville de départ
 {
     return trajets[0].VilleDepart();
-}//----- Fin de Méthode
+}
 
 char * TrajetCompose:: VilleArrivee() const
+// Retourne la ville d'arrivée
 {
     return trajets[nbTrajets-1].VilleArrivee();
-}//----- Fin de Méthode
+}
 
 Trajet* TrajetCompose::Clone() const
 {
@@ -52,8 +54,6 @@ Trajet* TrajetCompose::Clone() const
 
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompose )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel à l'opérateur d'assignement <TrajetCompose>" << endl;
@@ -70,8 +70,6 @@ TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompos
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTrajets(unTrajetCompose.nbTrajets)
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <TrajetCompose>" << endl;
@@ -84,8 +82,7 @@ TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTraje
 } //----- Fin de TrajetCompose (constructeur de copie)
 
 TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau)
-// Algorithme
-//
+// Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple.
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
@@ -97,8 +94,8 @@ TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau
 }
 
 TrajetCompose::TrajetCompose ( ) : nbTrajets(0)
-// Algorithme :
-//TrajetSimple
+// Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple.
+// par défault, aucun segment n'est présent
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;

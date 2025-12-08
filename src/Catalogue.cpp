@@ -29,8 +29,7 @@ const int NB_TRAJET_DEFAUT_CATA = 10;
 
 //----------------------------------------------------- Méthodes publiques
 void Catalogue::Afficher() const
-// Algorithme :
-//
+// Affiche l'intégralité des trajets du catalogue dans l'ordre d'insertion
 {
 #ifdef MAP
     cout << "Appel à la méthode Afficher de <Catalogue>" << endl;
@@ -46,8 +45,13 @@ void Catalogue::Afficher() const
 
 void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) const
 // Algorithme : Simple itération, si le départ et l'arrivée correspondent, alors on l'affiche
-//
+// Utilise une exploration récursive pour construire des itinéraires, 
+// Vérifie que la ville d'arrivée d'un trajet correspond à la ville de départ du suivan,
+// et evite de réutiliser les mêmes trajets dans une même branche pour eviterles cycles.
 {
+#ifdef MAP
+    std::cout << "Appel à la méthode RechercheParcours1 de <Catalogue>" << std::endl;
+#endif
     cout << "La recherche a trouvé les trajets suivants :" << endl;
     for (int i =0; i< nbTrajets; i++){
         if (!strcmp(trajets[i]->VilleDepart(), VilleA) && !strcmp(trajets[i]->VilleArrivee(), VilleB)){
@@ -61,8 +65,11 @@ void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) 
 void Catalogue::RechercheParcoursAvecComposition ( const char * VilleA, const char * VilleB ) const
 // Algorithme : cette fonction membre appelle seulement une autre fonction s'occupant de la récursion
 // et alloue les tableaux dont elle a besoin pour fonctionner
-//
 {
+    #ifdef MAP
+    std::cout << "Appel à la méthode RechercheParcoursAvecComposition de <Catalogue>" << std::endl;
+    #endif
+  
     bool * utilises = new bool[nbTrajets];
     int * ordre = new int[nbTrajets];
     for (int i = 0; i < nbTrajets; i++) {
@@ -122,6 +129,9 @@ void Catalogue::RechercheParcoursAvecCompositionRecursion ( const char * VilleA,
 
 
 void Catalogue::AjouterTrajet ( Trajet * traj )
+// Ajoute un trajet au catalogue.
+// Paramètre : traj - pointeur vers un trajet alloué dynamiquement (simple ou composé)
+// Le tableau trajets est redimentionné qd il faut
 {
     #ifdef MAP
     std::cout << "Appel à l'ajout d'un trajet dans Catalogue" << std::endl;
@@ -129,7 +139,6 @@ void Catalogue::AjouterTrajet ( Trajet * traj )
 
     trajets[nbTrajets] = traj->Clone();
     if (nbTrajets == tailleTrajets) {
-        // On ne change que si on veut vraiment
         tailleTrajets *= 2;
         Trajet ** newtrajets =  new Trajet*[tailleTrajets];
         for (int i = 0; i < nbTrajets-1; i++) {
@@ -145,15 +154,13 @@ void Catalogue::AjouterTrajet ( Trajet * traj )
 
 //------------------------------------------------- Surcharge d'opérateurs
 Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
-// Algorithme :
-//
 {
     #ifdef MAP
-        cout << "Appel à l'opérateur d'affectation de <Catalogue>" << endl;
+        cout << "Appel à l'opérateur d'affectation (=) de <Catalogue>" << endl;
     #endif
-    trajets = new Trajet*[nbTrajets];
     nbTrajets = unCatalogue.nbTrajets;
     tailleTrajets = unCatalogue.tailleTrajets;
+    trajets = new Trajet*[nbTrajets];
     for (int i = 0; i < unCatalogue.nbTrajets; i++) {
         this->trajets[i] = unCatalogue.trajets[i];
     }
@@ -179,8 +186,8 @@ Catalogue::Catalogue ( const Catalogue & unCatalogue ) : nbTrajets(unCatalogue.n
 
 
 Catalogue::Catalogue ( ) : nbTrajets(0), tailleTrajets(NB_TRAJET_DEFAUT_CATA)
-// Algorithme :
-//
+// Initialise la structure interne qui stocke des pointeurs vers les trajets
+// Par défault ucun trajet n'est présent au départ
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
@@ -193,8 +200,7 @@ Catalogue::Catalogue ( ) : nbTrajets(0), tailleTrajets(NB_TRAJET_DEFAUT_CATA)
 
 
 Catalogue::~Catalogue ( )
-// Algorithme :
-//
+// Le catalogue est propriétaire des trajets, il doit donc les delete ici
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
