@@ -77,6 +77,7 @@ void demanderAjoutTrajet(Catalogue & c)
             case 1:
                 // Définition du moyen de transport
                 moyen = new char[NB_CHAR_MAX_VILLE];
+                cout << "Nom du moyen de transport ?" << endl;
                 cin >> moyen;
                 break;
             case 2:
