@@ -48,6 +48,7 @@ public:
     // Contrat :
     //
 
+    virtual Trajet* Clone() const override;
 
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetCompose & operator = ( const TrajetCompose & unTrajetCompose );

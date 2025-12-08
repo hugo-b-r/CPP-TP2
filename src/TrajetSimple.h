@@ -54,7 +54,11 @@ public:
     // Contrat :
     //
 
-
+    virtual Trajet* Clone() const override;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 
 //------------------------------------------------- Surcharge d'opérateurs

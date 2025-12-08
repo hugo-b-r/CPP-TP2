@@ -46,6 +46,11 @@ char * TrajetCompose:: VilleArrivee() const
     return trajets[nbTrajets-1].VilleArrivee();
 }
 
+Trajet* TrajetCompose::Clone() const
+{
+    // Alloue un nouvel objet sur lequel on appelle le constructeur de copie
+    return new TrajetCompose(*this);
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompose )

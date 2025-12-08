@@ -31,12 +31,16 @@ const int NB_TRAJET_DEFAUT_CATA = 10;
 void Catalogue::Afficher() const
 // Affiche l'intégralité des trajets du catalogue dans l'ordre d'insertion
 {
-    #ifdef MAP
-    std::cout << "Appel à la méthode Afficher de <Catalogue>" << std::endl;
-    #endif
+#ifdef MAP
+    cout << "Appel à la méthode Afficher de <Catalogue>" << endl;
+#endif
+    cout << "---------" << endl;
+    cout << "Le catalogue comprend les trajets suivants : " << endl;
     for (int i =0; i< nbTrajets; i++){
+        cout << " - ";
         trajets[i]->Afficher();
     } //----- Fin de Méthode
+    cout << "---------" << endl;
 }
 
 void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) const
@@ -45,14 +49,13 @@ void Catalogue::RechercheParcours1 ( const char * VilleA, const char * VilleB ) 
 // Vérifie que la ville d'arrivée d'un trajet correspond à la ville de départ du suivan,
 // et evite de réutiliser les mêmes trajets dans une même branche pour eviterles cycles.
 {
-    #ifdef MAP
+#ifdef MAP
     std::cout << "Appel à la méthode RechercheParcours1 de <Catalogue>" << std::endl;
-    #endif
-    int compt =0;
+#endif
+    cout << "La recherche a trouvé les trajets suivants :" << endl;
     for (int i =0; i< nbTrajets; i++){
         if (!strcmp(trajets[i]->VilleDepart(), VilleA) && !strcmp(trajets[i]->VilleArrivee(), VilleB)){
-            compt +=1;
-            cout << compt << " : ";
+            cout << " - ";
             trajets[i]->Afficher();
         }
 
@@ -74,6 +77,7 @@ void Catalogue::RechercheParcoursAvecComposition ( const char * VilleA, const ch
         ordre[i] = -1;
     }
 
+    cout << "La recherche a mené à ces résultats :" << endl;
     for (int i = 0; i < nbTrajets; i++) {
         if (strcmp(VilleA, trajets[i]->VilleDepart()) == 0) {
             utilises[i] = true;
@@ -96,8 +100,9 @@ void Catalogue::RechercheParcoursAvecCompositionRecursion ( const char * VilleA,
 {
     // si le chemin passé correspond
     if (strcmp(trajets[ordre[nbAjoutes-1]]->VilleArrivee(), VilleB) == 0) {
-        cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+        cout << " - Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
         for (int i = 0; i < nbAjoutes; i++) {
+            cout << "   - ";
             trajets[ordre[i]]->Afficher();
         }
     // sinon si on peut encore tester d'autres trajets
@@ -132,7 +137,7 @@ void Catalogue::AjouterTrajet ( Trajet * traj )
     std::cout << "Appel à l'ajout d'un trajet dans Catalogue" << std::endl;
     #endif
 
-    trajets[nbTrajets] = traj;
+    trajets[nbTrajets] = traj->Clone();
     if (nbTrajets == tailleTrajets) {
         tailleTrajets *= 2;
         Trajet ** newtrajets =  new Trajet*[tailleTrajets];
@@ -164,12 +169,19 @@ Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Catalogue::Catalogue ( const Catalogue & unCatalogue )
+Catalogue::Catalogue ( const Catalogue & unCatalogue ) : nbTrajets(unCatalogue.nbTrajets), tailleTrajets(unCatalogue.tailleTrajets)
+// Algorithme :
+//
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Catalogue>" << endl;
 #endif
 
+    // On doit copier tous les trajets dans trajets
+    this->trajets = new Trajet*[tailleTrajets];
+    for (int i = 0; i < nbTrajets; i++) {
+        this->trajets[i] = unCatalogue.trajets[i]->Clone();
+    }
 } //----- Fin de Catalogue (constructeur de copie)
 
 

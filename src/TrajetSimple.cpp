@@ -27,26 +27,34 @@ using namespace std;
 void TrajetSimple::Afficher () const
 // Affiche un trajet simple sous forme lisible, ex =: "de Paris à Lyon en Train"
 {
-cout << "de " << this -> villeDepart << " à " << this -> villeArrivee << " en " << this -> moyenDeTransport << endl;
-} 
+    cout << "de " << this -> villeDepart << " à " << this -> villeArrivee << " en " << this -> moyenDeTransport << endl;
+} //----- Fin de Méthode
 
-char * TrajetSimple:: VilleDepart() const
-// Retourne la ville de départ
+char * TrajetSimple::VilleDepart() const
+// Algorithme :
+//
 {
     return this -> villeDepart;
-}
+} //----- Fin de Méthode
 
-char * TrajetSimple:: VilleArrivee() const
-// Retourne la ville de d'arrivee
+char * TrajetSimple::VilleArrivee() const
+// Algorithme :
+//
 {
     return this -> villeArrivee;
-} 
+} //----- Fin de Méthode
 
-char * TrajetSimple:: MoyenDeTransport() const
-// Retourne le moyen de transport
+char * TrajetSimple::MoyenDeTransport() const
+// Algorithme :
+//
 {
     return this -> moyenDeTransport;
-} 
+} //----- Fin de Méthode
+
+Trajet* TrajetSimple::Clone() const {
+    return new TrajetSimple(*this);
+} //----- Fin de Méthode
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )

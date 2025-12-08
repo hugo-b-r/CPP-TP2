@@ -51,6 +51,7 @@ void demanderAjoutTrajet(Catalogue & c)
         cout << "(2) Enregistre le trajet définition/Sortie" << endl;
         int choix;
         cin >> choix;
+        cout << endl;
         // on gère chacun des cas
         switch (choix) {
             case 0:
@@ -77,6 +78,7 @@ void demanderAjoutTrajet(Catalogue & c)
             case 1:
                 // Définition du moyen de transport
                 moyen = new char[NB_CHAR_MAX_VILLE];
+                cout << "Nom du moyen de transport ?" << endl;
                 cin >> moyen;
                 break;
             case 2:
@@ -124,6 +126,7 @@ void demanderAfficher(const Catalogue & cata)
 
 void demanderRechercheBasique( const Catalogue & cata)
 {
+    // on estime la longueur maximale d'un nom de ville à 1000 caractères
     char buffer[1000];
     int len;
 
@@ -131,13 +134,16 @@ void demanderRechercheBasique( const Catalogue & cata)
     cin >> buffer;
     len = strlen(buffer);
     char * villeA = new char[len + 1];
+    strcpy(villeA, buffer);
 
     cout << "Entrez le nom de la ville d'arrivée: " << endl;
     cin >> buffer;
     len = strlen(buffer);
     char * villeB = new char[len + 1];
+    strcpy(villeB, buffer);
 
     cata.RechercheParcours1(villeA, villeB);
+    cout << endl;
 }
 
 
@@ -150,13 +156,17 @@ void demanderRechercheComplexe( const Catalogue & cata)
     cin >> buffer;
     len = strlen(buffer);
     char * villeA = new char[len + 1];
+    strcpy(villeA, buffer);
+
 
     cout << "Entrez le nom de la ville d'arrivée: " << endl;
     cin >> buffer;
     len = strlen(buffer);
     char * villeB = new char[len + 1];
+    strcpy(villeB, buffer);
 
     cata.RechercheParcoursAvecComposition(villeA, villeB);
+    cout << endl;
 }
 
 int main() {
@@ -168,6 +178,7 @@ int main() {
     while (doitContinuer) {
         AfficherMenu(false);
         cin >> choix;
+        cout << endl;
         switch (choix) {
             case 0:
                 // ajout d'un trajet au catalogue

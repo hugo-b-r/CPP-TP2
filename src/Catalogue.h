@@ -50,7 +50,7 @@ public:
   // Mode d'emploi :
   //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
   // Contrat :
-  //  Prend la possession du trajet passé par pointeur
+  //
 
   //------------------------------------------------- Surcharge d'opérateurs
   Catalogue &operator=(const Catalogue &uCatalogue);
@@ -89,8 +89,11 @@ protected:
   //
 
   //----------------------------------------------------- Attributs protégés
+  // Le nombre de trajets enregistrés dans le catalogue
   int nbTrajets;
+  // La capacité réservée par trajets
   int tailleTrajets;
+  // Un tableau de pointeurs sur des Trajets
   Trajet **trajets;
 };
 
