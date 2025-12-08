@@ -125,6 +125,7 @@ void demanderAfficher(const Catalogue & cata)
 
 void demanderRechercheBasique( const Catalogue & cata)
 {
+    // on estime la longueur maximale d'un nom de ville à 1000 caractères
     char buffer[1000];
     int len;
 
@@ -132,11 +133,13 @@ void demanderRechercheBasique( const Catalogue & cata)
     cin >> buffer;
     len = strlen(buffer);
     char * villeA = new char[len + 1];
+    strcpy(villeA, buffer);
 
     cout << "Entrez le nom de la ville d'arrivée: " << endl;
     cin >> buffer;
     len = strlen(buffer);
     char * villeB = new char[len + 1];
+    strcpy(villeB, buffer);
 
     cata.RechercheParcours1(villeA, villeB);
 }
@@ -151,11 +154,14 @@ void demanderRechercheComplexe( const Catalogue & cata)
     cin >> buffer;
     len = strlen(buffer);
     char * villeA = new char[len + 1];
+    strcpy(villeA, buffer);
+
 
     cout << "Entrez le nom de la ville d'arrivée: " << endl;
     cin >> buffer;
     len = strlen(buffer);
     char * villeB = new char[len + 1];
+    strcpy(villeB, buffer);
 
     cata.RechercheParcoursAvecComposition(villeA, villeB);
 }
