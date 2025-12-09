@@ -120,7 +120,6 @@ void demanderAjoutTrajet(Catalogue & c)
                     delete[] moyen;
                     doitContinuer = false;
                 }
-
                 break;
         }
     }
