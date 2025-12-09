@@ -50,13 +50,16 @@ void TestCatalogue::testAfficher()
 // Algorithme : Vérifier le bon affichage du Catalogue
 {
     Test::TestHeader("Afficher", "Catalogue");
-  cout << "de Paris à Brest en Gateau" << "\r\n";
-  Catalogue C1 = Catalogue();
-  TrajetSimple *traj1 = new TrajetSimple("Paris", "Brest", "Gateau");
-  C1.AjouterTrajet(traj1);
-  delete traj1;
-  Test::etAffiche();
-  C1.Afficher();
+    cout << "---------" << endl;
+    cout << "Le catalogue comprend les trajets suivants :" << endl;
+    cout << " - de Paris à Brest en Gateau" << "\r\n";
+    cout << "---------" << endl;
+    Catalogue C1 = Catalogue();
+    TrajetSimple *traj1 = new TrajetSimple("Paris", "Brest", "Gateau");
+    C1.AjouterTrajet(traj1);
+    delete traj1;
+    Test::etAffiche();
+    C1.Afficher();
 
 }
 
@@ -64,8 +67,9 @@ void TestCatalogue::testRechercheParcours1()
 // Algorithme : Verifié la recherche simple
 {
   Test::TestHeader("Recherche Parcours 1", "Catalogue");
-  cout << "1 : de Paris à Brest en Gateau" << std::endl;
-  cout << "1 : de Paris à Brest en Voiture" << std::endl;
+  cout << "La recherche a trouvé les trajets suivants :" << endl;
+  cout << "- : de Paris à Brest en Gateau" << std::endl;
+  cout << "- : de Paris à Brest en Voiture" << std::endl;
   Catalogue C1 = Catalogue();
 
   TrajetSimple * traj1 = new TrajetSimple("Paris", "Brest", "Gateau");
@@ -121,11 +125,12 @@ void TestCatalogue::testRechercheParcoursAvecComposition()
     C1.AjouterTrajet(ts13);
     delete ts13;
     // ce que le test doit afficher
-    cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
-    cout << "de Chambéry à Paris en Velo - de Paris à Londres en Voiture - de Londres à Marseille en Train - " << endl;
-    cout << "de Marseille à Bruxelles en Velo - de Bruxelles à Nantes en Voiture - de Nantes à Rennes en Train - " << endl;
-    cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
-    cout << "De Chambéry à Rennes en Voiture" << endl;
+    cout << "La recherche a mené à ces résultats :" << endl;
+    cout << " - Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+    cout << "   - de Chambéry à Paris en Velo - de Paris à Londres en Voiture - de Londres à Marseille en Train -" << endl;
+    cout << "   - de Marseille à Bruxelles en Velo - de Bruxelles à Nantes en Voiture - de Nantes à Rennes en Train -" << endl;
+    cout << " - Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+    cout << "   - de Chambéry à Rennes en Voiture" << endl;
 
     Test::etAffiche();
     // ce qu'il affiche vraiment
@@ -152,8 +157,9 @@ void TestCatalogue::testRechercheParcoursAvecComposition2()
     delete t1;
 
     // ce que le test doit afficher
-    cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
-    cout << "de Chambéry à Paris en Velo - de Paris à Londres en Voiture - de Londres à Marseille en Train - " << endl;
+    cout << "La recherche a mené à ces résultats :" << endl;
+    cout << " - Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+    cout << "   - de Chambéry à Paris en Velo - de Paris à Londres en Voiture - de Londres à Marseille en Train - " << endl;
 
     Test::etAffiche();
     // ce qu'il affiche vraiment
@@ -179,6 +185,7 @@ void TestCatalogue::testRechercheParcoursAvecComposition3()
     C1.AjouterTrajet(t1);
     delete t1;
 
+    cout << "La recherche a mené à ces résultats :"  << endl;
 
     Test::etAffiche();
     // ce qu'il affiche vraiment
@@ -196,8 +203,9 @@ void TestCatalogue::testRechercheParcoursAvecComposition4()
     C1.AjouterTrajet(ts1);
     delete ts1;
 
-    cout << "Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
-    cout << "de Chambéry à Paris en Velo" << endl;
+    cout << "La recherche a mené à ces résultats :" << endl;
+    cout << " - Un trajet avec correspondances a été trouvé, composé des trajets suivants :" << endl;
+    cout << "   -de Chambéry à Paris en Velo" << endl;
 
 
     Test::etAffiche();
@@ -216,7 +224,7 @@ void TestCatalogue::testRechercheParcoursAvecComposition5()
     C1.AjouterTrajet(ts1);
     delete ts1;
 
-
+    cout << "La recherche a mené à ces résultats : " << endl;
     Test::etAffiche();
     // ce qu'il affiche vraiment
     C1.RechercheParcoursAvecComposition("Chambéry", "Paris");
@@ -229,9 +237,12 @@ void TestCatalogue::testAjouterTrajet()
 // Algorithme : tester l'ajout d'un trajet
 {
     Test::TestHeader("Ajouter Trajet", "Catalogue");
-    cout << "de Paris à Brest en Gateau" << "\r\n";
-    cout << "de Chambéry à Lyon en Vélo" << "\r\n";
-    cout << "de Berlin à Berlin en Canapé" << "\r\n";
+    cout << "---------" << endl;
+    cout << "Le catalogue comprend les trajets suivants :" << endl;
+    cout << " - de Paris à Brest en Gateau" << "\r\n";
+    cout << " - de Chambéry à Lyon en Vélo" << "\r\n";
+    cout << " - de Berlin à Berlin en Canapé" << "\r\n";
+    cout << "---------" << endl;
     Catalogue C1 = Catalogue();
     TrajetSimple *traj1;
     traj1 = new TrajetSimple("Paris", "Brest", "Gateau");
@@ -253,6 +264,9 @@ void TestCatalogue::testAjouterAucunTrajet()
 {
     Test::TestHeader("Aucun ajout de trajet", "Catalogue");
     Catalogue C1 = Catalogue();
+    cout << "---------" << endl;
+    cout << "Le catalogue comprend les trajets suivants :" << endl;
+    cout << "---------" << endl;
     Test::etAffiche();
     C1.Afficher();
 }
