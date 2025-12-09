@@ -111,6 +111,7 @@ void demanderAjoutTrajet(Catalogue & c)
                     }
                     TrajetCompose *trC = new TrajetCompose(trajetsSimples, nb_villes-1);
                     c.AjouterTrajet(trC);
+                    delete trC;
                     // puis on supprme la liste de villes dont on n'a plus besoin
                     for (unsigned int i = 0; i < nb_villes; i++) {
                         delete[] villes[i];
