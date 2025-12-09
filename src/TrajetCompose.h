@@ -20,6 +20,7 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetCompose>
+// C'est un trajet multimodal : il est composé de plusieurs TrajetSimple, qui sont à la suite. Hérite de Trajet.
 //
 //
 //------------------------------------------------------------------------
@@ -60,28 +61,13 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     TrajetCompose ( const TrajetCompose & unTrajetCompose );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
+    // Copie profonde
 
     TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
     TrajetCompose ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     virtual ~TrajetCompose ( ) override;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 

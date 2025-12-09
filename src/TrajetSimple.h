@@ -19,7 +19,7 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetSimple>
-//
+// C'est un trajet très imple : il a un départ, une arrivé et un moyen de transport. Hérite de Trajet.
 //
 //------------------------------------------------------------------------
 
@@ -31,66 +31,60 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
     virtual char * VilleDepart () const override;
-    // Mode d'emploi :
+    // Mode d'emploi : Retourne la ville de départ du trajet
     //
     // Contrat :
     //
 
     virtual char * VilleArrivee () const override;
-    // Mode d'emploi :
+    // Mode d'emploi : Retourne la ville d'arrivé du trajet
     //
     // Contrat :
     //
 
     virtual char * MoyenDeTransport () const;
-    // Mode d'emploi :
+    // Mode d'emploi : Moyen de transport du trajet
     //
     // Contrat :
     //
 
     virtual void Afficher () const override;
-    // Mode d'emploi :
+    // Mode d'emploi : Affichage sympathique dans cout du trajet
     //
     // Contrat :
     //
 
     virtual Trajet* Clone() const override;
-    // Mode d'emploi :
+    // Mode d'emploi : Allocation puis copie d'un nouvel objet dont l'adresse est renvoyée
     //
-    // Contrat :
+    // Contrat : l'adresse doit bien être stockée pour bien appeler les destructeurs.
     //
 
 
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetSimple & operator = ( const TrajetSimple & unTrajetSimple );
-    // Mode d'emploi :
-    //
-    // Contrat :
+    // Mode d'emploi : affectation simple de l'objet
     //
 
 
 //-------------------------------------------- Constructeurs - destructeur
     TrajetSimple ( const TrajetSimple & unTrajetSimple );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
+    // Mode d'emploi (constructeur de copie) : copie simple de l'objet
     //
 
+
     TrajetSimple ( );
-    // Mode d'emploi :
+    // Mode d'emploi : Construit un traje simple vide
     //
-    // Contrat :
-    //
+
     TrajetSimple ( const char * uneVilleDepart, const char * uneVilleArrivee, const char * moyenTransport );
-    // Mode d'emploi :
+    // Mode d'emploi : Construit le trajet à partir des paramaètres passés
     //
     // Contrat :
-    //  les chaines char * sont allouées sur le tas dynamiquement
+    //      Le trajet fait sa propre copie des chaine de caractères
 
     virtual ~TrajetSimple ( ) override;
     // Mode d'emploi :
-    //
-    // Contrat :
     //
 
 //------------------------------------------------------------------ PRIVE

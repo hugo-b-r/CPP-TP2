@@ -18,7 +18,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TestTrajetSimple>
-//
+// Teste la classe <TrajetSimple>.Les tests choisis sont ceux considérés comme
+// important. Il peut manquer quelques cas limites.
 //
 //------------------------------------------------------------------------
 
@@ -38,7 +39,9 @@ protected:
     static void TestOperateurEgal();
 
     static void TestAfficherNonBords();
+
     static void TestIndependanceChar();
+
     static void TestVille();
 
 //----------------------------------------------------- Attributs protégés

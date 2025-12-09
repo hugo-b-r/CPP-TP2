@@ -21,8 +21,9 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe Catalogue>
-// Collection des différents trajets
-// Trajet
+// Catalogue est une collection ordonnée de Trajet dans laquelle on peut faire
+// différents types de recherches, comme pour un itinéraire.
+//
 //------------------------------------------------------------------------
 
 class Catalogue {
@@ -32,61 +33,57 @@ public:
   //----------------------------------------------------- Méthodes publiques
   void Afficher() const;
   // Mode d'emploi :
-  //    Quand appelée, affiche tout les trajets du catalogue
+  //    Affichage sumpathique des trajets qui sont présents dans le catalogue
   // Contrat :
   //
 
   void RechercheParcours1(const char * VilleA, const char * VilleB) const;
   // Mode d'emploi :
-  //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
+  //    Rechercher parmis les trajets ceux dont la ville de départ est la même que VilleA et
+  //    dont l'arrivée est la même que VilleB
   // Contrat :
   //
+
   void RechercheParcoursAvecComposition(const char * VilleA, const char * VilleB) const;
   // Mode d'emploi :
-  //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
+  //    Quand appelée, affiche tout les trajets du catalogue allant de A à B, en essayant aussi
+  //    d'imbriquer les trajets entre eux quand cela est possible
   // Contrat :
   //
+
   void AjouterTrajet(Trajet * Traj);
   // Mode d'emploi :
-  //    Quand appelée, affiche tout les trajets du catalogue allant de A à B
+  //    Ajoute un trajet dans le catalogue
   // Contrat :
-  //
+  //  Le trajet reste à charge de l'utilisateur, le catalogue fait sa propre copie.
 
   //------------------------------------------------- Surcharge d'opérateurs
   Catalogue &operator=(const Catalogue &uCatalogue);
-  // Mode d'emploi :
+  // Mode d'emploi : copie en profondeur d'un catalogue
   //
-  // Contrat :
-  //
+
 
   //-------------------------------------------- Constructeurs - destructeur
-  Catalogue(const Catalogue &uCatalogue);
+  Catalogue(const Catalogue &unCatalogue);
   // Mode d'emploi (constructeur de copie) :
   //
-  // Contrat :
-  //
+
 
   Catalogue();
-  // Mode d'emploi :
-  //
-  // Contrat :
+  // Mode d'emploi : construction d'un catalogue vide
   //
 
   virtual ~Catalogue();
-  // Mode d'emploi :
-  //
-  // Contrat :
-  //
 
   //------------------------------------------------------------------ PRIVE
 
 protected:
   //----------------------------------------------------- Méthodes protégées
   void RechercheParcoursAvecCompositionRecursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
-  // Mode d'emploi :
+  // Mode d'emploi : Fait la recherche de trajets qui s'imbriquent à partir de villes de départ (VilleA) et d'arrivée (VilleB).
   //
   // Contrat :
-  //
+  //    ordre est un tableau de taille nbTrajets, utilises est un tableau de taille nbTrajets
 
   //----------------------------------------------------- Attributs protégés
   // Le nombre de trajets enregistrés dans le catalogue

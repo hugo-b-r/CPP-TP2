@@ -6,7 +6,7 @@
     e-mail               : perrine.blouin-lauvergne@insa-lyon.fr, brhugo@proton.me
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
+//---------- Interface de la classe <Trajet> (fichier Trajet.h) ----------------
 #if ! defined ( TRAJET_H )
 #define TRAJET_H
 
@@ -17,7 +17,8 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
+// Rôle de la classe <Trajet>
+// Trajet est une classe abstraite non instanciable. Un trajet a une ville de départ, une ville d'arrivée et est clonable
 //
 //
 //------------------------------------------------------------------------
@@ -49,25 +50,6 @@ public:
     virtual Trajet* Clone() const = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Trajet & operator = ( const Trajet & unTrajet );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    Trajet ( const Trajet & unTrajet );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    Trajet ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     virtual ~Trajet ( );
     // Mode d'emploi :

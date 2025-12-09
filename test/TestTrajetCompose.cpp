@@ -42,6 +42,7 @@ void TestTrajetCompose::TestTous()
 }
 
 void TestTrajetCompose::testOperateurEgal()
+// Test l'operateur egal
 {
     Test::TestHeader("Test opérateur =", "TrajetCompose");
 

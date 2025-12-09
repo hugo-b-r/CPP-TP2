@@ -32,7 +32,7 @@ void TrajetCompose::Afficher () const
         cout << "de "<< traj.VilleDepart() << " à " << traj.VilleArrivee() << " en " << traj.MoyenDeTransport() << " - ";
     }
     cout << endl;
-} 
+}
 
 char * TrajetCompose:: VilleDepart() const
 // Retourne la ville de départ
@@ -47,8 +47,10 @@ char * TrajetCompose:: VilleArrivee() const
 }
 
 Trajet* TrajetCompose::Clone() const
+// Algorithme : Alloue un nouvel objet sur lequel on appelle le constructeur de copie
+//
 {
-    // Alloue un nouvel objet sur lequel on appelle le constructeur de copie
+
     return new TrajetCompose(*this);
 }
 
@@ -70,10 +72,12 @@ TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompos
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTrajets(unTrajetCompose.nbTrajets)
+// constucteur de copie, copie en profondeur
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <TrajetCompose>" << endl;
 #endif
+    // copie en profondeur
     trajets = new TrajetSimple[unTrajetCompose.nbTrajets];
     for (int i = 0; i < unTrajetCompose.nbTrajets; i++)
     {
@@ -87,6 +91,7 @@ TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
 #endif
+    // copie en profondeur
     trajets = new TrajetSimple[taille_tableau];
     for (int i = 0; i < taille_tableau; i++) {
         trajets[i] = trajetsSimples[i];
@@ -101,23 +106,17 @@ TrajetCompose::TrajetCompose ( ) : nbTrajets(0)
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
     trajets = new TrajetSimple[NB_TRAJET_DEFAUT_COMP];
-    if (!trajets) {
-        std::cerr << "N'a pas pu initialiser les trajets" << std::endl;
-    }
-
 } //----- Fin de TrajetCompose
 
 
 TrajetCompose::~TrajetCompose ( )
-// Algorithme :
+// Algorithme : détruit le tableau de trajets
 //
 {
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
-    if (trajets != nullptr) {
-        delete [] trajets;
-    }
+    delete[] trajets;
 } //----- Fin de ~TrajetCompose
 
 

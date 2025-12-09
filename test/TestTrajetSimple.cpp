@@ -34,6 +34,7 @@ void TestTrajetSimple::TestTous()
 }
 
 void TestTrajetSimple::TestCreation()
+// Test la construction d'un TrajetSimple
 {
     Test::TestHeader("Afficher", "TrajetSimple");
     cout << "de Paris à Brest en pédalo"<< endl;
@@ -55,9 +56,12 @@ void TestTrajetSimple::TestOperateurEgal()
 }
 
 void TestTrajetSimple::TestAfficherNonBords()
+// Test de plusieurs appels pour l'affichage
 {
     Test::TestHeader("Afficher non-crash", "TrajetSimple");
-    cout << "Affichage simple (vérification visuelle)" << endl;
+    cout << "de Nice à Marseille en bus" << endl;
+    cout << "de Lyon à Grenoble en moto" << endl;
+    cout << "de Nice à Marseille en bus" << endl;
     Test::etAffiche();
 
     TrajetSimple t1("Nice", "Marseille", "bus");
@@ -70,9 +74,12 @@ void TestTrajetSimple::TestAfficherNonBords()
 }
 
 void TestTrajetSimple::TestIndependanceChar()
+// Teste si les chaines originales modifiées n'affectent pas la valeur de l'objets
 {
     Test::TestHeader("Indépendance des char", "TrajetSimple");
-    cout << "Les chaînes originales modifiées après création ne doivent pas affecter l'objet" << endl;
+
+    cout << "de Lille à Bruxelles en voiture" << endl;
+
     Test::etAffiche();
 
     char dep[20] = "Lille";
@@ -88,21 +95,23 @@ void TestTrajetSimple::TestIndependanceChar()
 }
 
 void TestTrajetSimple::TestVille()
+// Vérifie que VilleDepart() et VilleArrivee() retournent les bonnes chaînes
 {
-    Test::TestHeader("Ville_Depart/Arrivee", "TrajetSimple");
-    cout << "Vérifie que VilleDepart() et VilleArrivee() retournent les bonnes chaînes" << endl;
+    Test::TestHeader("Ville_Depart/Arrivee retournent les bonnes chaines", "TrajetSimple");
+    cout << "VilleDepart()   --> c'est bon" << endl;
+    cout << "VilleArrivee()   --> c'est bon" << endl;
     Test::etAffiche();
 
     TrajetSimple ts("A", "B", "bus");
-    if (strcpy(ts.VilleDepart(), "A") == 0){
+    if (strcmp(ts.VilleDepart(), "A") == 0){
       cout << "VilleDepart()   --> c'est bon" << endl;
     } else{
-      cout << "VilleDepart()   -->  erreur, rend:"<< ts.VilleDepart() << "au lieu de 'A' " << endl;
+      cout << "VilleDepart()   -->  erreur, rend: \""<< ts.VilleDepart() << "\" au lieu de \"A\" " << endl;
     }
-    if (strcpy(ts.VilleArrivee(), "B") == 0){
+    if (strcmp(ts.VilleArrivee(), "B") == 0){
       cout << "VilleArrivee()   --> c'est bon" << endl;
-    }else{
-      cout << "VilleArrivee()   -->  erreur, rend:"<< ts.VilleArrivee() << "au lieu de 'B' " << endl;
+    } else {
+      cout << "VilleArrivee()   -->  erreur, rend: \""<< ts.VilleArrivee() << "\" au lieu de \"B\" " << endl;
     }
 }
 

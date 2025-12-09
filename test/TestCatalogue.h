@@ -18,7 +18,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TestCatalogue>
-//
+// Test la classe Catalogue. Les tests choisis sont ceux considérés comme important.
+// Il peut manquer quelques cas limites.
 //
 //------------------------------------------------------------------------
 
@@ -30,7 +31,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
     static void TestTous();
   // Mode d'emploi :
-  //    Quand appelée, realise tout le test de catalogue
+  //    Appelle tous les tests de catalogue
   // Contrat :
   //
 
@@ -44,43 +45,47 @@ protected:
 
   static void testAfficher();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonctio nafficher de catalogue
+  //    Teste la fonction nafficher de catalogue
   // Contrat :
   static void testRechercheParcours1();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonctio recherche de parcours1 de catalogue
+  //    Teste la fonction recherche de parcours1 de catalogue
   // Contrat :
   static void testRechercheParcoursAvecComposition();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonction recherche de parcours2 de catalogue
+  //    Teste la fonction recherche de parcours2 de catalogue
   // Contrat :
   //
   static void testRechercheParcoursAvecComposition2();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
+  //    Teste la fonction recherche de parcours1 de catalogue
   // Contrat :
   //
   static void testRechercheParcoursAvecComposition3();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
+  //    Teste la fonction recherche de parcours1 de catalogue
   // Contrat :
   //
   static void testRechercheParcoursAvecComposition4();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
+  //    Teste la fonction recherche de parcours1 de catalogue
   // Contrat :
   //
   static void testRechercheParcoursAvecComposition5();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonction recherche de parcours1 de catalogue
+  //    Teste la fonction recherche de parcours1 de catalogue
   // Contrat :
   //
   static void testAjouterTrajet();
   // Mode d'emploi :
-  //    Quand appelée, affiche des tests de la fonction d'ajout de traj de catalogue
+  //    Teste la fonction d'ajout de traj de catalogue
   // Contrat :
   //
   static void testAjouterAucunTrajet();
+  // Mode d'emploi :
+  //    Test l'ajout d'aucun trajet
+  // Contrat :
+  //
 
 
 

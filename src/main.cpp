@@ -14,8 +14,9 @@ using namespace std;
 #include "TrajetCompose.h"
 #include "TrajetSimple.h"
 
-// nombre mximal de caractères dans les chaines qui sont des noms de villes
-const int NB_CHAR_MAX_VILLE = 20;
+// nombre mximal de caractères dans les chaines qui sont des noms de villes ou de moyen de transport
+const int NB_CHAR_MAX_VILLE = 100;
+
 
 void AfficherMenu(bool afficher_menu)
 // Un simple affichage qui peut facilement être répété
@@ -60,6 +61,7 @@ void demanderAjoutTrajet(Catalogue & c)
                 ville_tmp = new char[NB_CHAR_MAX_VILLE];
                 cin >> ville_tmp;
                 if (nb_villes < taille_tableau_trajets) {
+                    // copie du nom de la ville dans une variable de la bonne taille
                     villes[nb_villes] = new char[strlen(ville_tmp) + 1];
                     strcpy(villes[nb_villes], ville_tmp);
                 } else {
@@ -89,9 +91,10 @@ void demanderAjoutTrajet(Catalogue & c)
                     cout << "Vous devez préciser un moyen de transport !" << endl;
                     cout << "Le trajet n'est pas enregistré, veuillez réessayer." << endl;
                 } else if (nb_villes == 2) {
-                    // trajet simple
+                    // on crée le trajet simple
                     TrajetSimple *trS = new TrajetSimple(villes[0], villes[1], moyen);
                     c.AjouterTrajet(trS);
+                    // puis on supprime la liste de ville dont on n'a plus besoin
                     for (unsigned int i = 0; i < nb_villes; i++) {
                         delete[] villes[i];
                     }
@@ -106,6 +109,7 @@ void demanderAjoutTrajet(Catalogue & c)
                     }
                     TrajetCompose *trC = new TrajetCompose(trajetsSimples, nb_villes-1);
                     c.AjouterTrajet(trC);
+                    // puis on supprme la liste de villes dont on n'a plus besoin
                     for (unsigned int i = 0; i < nb_villes; i++) {
                         delete[] villes[i];
                     }
@@ -119,15 +123,9 @@ void demanderAjoutTrajet(Catalogue & c)
     }
 }
 
-void demanderAfficher(const Catalogue & cata)
-{
-    cata.Afficher();
-}
-
 void demanderRechercheBasique( const Catalogue & cata)
 {
-    // on estime la longueur maximale d'un nom de ville à 1000 caractères
-    char buffer[1000];
+    char buffer[NB_CHAR_MAX_VILLE];
     int len;
 
     cout << "Entrez le nom de la ville de départ : " << endl;
@@ -143,13 +141,15 @@ void demanderRechercheBasique( const Catalogue & cata)
     strcpy(villeB, buffer);
 
     cata.RechercheParcours1(villeA, villeB);
+    delete[] villeA;
+    delete[] villeB;
     cout << endl;
 }
 
 
 void demanderRechercheComplexe( const Catalogue & cata)
 {
-    char buffer[1000];
+    char buffer[NB_CHAR_MAX_VILLE];
     int len;
 
     cout << "Entrez le nom de la ville de départ : " << endl;
@@ -166,6 +166,8 @@ void demanderRechercheComplexe( const Catalogue & cata)
     strcpy(villeB, buffer);
 
     cata.RechercheParcoursAvecComposition(villeA, villeB);
+    delete[] villeA;
+    delete[] villeB;
     cout << endl;
 }
 
@@ -186,7 +188,7 @@ int main() {
                 break;
             case 1:
                 // Affichage du catalogue
-                demanderAfficher(cata);
+                cata.Afficher();
                 break;
             case 2:
                 // Recherche de parcous basique

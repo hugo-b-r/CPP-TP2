@@ -18,6 +18,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TestTrajetCompose>
+// Test la classe <TrajetCompose>. Les tests choisis sont ceux considérés comme
+// important. Il peut manquer quelques cas limites.
 //
 //
 //------------------------------------------------------------------------
@@ -28,12 +30,8 @@ class TestTrajetCompose
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     static void TestTous();
+    // Appelle tous les test de <TestTrajetCompose>
 
 
 //------------------------------------------------------------------ PRIVE

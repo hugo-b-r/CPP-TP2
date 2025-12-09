@@ -58,7 +58,7 @@ Trajet* TrajetSimple::Clone() const {
 
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )
-// Algorithme :
+// Algorithme : suppression des string préallouées et allocaiton de la bonne taille pour les string de la rvalue
 //
 {
 #ifdef MAP
@@ -82,7 +82,7 @@ TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetSimple::TrajetSimple ( const TrajetSimple & unTrajetSimple )
-// Algorithme :
+// Algorithme : alloue un char *  de la bonne taille et copie les chaines dedans
 //
 {
 #ifdef MAP
@@ -100,7 +100,7 @@ TrajetSimple::TrajetSimple ( const TrajetSimple & unTrajetSimple )
 
 
 TrajetSimple::TrajetSimple ( ): villeDepart(nullptr), villeArrivee(nullptr), moyenDeTransport(nullptr)
-// Algorithme :
+// Algorithme : ne fait presque rien, le trajet est vide
 //
 {
 #ifdef MAP
@@ -111,6 +111,7 @@ TrajetSimple::TrajetSimple ( ): villeDepart(nullptr), villeArrivee(nullptr), moy
 } //----- Fin de TrajetSimple
 
 TrajetSimple::TrajetSimple ( const char * uneVilleDepart, const char * uneVilleArrivee, const char * unMoyenTransport )
+// Alorithme : allocation et copie des différentes chaines de caractères
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetSimple>" << endl;
@@ -125,8 +126,6 @@ TrajetSimple::TrajetSimple ( const char * uneVilleDepart, const char * uneVilleA
 
 
 TrajetSimple::~TrajetSimple ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;

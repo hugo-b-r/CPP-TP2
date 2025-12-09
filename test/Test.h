@@ -18,7 +18,7 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Test>
-//
+//  Rassemble l'appel de tous les tests de chacun des modules de test.
 //
 //------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
     static void TestTous();
   // Mode d'emploi :
-  //    Quand appelée, realise tout le test de catalogue
+  //    Quand appelée, appelle tous les tests de chacun de modules
   // Contrat :
   //
   static void TestHeader(const char * nomTest, const char * nomClasse);

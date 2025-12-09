@@ -40,6 +40,7 @@ const char * finCouleur = "";
 //{
 //} //----- Fin de Méthode
 void Test::TestTous()
+// Pour chaque module de test, on appelle sa méthode TestTous
 {
     TestCatalogue::TestTous();
     TestTrajetSimple::TestTous();

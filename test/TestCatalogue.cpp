@@ -30,7 +30,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void TestCatalogue::TestTous()
-// Algo:
+// Algorithme: execute chacun des tests
 {
   testAfficher();
   testRechercheParcours1();
@@ -46,7 +46,9 @@ void TestCatalogue::TestTous()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-void TestCatalogue::testAfficher() {
+void TestCatalogue::testAfficher()
+// Algorithme : Vérifier le bon affichage du Catalogue
+{
     Test::TestHeader("Afficher", "Catalogue");
   cout << "de Paris à Brest en Gateau" << "\r\n";
   Catalogue C1 = Catalogue();
@@ -59,7 +61,7 @@ void TestCatalogue::testAfficher() {
 }
 
 void TestCatalogue::testRechercheParcours1()
-// Algo:
+// Algorithme : Verifié la recherche simple
 {
   Test::TestHeader("Recherche Parcours 1", "Catalogue");
   cout << "1 : de Paris à Brest en Gateau" << std::endl;
@@ -84,7 +86,7 @@ void TestCatalogue::testRechercheParcours1()
 }
 
 void TestCatalogue::testRechercheParcoursAvecComposition()
-// Algo:
+// Algorithme : verifie la recherche complexe version 1
 {
     Test::TestHeader(" Recherche parcours composes", "Catalogue");
     Catalogue C1 = Catalogue();
@@ -133,7 +135,7 @@ void TestCatalogue::testRechercheParcoursAvecComposition()
 
 
 void TestCatalogue::testRechercheParcoursAvecComposition2()
-// Algo: test de l'ajout d'un seul trajet compose et voir s'il est trouvé
+// Algorithme : verifie la recherche complexe version 2
 {
     Test::TestHeader(" Recherche parcours composes n°2", "Catalogue");
     Catalogue C1 = Catalogue();
@@ -224,7 +226,7 @@ void TestCatalogue::testRechercheParcoursAvecComposition5()
 
 
 void TestCatalogue::testAjouterTrajet()
-// Algo:
+// Algorithme : tester l'ajout d'un trajet
 {
     Test::TestHeader("Ajouter Trajet", "Catalogue");
     cout << "de Paris à Brest en Gateau" << "\r\n";
@@ -247,7 +249,7 @@ void TestCatalogue::testAjouterTrajet()
 }
 
 void TestCatalogue::testAjouterAucunTrajet()
-// Algo:
+// Algorithme: test de l'affichage pour aucun trajet
 {
     Test::TestHeader("Aucun ajout de trajet", "Catalogue");
     Catalogue C1 = Catalogue();
