@@ -4,60 +4,45 @@
 
 Premier essai de modules du projet :
 
-```mermaid
-
-classDiagram
-    class Catalogue {
-        #Trajet * trajets
-        #int nbTrajets
-        
-        +Catalogue()
-        +Catalogue(const Catalog & c)
-        +~Catalogue()
-        +void Afficher()
-        +Catalogue RechercheParcours(Ville A, Ville B)
-        +void AjouterTrajet(const Trajet traj)
-    }
-
-    class TrajetSimple {
-        #char * villeDepart
-        #char * villeArrivee
-        #char * moyenDeTransport
-
-        +Trajet()
-        +~Trajet()
-        +void Afficher()
-    }
-
-    class TrajetMultiple {
-        #TrajetSimple * trajets
-        #int nbTrajets
-
-        +TrajetMultiple()
-        +~TrajetMultiple()
-        +void Afficher()
-    }
-
-
-```
 
 et avec des tests qui peuvent au futur ressembler à :
 ```mermaid
 classDiagram
     class Test{
-        +TestTous()
+        +static void TestTous()
+        +static void TestHeader(const char * nomTest, const char * nomClasse)
+        +static void etAffiche()
     }
-
-    class TestTrajet {
-        +TestTous()
-        -int testCreerTrajet()
-    }
-    Test -->TestTrajet
     Test --> TestCatalogue
+    Test --> TestTrajetSimple
+    Test --> TestTrajetCompose
     class TestCatalogue {
-        +TestTous()
-        -int testAjouterTrajet()
-        -int testRechercheParcours()
+        +static void TestTous()
+        #static void testAjouterTrajet()
+        #static void testRechercheParcours()
+        #static void testAfficher()
+        #static void testRechercheParcours1()
+        #static void testRechercheParcoursAvecComposition()
+        #static void testRechercheParcoursAvecComposition2()
+        #static void testRechercheParcoursAvecComposition3()
+        #static void testRechercheParcoursAvecComposition4()
+        #static void testRechercheParcoursAvecComposition5()
+        #static void testAjouterTrajet()
+        #static void testAjouterAucunTrajet()
+    }
+    class TestTrajetCompose {
+        +static void TestTous()
+        #static void testOperateurEgal()
+        #static void testCopie()
+        #static void testAffiche()
+    }
+    class TestTrajetSimple {
+        +static void TestTous()
+        #static void TestCreation()
+        #static void TestOperateurEgal()
+        #static void TestAfficherNonBords()
+        #static void TestIndependanceChar()
+        #static void TestVille()
     }
 ```
 
@@ -67,21 +52,6 @@ Deuxieme version de modules du projet, qui sera celle utilisée:
 ```mermaid
 
 classDiagram
-    class Catalogue {
-        #Trajet ** trajets
-        #int nbTrajets
-        #int tailleTrajets
-        
-        +Catalogue() - OK
-        +Catalogue(const Catalog & c)
-        +~Catalogue() - OK
-        +void Afficher() - OK
-        +void RechercheParcours1(const char * VilleA, const char * VilleB) const - OK
-        +void RechercheParcoursAvecComposition(const char * VilleA, const char * VilleB) const
-        -void RechercheParcoursAvecCompositionRecursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
-        +void AjouterTrajet(Trajet * traj) - OK
-    }
-
     class Trajet {
         +Trajet ( const Trajet & unTrajet )
         +Trajet ( )
@@ -89,6 +59,7 @@ classDiagram
         +virtual char * VilleDepart()
         +virtual char * VilleArrivee()
         +virtual void Afficher()
+        +virtual Trajet * Clone()
     }
 
     
@@ -98,12 +69,13 @@ classDiagram
         #char * moyenDeTransport
 
         +TrajetSimple(const TrajetSimple & unTrajetSimple)
-        +TrajetSimple()  OK
-        +virtual ~TrajetSimple() - OK
-        +virtual char * VilleDepart() - OK
-        +virtual char * VilleArrivee() - OK
-        +virtual char * MoyendeTransport() - OK
-        +virtual void Afficher () - OK
+        +TrajetSimple()
+        +virtual ~TrajetSimple()
+        +virtual char * VilleDepart()
+        +virtual char * VilleArrivee()
+        +virtual char * MoyendeTransport()
+        +virtual void Afficher ()
+        +virtual Trajet * Clone()
     }
     Trajet-->TrajetSimple
     
@@ -111,25 +83,37 @@ classDiagram
         #TrajetSimple * trajets
         #int nbTrajets
 
-        +TrajetCompose() - OK
+        +TrajetCompose()
         +TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau )
         +TrajetCompose ( const TrajetCompose & unTrajetCompose )
-        +virtual ~TrajetCompose() - OK
-        +virtual void Afficher() - OK
-        +virtual char * VilleDepart() - OK
-        +virtual char * VilleArrivee() - OK
+        +virtual ~TrajetCompose()
+        +virtual void Afficher()
+        +virtual char * VilleDepart()
+        +virtual char * VilleArrivee()
+        +virtual Trajet * Clone()
+        
     }
     Trajet-->TrajetCompose
 
 
+
 ```
 
-## To-do 
+```mermaid
+classDiagram
+    class Catalogue {
+        #Trajet ** trajets
+        #int nbTrajets
+        #int tailleTrajets
+        
+        +Catalogue()
+        +Catalogue(const Catalog & c)
+        +~Catalogue()
+        +void Afficher()
+        +void RechercheParcours1(const char * VilleA, const char * VilleB) const
+        +void RechercheParcoursAvecComposition(const char * VilleA, const char * VilleB) const
+        -void RechercheParcoursAvecCompositionRecursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
+        +void AjouterTrajet(Trajet * traj)
+    }
 
-- [ ] Corriger l'algo complexe qui doit presque fonctionner
-- [ ] Correctement documenter chaque classe et fonction, commenter
-Si on a le temps:
-- [ ] Rajouter tests TrajetCompose
-- [ ] Rajoutertests TrajetSimple
-- [ ] Rajoutertests TrajetSimple
-- [ ] Checker la mémoire
+```
