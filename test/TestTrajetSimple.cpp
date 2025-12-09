@@ -13,6 +13,7 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 using namespace std;
+#include <cstring>
 
 //------------------------------------------------------ Include personnel
 #include "TestTrajetSimple.h"
@@ -93,12 +94,12 @@ void TestTrajetSimple::TestVille()
     Test::etAffiche();
 
     TrajetSimple ts("A", "B", "bus");
-    if (ts.VilleDepart()=="A"){
+    if (strcpy(ts.VilleDepart(), "A") == 0){
       cout << "VilleDepart()   --> c'est bon" << endl;
     } else{
       cout << "VilleDepart()   -->  erreur, rend:"<< ts.VilleDepart() << "au lieu de 'A' " << endl;
     }
-    if (ts.VilleArrivee()=="B"){
+    if (strcpy(ts.VilleArrivee(), "B") == 0){
       cout << "VilleArrivee()   --> c'est bon" << endl;
     }else{
       cout << "VilleArrivee()   -->  erreur, rend:"<< ts.VilleArrivee() << "au lieu de 'B' " << endl;
