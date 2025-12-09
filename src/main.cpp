@@ -94,11 +94,13 @@ void demanderAjoutTrajet(Catalogue & c)
                     // on crée le trajet simple
                     TrajetSimple *trS = new TrajetSimple(villes[0], villes[1], moyen);
                     c.AjouterTrajet(trS);
+                    delete trS;
                     // puis on supprime la liste de ville dont on n'a plus besoin
                     for (unsigned int i = 0; i < nb_villes; i++) {
                         delete[] villes[i];
                     }
                     delete[] villes;
+                    delete[] moyen;
                     doitContinuer = false;
                 } else {
                     // On crée un trajet composé
@@ -115,6 +117,7 @@ void demanderAjoutTrajet(Catalogue & c)
                     }
                     delete[] villes;
                     delete[] trajetsSimples;
+                    delete[] moyen;
                     doitContinuer = false;
                 }
 
