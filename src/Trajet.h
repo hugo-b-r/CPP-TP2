@@ -26,6 +26,9 @@ using namespace std;
 // MAUVAIS_FICHIER : le fichier n'est pas trouvé ou non accessible
 enum class StatutChargement { SUCCES, MAUVAIS_FORMAT, MAUVAIS_FICHIER };
 
+// Différents types de trajet pour savoir lesquels charger
+enum class TypeTrajet { SIMPLE, COMPOSE };
+
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
 // Trajet est une classe abstraite non instanciable. Un trajet a une ville de départ, une ville d'arrivée et est clonable
@@ -60,6 +63,12 @@ public:
     virtual Trajet* Clone() const = 0;
 
     virtual ofstream & FormaterPourFichier(ofstream & flux) const = 0;
+
+    static int LireNbEtapes(ifstream & flux);
+
+    static string LireVilleDepart(ifstream & flux);
+
+    static string LireVilleArrivee(ifstream & flux);
 
 
 //------------------------------------------------- Surcharge d'opérateurs

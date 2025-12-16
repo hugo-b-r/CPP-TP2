@@ -11,17 +11,40 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-
+#include <fstream>
 
 
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
+
+
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+
+int Trajet::LireNbEtapes(ifstream & flux)
+{
+    string taille_str;
+    getline(flux, taille_str, ':');
+    return stoi(taille_str);
+}
+
+string LireVilleDepart(ifstream & flux)
+{
+    string villeDep;
+    getline(flux, villeDep, ':');
+    return villeDep;
+}
+
+string LireVilleArrivee(ifstream & flux)
+{
+    string villeArr;
+    getline(flux, villeArr, ':');
+    return villeArr;
+}
 
 Trajet::~Trajet ( )
 // Algorithme :
