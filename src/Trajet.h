@@ -12,9 +12,19 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
+#include <ostream>
+
+using namespace std;
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
+
+// Différents types de résultat du chargement d'un fichier
+// SUCCES: c'est une réussite, cela a bien fonctionné
+// MAUVAIS_FORMAT : le fichier est trouvé mais son format n'est pas le bon
+// MAUVAIS_FICHIER : le fichier n'est pas trouvé ou non accessible
+enum class StatutChargement { SUCCES, MAUVAIS_FORMAT, MAUVAIS_FICHIER };
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
@@ -48,6 +58,9 @@ public:
     //
 
     virtual Trajet* Clone() const = 0;
+
+    virtual ofstream & FormaterPourFichier(ofstream & flux) const = 0;
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 
