@@ -12,8 +12,8 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
-#include <ostream>
-
+#include <fstream>
+#include <string>
 using namespace std;
 
 //------------------------------------------------------------- Constantes

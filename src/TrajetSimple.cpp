@@ -59,6 +59,7 @@ Trajet* TrajetSimple::Clone() const {
 
 ofstream & TrajetSimple::FormaterPourFichier(ofstream & flux) const {
     flux << "1" << ":" << villeDepart << ">" << villeArrivee << ":" << moyenDeTransport << endl;
+    return flux;
 } //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs

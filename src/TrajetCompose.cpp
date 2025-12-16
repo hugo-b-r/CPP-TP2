@@ -13,7 +13,7 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 #include <string>
-
+#include <fstream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -55,17 +55,18 @@ Trajet* TrajetCompose::Clone() const
     return new TrajetCompose(*this);
 }
 
-ofstream FormaterPourFichier()
+ofstream& TrajetCompose::FormaterPourFichier(ofstream & flux) const
 {
-  flux << taille_tableau << ':' << VilleDepart() << '>' << VilleArrivee() << ':' ;
-  for (int i =0 ; i< nbTrajets ; i++){
-    TrajetSimple traj = trajets[i];
-    if (i == (nbTrajets-1)) {
-      flux << traj.MoyenDeTransport() << '\n' << endl;
-    } else {
-      flux << traj.MoyenDeTransport() << '>' << traj.VilleArrivee() << '>';
+    flux << to_string(nbTrajets) << ':' << VilleDepart() << '>' << VilleArrivee() << ':' ;
+    for (int i =0 ; i< nbTrajets ; i++) {
+        TrajetSimple traj = trajets[i];
+        if (i == (nbTrajets-1)) {
+            flux << traj.MoyenDeTransport() << '\n' << endl;
+        } else {
+            flux << traj.MoyenDeTransport() << '>' << traj.VilleArrivee() << '>';
+        }
     }
-    }
+    return flux;
 }
 
 
@@ -102,7 +103,6 @@ TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTraje
 
 TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau)
 // Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple
-.
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
@@ -114,7 +114,7 @@ TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau
     }
 }
 
-TrajetCompose::TrajetCompose (ifstream chaineFormatteeFichier, int taille_tableau, string villeDep, string villeArr) : nbTrajets(taille_tableau)
+TrajetCompose::TrajetCompose (ifstream& chaineFormatteeFichier, int taille_tableau, string villeDep, string villeArr) : nbTrajets(taille_tableau)
 // Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple.
 // A partir d'un texte de format fichier de sauvegerde
 {
@@ -122,27 +122,27 @@ TrajetCompose::TrajetCompose (ifstream chaineFormatteeFichier, int taille_tablea
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
   #endif
   trajets = new TrajetSimple[taille_tableau];
-  
+
     for (int i = 0; i < taille_tableau; i++) {
-      TrajetSimple traj;
+      TrajetSimple* traj;
       string moyen;
       string villeEtape1;
       string villeEtape2;
       if (i==0){
         getline(chaineFormatteeFichier,moyen,'>');
         getline(chaineFormatteeFichier,villeEtape2,'>');
-        traj = new TrajetSimple(villeDep, villeEtape2, moyen);
+        traj = new TrajetSimple(villeDep.c_str(), villeEtape2.c_str(), moyen.c_str());
       } else if (i==taille_tableau-1){
         villeEtape1=villeEtape2;
         getline(chaineFormatteeFichier,moyen,'\n');
-        traj = new TrajetSimple(villeEtape1, villeArr, moyen);
+        traj = new TrajetSimple(villeEtape1.c_str(), villeArr.c_str(), moyen.c_str());
       } else {
         villeEtape1=villeEtape2;
         getline(chaineFormatteeFichier,moyen,'>');
         getline(chaineFormatteeFichier,villeEtape2,'>');
-        traj = new TrajetSimple(villeEtape1, villeEtape2, moyen);
+        traj = new TrajetSimple(villeEtape1.c_str(), villeEtape2.c_str(), moyen.c_str());
       }
-        trajets[i] = traj;
+        trajets[i] = *traj;
         delete traj;
     }
 }

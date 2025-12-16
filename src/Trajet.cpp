@@ -32,14 +32,14 @@ int Trajet::LireNbEtapes(ifstream & flux)
     return stoi(taille_str);
 }
 
-string LireVilleDepart(ifstream & flux)
+string Trajet::LireVilleDepart(ifstream & flux)
 {
     string villeDep;
     getline(flux, villeDep, ':');
     return villeDep;
 }
 
-string LireVilleArrivee(ifstream & flux)
+string Trajet::LireVilleArrivee(ifstream & flux)
 {
     string villeArr;
     getline(flux, villeArr, ':');

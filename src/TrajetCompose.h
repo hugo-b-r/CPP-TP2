@@ -14,6 +14,9 @@
 #include "Trajet.h"
 #include "TrajetSimple.h"
 
+#include <fstream>
+#include <string>
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -51,7 +54,7 @@ public:
 
     virtual Trajet* Clone() const override;
 
-    virtual ofstream FormaterPourFichier() const override;
+    virtual ofstream& FormaterPourFichier(ofstream & flux) const override;
 
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetCompose & operator = ( const TrajetCompose & unTrajetCompose );
@@ -67,7 +70,7 @@ public:
 
     TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau );
 
-    TrajetCompose ( ifstream chaineFormatteeFichier, int taille_tableau, string villeD, string villeA);
+    TrajetCompose ( ifstream& chaineFormatteeFichier, int taille_tableau, string villeD, string villeA);
 
     TrajetCompose ( );
 
