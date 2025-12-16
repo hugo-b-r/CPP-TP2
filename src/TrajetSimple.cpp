@@ -11,8 +11,10 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <fstream>
 #include <iostream>
 #include <cstring>
+#include <string>
 
 using namespace std;
 
@@ -55,6 +57,9 @@ Trajet* TrajetSimple::Clone() const {
     return new TrajetSimple(*this);
 } //----- Fin de Méthode
 
+ofstream & TrajetSimple::FormaterPourFichier(ofstream & flux) const {
+    flux << "1" << ":" << villeDepart << ">" << villeArrivee << ":" << moyenDeTransport << endl;
+} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )
@@ -123,6 +128,22 @@ TrajetSimple::TrajetSimple ( const char * uneVilleDepart, const char * uneVilleA
     moyenDeTransport = new char[strlen(unMoyenTransport) + 1];
     strcpy(moyenDeTransport, unMoyenTransport);
 } //----- Fin de TrajetSimple
+
+TrajetSimple::TrajetSimple ( ifstream & flux )
+{
+    string nb_str;
+    getline(flux, nb_str, ':');
+    string uneVilleDepart, uneVilleArrivee, unMoyenDeTransport;
+    getline(flux, uneVilleDepart, '>');
+    getline(flux, uneVilleArrivee, ':');
+    getline(flux, unMoyenDeTransport, '\n');
+    villeDepart = new char[uneVilleDepart.size() + 1];
+    strcpy(villeDepart, uneVilleDepart.c_str());
+    villeArrivee = new char[uneVilleArrivee.size() + 1];
+    strcpy(villeArrivee, uneVilleArrivee.c_str());
+    moyenDeTransport = new char[unMoyenDeTransport.size() + 1];
+    strcpy(moyenDeTransport, unMoyenDeTransport.c_str());
+}
 
 
 TrajetSimple::~TrajetSimple ( )

@@ -60,6 +60,8 @@ public:
     // Contrat : l'adresse doit bien être stockée pour bien appeler les destructeurs.
     //
 
+    virtual ofstream & FormaterPourFichier(ofstream & flux) const override;
+
 
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetSimple & operator = ( const TrajetSimple & unTrajetSimple );
@@ -82,6 +84,13 @@ public:
     //
     // Contrat :
     //      Le trajet fait sa propre copie des chaine de caractères
+
+    TrajetSimple ( ifstream & flux );
+    // Mode d'emploi : Construit le trajet à partir des paramaètres passés
+    //
+    // Contrat :
+    //      Le trajet fait sa propre copie des chaine de caractères
+
 
     virtual ~TrajetSimple ( ) override;
     // Mode d'emploi :

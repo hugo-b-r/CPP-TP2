@@ -62,6 +62,23 @@ public:
   // Mode d'emploi : copie en profondeur d'un catalogue
   //
 
+  StatutChargement Charger(string cheminFichier);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
+
+  StatutChargement ChargerTypeTrajet(string cheminFichier, TypeTrajet type);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
+
+  StatutChargement ChargerVilleDepartOuArrivee(string cheminFichier, string ville, bool depart);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
+
+  StatutChargement ChargerSelonSelection(string cheminFichier, int dep, int arrivee);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
+
+
 
   //-------------------------------------------- Constructeurs - destructeur
   Catalogue(const Catalogue &unCatalogue);

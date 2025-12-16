@@ -13,8 +13,11 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include "TrajetCompose.h"
+#include "TrajetSimple.h"
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 using namespace std;
 
@@ -156,6 +159,183 @@ void Catalogue::AjouterTrajet ( Trajet * traj )
     }
     nbTrajets +=1;
 }
+
+
+
+StatutChargement Catalogue::Charger(string cheminFichier)
+{
+    ifstream f;
+    f.open(cheminFichier, ios_base::in);
+    if (!f.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutChargement::MAUVAIS_FICHIER;
+    } else {
+        // tant qu'on n'a pas atteint la fin du fichier
+        while (f.peek() != EOF) {
+            int nb = Trajet::LireNbEtapes(f);
+            if (nb == 1)
+            {
+                string villeD = Trajet::LireVilleDepart(f);
+                string villeA = Trajet::LireVilleArrivee(f);
+                TrajetSimple t (f, villeA, villeD);
+                AjouterTrajet(&t);
+            } else if (nb > 1)
+            {
+                string villeD = Trajet::LireVilleDepart(f);
+                string villeA = Trajet::LireVilleArrivee(f);
+                TrajetCompose t (f, villeA, villeD);
+                AjouterTrajet(&t);
+            } else
+            {
+                cerr << "Le fichier a un mauvais format" <<  endl;
+                return StatutChargement::MAUVAIS_FORMAT;
+            }
+
+        }
+    }
+    f.close();
+}
+
+StatutChargement Catalogue::ChargerTypeTrajet(string cheminFichier, TypeTrajet type)
+{
+    ifstream f;
+    f.open(cheminFichier, ios_base::in);
+    if (!f.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutChargement::MAUVAIS_FICHIER;
+    } else {
+        // tant qu'on n'a pas atteint la fin du fichier
+        while (f.peek() != EOF) {
+            int nb = Trajet::LireNbEtapes(f);
+            if (nb == 1 && type == TypeTrajet::SIMPLE)
+            {
+                string villeD = Trajet::LireVilleDepart(f);
+                string villeA = Trajet::LireVilleArrivee(f);
+                TrajetSimple t (f, villeA, villeD);
+                AjouterTrajet(&t);
+            } else if (nb > 1 && type == TypeTrajet::COMPOSE)
+            {
+                string villeD = Trajet::LireVilleDepart(f);
+                string villeA = Trajet::LireVilleArrivee(f);
+                TrajetCompose t (f, villeA, villeD);
+                AjouterTrajet(&t);
+            } else
+            {
+                cerr << "Le fichier a un mauvais format" <<  endl;
+                return StatutChargement::MAUVAIS_FORMAT;
+            }
+
+        }
+    }
+    f.close();
+}
+
+StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, string ville, bool depart)
+{
+    ifstream f;
+    f.open(cheminFichier, ios_base::in);
+    if (!f.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutChargement::MAUVAIS_FICHIER;
+    } else {
+        if (depart)
+        {
+            // tant qu'on n'a pas atteint la fin du fichier
+            while (f.peek() != EOF) {
+                int nb = Trajet::LireNbEtapes(f);
+                string villeD = Trajet::LireVilleDepart(f);
+                if (villeD == ville)
+                {
+                    if (nb == 1) {
+                        string villeA = Trajet::LireVilleArrivee(f);
+                        TrajetSimple t (f, villeA, villeD);
+                        AjouterTrajet(&t);
+                    } else if (nb > 1) {
+                        string villeA = Trajet::LireVilleArrivee(f);
+                        TrajetCompose t (f, villeA, villeD);
+                        AjouterTrajet(&t);
+                    } else {
+                        cerr << "Le fichier a un mauvais format" <<  endl;
+                        return StatutChargement::MAUVAIS_FORMAT;
+                    }
+                }
+            }
+        } else
+        {
+
+            // tant qu'on n'a pas atteint la fin du fichier
+            while (f.peek() != EOF) {
+                int nb = Trajet::LireNbEtapes(f);
+                string villeD = Trajet::LireVilleDepart(f);
+                string villeA = Trajet::LireVilleArrivee(f);
+                if (villeA == ville)
+                {
+                    if (nb == 1) {
+                        TrajetSimple t (f, villeA, villeD);
+                        AjouterTrajet(&t);
+                    } else if (nb > 1) {
+                        TrajetCompose t (f, villeA, villeD);
+                        AjouterTrajet(&t);
+                    } else {
+                        cerr << "Le fichier a un mauvais format" <<  endl;
+                        return StatutChargement::MAUVAIS_FORMAT;
+                    }
+                }
+            }
+
+        }
+
+    }
+    f.close();
+}
+
+StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep, int arrivee)
+{
+    ifstream f;
+    int ligneActuelle = 0;
+    if (!f.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutChargement::MAUVAIS_FICHIER;
+    } else
+    {
+        while (ligneActuelle < dep && getline(f))
+        {
+            // on va jusqu'à la fin de la ligne
+            ++ligneActuelle;
+        }
+        while (ligneActuelle < arrivee)
+        {
+            // tant qu'on n'a pas atteint la fin du fichier
+            while (f.peek() != EOF) {
+                int nb = Trajet::LireNbEtapes(f);
+                if (nb == 1)
+                {
+                    string villeD = Trajet::LireVilleDepart(f);
+                    string villeA = Trajet::LireVilleArrivee(f);
+                    TrajetSimple t (f, villeA, villeD);
+                    AjouterTrajet(&t);
+                } else if (nb > 1)
+                {
+                    string villeD = Trajet::LireVilleDepart(f);
+                    string villeA = Trajet::LireVilleArrivee(f);
+                    TrajetCompose t (f, villeA, villeD);
+                    AjouterTrajet(&t);
+                } else
+                {
+                    cerr << "Le fichier a un mauvais format" <<  endl;
+                    return StatutChargement::MAUVAIS_FORMAT;
+                }
+            }
+        }
+    }
+    f.close();
+
+}
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
