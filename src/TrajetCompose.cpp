@@ -12,6 +12,7 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -54,6 +55,20 @@ Trajet* TrajetCompose::Clone() const
     return new TrajetCompose(*this);
 }
 
+ofstream FormaterPourFichier()
+{
+  flux << taille_tableau << ':' << VilleDepart() << '>' << VilleArrivee() << ':' ;
+  for (int i =0 ; i< nbTrajets ; i++){
+    TrajetSimple traj = trajets[i];
+    if (i == (nbTrajets-1)) {
+      flux << traj.MoyenDeTransport() << '\n' << endl;
+    } else {
+      flux << traj.MoyenDeTransport() << '>' << traj.VilleArrivee() << '>';
+    }
+    }
+}
+
+
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompose )
 {
@@ -86,7 +101,8 @@ TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose ) : nbTraje
 } //----- Fin de TrajetCompose (constructeur de copie)
 
 TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau ) : nbTrajets(taille_tableau)
-// Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple.
+// Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple
+.
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
@@ -95,6 +111,39 @@ TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau
     trajets = new TrajetSimple[taille_tableau];
     for (int i = 0; i < taille_tableau; i++) {
         trajets[i] = trajetsSimples[i];
+    }
+}
+
+TrajetCompose::TrajetCompose (ifstream chaineFormatteeFichier, int taille_tableau, string villeDep, string villeArr) : nbTrajets(taille_tableau)
+// Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple.
+// A partir d'un texte de format fichier de sauvegerde
+{
+  #ifdef MAP
+    cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
+  #endif
+  trajets = new TrajetSimple[taille_tableau];
+  
+    for (int i = 0; i < taille_tableau; i++) {
+      TrajetSimple traj;
+      string moyen;
+      string villeEtape1;
+      string villeEtape2;
+      if (i==0){
+        getline(chaineFormatteeFichier,moyen,'>');
+        getline(chaineFormatteeFichier,villeEtape2,'>');
+        traj = new TrajetSimple(villeDep, villeEtape2, moyen);
+      } else if (i==taille_tableau-1){
+        villeEtape1=villeEtape2;
+        getline(chaineFormatteeFichier,moyen,'\n');
+        traj = new TrajetSimple(villeEtape1, villeArr, moyen);
+      } else {
+        villeEtape1=villeEtape2;
+        getline(chaineFormatteeFichier,moyen,'>');
+        getline(chaineFormatteeFichier,villeEtape2,'>');
+        traj = new TrajetSimple(villeEtape1, villeEtape2, moyen);
+      }
+        trajets[i] = traj;
+        delete traj;
     }
 }
 
