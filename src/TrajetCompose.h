@@ -67,7 +67,7 @@ public:
 
     TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau );
 
-    TrajetCompose ( string FormatPourFichier);
+    TrajetCompose ( string chaineFormatteeFichier);
 
     TrajetCompose ( );
 
