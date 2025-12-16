@@ -1,0 +1,6 @@
+1:ville_depart>ville_arr:moyendetransport
+2:ville_depart>ville_arr:moyendetransportA>villeA>moyendetransportFin
+
+# étudié mais pas utilisé (ceci est un commentaire)
+# 1>ville_depart>ville_arr>moyendetransport
+# 2>ville_depart>ville_arr>moyendetransportA>villeA>moyendetransportB>VilleB

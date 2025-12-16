@@ -60,6 +60,7 @@ classDiagram
         +virtual char * VilleArrivee()
         +virtual void Afficher()
         +virtual Trajet * Clone()
+        +virtual string FormaterPourFichier()
     }
 
     
@@ -70,12 +71,14 @@ classDiagram
 
         +TrajetSimple(const TrajetSimple & unTrajetSimple)
         +TrajetSimple()
+        +TrajetSimple( string chaineFormatteeFichier )
         +virtual ~TrajetSimple()
         +virtual char * VilleDepart()
         +virtual char * VilleArrivee()
         +virtual char * MoyendeTransport()
         +virtual void Afficher ()
         +virtual Trajet * Clone()
+        +string FormaterPourFichier()
     }
     Trajet-->TrajetSimple
     
@@ -86,12 +89,13 @@ classDiagram
         +TrajetCompose()
         +TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau )
         +TrajetCompose ( const TrajetCompose & unTrajetCompose )
+        +TrajetCompose ( string chaineFormatteeFichier )
         +virtual ~TrajetCompose()
         +virtual void Afficher()
         +virtual char * VilleDepart()
         +virtual char * VilleArrivee()
         +virtual Trajet * Clone()
-        
+        +string FormaterPourFichier()
     }
     Trajet-->TrajetCompose
 
@@ -114,6 +118,8 @@ classDiagram
         +void RechercheParcoursAvecComposition(const char * VilleA, const char * VilleB) const
         -void RechercheParcoursAvecCompositionRecursion ( const char * VilleA, const char * VilleB, int * ordre, bool * utilises, int nbAjoutes) const;
         +void AjouterTrajet(Trajet * traj)
+        +void Charger(string cheminFichier)
+        +void Sauvegarder(string cheminFichier)
     }
 
 ```
