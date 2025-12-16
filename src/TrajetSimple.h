@@ -85,7 +85,7 @@ public:
     // Contrat :
     //      Le trajet fait sa propre copie des chaine de caractères
 
-    TrajetSimple ( ifstream & flux );
+    TrajetSimple ( ifstream & flux, string villeA, string villeB);
     // Mode d'emploi : Construit le trajet à partir des paramaètres passés
     //
     // Contrat :

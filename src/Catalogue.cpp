@@ -184,7 +184,7 @@ StatutChargement Catalogue::Charger(string cheminFichier)
             {
                 string villeD = Trajet::LireVilleDepart(f);
                 string villeA = Trajet::LireVilleArrivee(f);
-                TrajetCompose t (f, villeA, villeD);
+                TrajetCompose t (f, nb, villeA, villeD);
                 AjouterTrajet(&t);
             } else
             {
@@ -219,7 +219,7 @@ StatutChargement Catalogue::ChargerTypeTrajet(string cheminFichier, TypeTrajet t
             {
                 string villeD = Trajet::LireVilleDepart(f);
                 string villeA = Trajet::LireVilleArrivee(f);
-                TrajetCompose t (f, villeA, villeD);
+                TrajetCompose t (f, nb, villeA, villeD);
                 AjouterTrajet(&t);
             } else
             {
@@ -255,7 +255,7 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
                         AjouterTrajet(&t);
                     } else if (nb > 1) {
                         string villeA = Trajet::LireVilleArrivee(f);
-                        TrajetCompose t (f, villeA, villeD);
+                        TrajetCompose t (f, nb, villeA, villeD);
                         AjouterTrajet(&t);
                     } else {
                         cerr << "Le fichier a un mauvais format" <<  endl;
@@ -277,7 +277,7 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
                         TrajetSimple t (f, villeA, villeD);
                         AjouterTrajet(&t);
                     } else if (nb > 1) {
-                        TrajetCompose t (f, villeA, villeD);
+                        TrajetCompose t (f, nb, villeA, villeD);
                         AjouterTrajet(&t);
                     } else {
                         cerr << "Le fichier a un mauvais format" <<  endl;
@@ -302,7 +302,9 @@ StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep,
         return StatutChargement::MAUVAIS_FICHIER;
     } else
     {
-        while (ligneActuelle < dep && getline(f))
+        // buffer inutile pour sauter les lignes
+        string buf;
+        while (ligneActuelle < dep && getline(f, buf))
         {
             // on va jusqu'à la fin de la ligne
             ++ligneActuelle;
@@ -322,7 +324,7 @@ StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep,
                 {
                     string villeD = Trajet::LireVilleDepart(f);
                     string villeA = Trajet::LireVilleArrivee(f);
-                    TrajetCompose t (f, villeA, villeD);
+                    TrajetCompose t (f, nb, villeA, villeD);
                     AjouterTrajet(&t);
                 } else
                 {

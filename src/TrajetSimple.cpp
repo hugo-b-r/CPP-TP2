@@ -129,7 +129,7 @@ TrajetSimple::TrajetSimple ( const char * uneVilleDepart, const char * uneVilleA
     strcpy(moyenDeTransport, unMoyenTransport);
 } //----- Fin de TrajetSimple
 
-TrajetSimple::TrajetSimple ( ifstream & flux )
+TrajetSimple::TrajetSimple ( ifstream & flux, string villeA, string villeB )
 {
     string nb_str;
     getline(flux, nb_str, ':');
