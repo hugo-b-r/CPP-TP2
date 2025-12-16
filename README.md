@@ -60,7 +60,7 @@ classDiagram
         +virtual char * VilleArrivee()
         +virtual void Afficher()
         +virtual Trajet * Clone()
-        +virtual string FormaterPourFichier()
+        +virtual ofstream FormaterPourFichier()
     }
 
     
@@ -71,14 +71,14 @@ classDiagram
 
         +TrajetSimple(const TrajetSimple & unTrajetSimple)
         +TrajetSimple()
-        +TrajetSimple( string chaineFormatteeFichier )
+        +TrajetSimple( ifstream chaineFormatteeFichier )
         +virtual ~TrajetSimple()
         +virtual char * VilleDepart()
         +virtual char * VilleArrivee()
         +virtual char * MoyendeTransport()
         +virtual void Afficher ()
         +virtual Trajet * Clone()
-        +string FormaterPourFichier()
+        +ofstream FormaterPourFichier()
     }
     Trajet-->TrajetSimple
     
@@ -89,13 +89,13 @@ classDiagram
         +TrajetCompose()
         +TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau )
         +TrajetCompose ( const TrajetCompose & unTrajetCompose )
-        +TrajetCompose ( string chaineFormatteeFichier )
+        +TrajetCompose ( ifstream chaineFormatteeFichier, int taille_tableau )
         +virtual ~TrajetCompose()
         +virtual void Afficher()
         +virtual char * VilleDepart()
         +virtual char * VilleArrivee()
         +virtual Trajet * Clone()
-        +string FormaterPourFichier()
+        +ofstream FormaterPourFichier()
     }
     Trajet-->TrajetCompose
 
