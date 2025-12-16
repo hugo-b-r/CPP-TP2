@@ -102,15 +102,13 @@ TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau
     }
 }
 
-TrajetCompose::TrajetCompose (istream chaineFormatteeFichier)
+TrajetCompose::TrajetCompose (ifstream chaineFormatteeFichier, int taille tableau)
 // Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple.
 // A partir d'un texte de format fichier de sauvegerde
 {
   #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
   #endif
-  int taille_tableau;
-  getline(chaineFormatteeFichier,taille_tableau,':');
   string villeDep;
   getline(chaineFormatteeFichier,villeDep,'>');
   string villeArr;
