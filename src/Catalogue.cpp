@@ -195,6 +195,7 @@ StatutChargement Catalogue::Charger(string cheminFichier)
         }
     }
     f.close();
+    return StatutChargement::SUCCES;
 }
 
 StatutChargement Catalogue::ChargerTypeTrajet(string cheminFichier, TypeTrajet type)
@@ -230,6 +231,7 @@ StatutChargement Catalogue::ChargerTypeTrajet(string cheminFichier, TypeTrajet t
         }
     }
     f.close();
+    return StatutChargement::SUCCES;
 }
 
 StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, string ville, bool depart)
@@ -290,6 +292,7 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
 
     }
     f.close();
+    return StatutChargement::SUCCES;
 }
 
 StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep, int arrivee)
@@ -335,7 +338,7 @@ StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep,
         }
     }
     f.close();
-
+    return StatutChargement::SUCCES;
 }
 
 
