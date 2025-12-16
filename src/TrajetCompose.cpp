@@ -122,11 +122,11 @@ TrajetCompose::TrajetCompose (istream chaineFormatteeFichier)
       string moyen;
       string villeEtape1;
       string villeEtape2;
-      if (i=0){
+      if (i==0){
         getline(chaineFormatteeFichier,moyen,'>');
         getline(chaineFormatteeFichier,villeEtape2,'>');
         traj = new TrajetSimple(villeDep, villeEtape2, moyen);
-      } else if (i=taille_tableau-1){
+      } else if (i==taille_tableau-1){
         villeEtape1=villeEtape2;
         getline(chaineFormatteeFichier,moyen,'\n');
         traj = new TrajetSimple(villeEtape1, villeArr, moyen);
@@ -137,6 +137,7 @@ TrajetCompose::TrajetCompose (istream chaineFormatteeFichier)
         traj = new TrajetSimple(villeEtape1, villeEtape2, moyen);
       }
         trajets[i] = traj;
+        dlete traj;
     }
 }
 
