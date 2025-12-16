@@ -51,6 +51,8 @@ public:
 
     virtual Trajet* Clone() const override;
 
+    virtual string FormaterPourFichier() const override;
+
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetCompose & operator = ( const TrajetCompose & unTrajetCompose );
     // Mode d'emploi :
@@ -64,6 +66,8 @@ public:
     // Copie profonde
 
     TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau );
+
+    TrajetCompose ( string FormatPourFichier);
 
     TrajetCompose ( );
 
