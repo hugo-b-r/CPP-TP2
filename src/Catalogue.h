@@ -19,6 +19,18 @@
 
 //------------------------------------------------------------------ Types
 
+// Différents types de résultat du chargement d'un fichier
+// SUCCES: c'est une réussite, cela a bien fonctionné
+// MAUVAIS_FORMAT : le fichier est trouvé mais son format n'est pas le bon
+// MAUVAIS_FICHIER : le fichier n'est pas trouvé ou non accessible
+enum class StatutChargement { SUCCES, MAUVAIS_FORMAT, MAUVAIS_FICHIER };
+
+// Différents types de résultat du chargement d'un fichier
+// SUCCES: c'est une réussite, cela a bien fonctionné
+// MAUVAIS_FICHIER : le fichier n'est pas trouvé ou non accessible
+enum class StatutSauvegarde { SUCCES, MAUVAIS_FICHIER };
+
+
 //------------------------------------------------------------------------
 // Rôle de la classe Catalogue>
 // Catalogue est une collection ordonnée de Trajet dans laquelle on peut faire
@@ -78,6 +90,22 @@ public:
   // Mode d'emploi : copie en profondeur d'un catalogue
   //
 
+
+  StatutSauvegarde Sauvergarder(string cheminFichier);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
+
+  StatutSauvegarde SauvergarderTypeTrajet(string cheminFichier, TypeTrajet type);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
+
+  StatutSauvegarde SauvergarderVilleDepartOuArrivee(string cheminFichier, string ville, bool depart);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
+
+  StatutSauvegarde SauvergarderSelonSelection(string cheminFichier, int dep, int arrivee);
+  // Mode d'emploi : copie en profondeur d'un catalogue
+  //
 
 
   //-------------------------------------------- Constructeurs - destructeur

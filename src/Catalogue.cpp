@@ -342,6 +342,82 @@ StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep,
 }
 
 
+
+StatutSauvegarde Catalogue::Sauvergarder(string cheminFichier)
+{
+    ofstream of;
+    of.open(cheminFichier);
+    if (!of.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutSauvegarde::MAUVAIS_FICHIER;
+    } else
+    {
+        for (int i = 0; i < nbTrajets; i++)
+        {
+            trajets[i]->FormaterPourFichier(of);
+        }
+    }
+    return StatutSauvegarde::SUCCES;
+}
+
+StatutSauvegarde Catalogue::SauvergarderTypeTrajet(string cheminFichier, TypeTrajet type)
+{
+    ofstream of;
+    of.open(cheminFichier);
+    if (!of.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutSauvegarde::MAUVAIS_FICHIER;
+    } else
+    {
+        for (int i = 0; i < nbTrajets; i++)
+        {
+            if ((typeid(trajets[i]).name() == "TrajetSimple" && type == TypeTrajet::SIMPLE)
+                || (typeid(trajets[i]).name() == "TrajetCompose" && type == TypeTrajet::COMPOSE)) {
+                trajets[i]->FormaterPourFichier(of);
+            }
+        }
+    }
+    return StatutSauvegarde::SUCCES;
+}
+
+StatutSauvegarde Catalogue::SauvergarderVilleDepartOuArrivee(string cheminFichier, string ville, bool depart)
+{
+    ofstream of;
+    of.open(cheminFichier);
+    if (!of.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutSauvegarde::MAUVAIS_FICHIER;
+    } else
+    {
+        for (int i = 0; i < nbTrajets; i++)
+        {
+            trajets[i]->FormaterPourFichier(of);
+        }
+    }
+    return StatutSauvegarde::SUCCES;
+}
+
+StatutSauvegarde Catalogue::SauvergarderSelonSelection(string cheminFichier, int dep, int arrivee)
+{
+    ofstream of;
+    of.open(cheminFichier);
+    if (!of.is_open())
+    {
+        cerr << "Le fichier n'a pas pu être ouvert" <<  endl;
+        return StatutSauvegarde::MAUVAIS_FICHIER;
+    } else
+    {
+        for (int i = 0; i < nbTrajets; i++)
+        {
+            trajets[i]->FormaterPourFichier(of);
+        }
+    }
+    return StatutSauvegarde::SUCCES;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
 // Algorithme : simple copie en profondeur d'un Catalogue
