@@ -373,8 +373,10 @@ StatutSauvegarde Catalogue::SauvergarderTypeTrajet(string cheminFichier, TypeTra
     {
         for (int i = 0; i < nbTrajets; i++)
         {
-            if ((strcmp(typeid(trajets[i]).name(), "TrajetSimple") == 0 && type == TypeTrajet::SIMPLE)
-                || (strcmp(typeid(trajets[i]).name(), "TrajetCompose")== 0 && type == TypeTrajet::COMPOSE)) {
+            cout << "--------" << endl;
+            cout << typeid(trajets[i]).name() << endl;
+            cout << "--------" << endl;
+            if (trajets[i]->Type() == type) {
                 trajets[i]->FormaterPourFichier(of);
             }
         }
