@@ -13,6 +13,7 @@
 //-------------------------------------------------------- Include système
 #include <fstream>
 
+#include <iostream>
 
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"

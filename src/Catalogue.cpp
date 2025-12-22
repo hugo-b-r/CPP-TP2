@@ -173,24 +173,31 @@ StatutChargement Catalogue::Charger(string cheminFichier)
     } else {
         // tant qu'on n'a pas atteint la fin du fichier
         while (f.peek() != EOF) {
-            int nb = Trajet::LireNbEtapes(f);
-            cout << "nb :" << nb << endl;
-            if (nb == 1)
+            // si la ligne n'est pas vide
+            if (f.peek() != '\n')
             {
-                string villeD = Trajet::LireVilleDepart(f);
-                string villeA = Trajet::LireVilleArrivee(f);
-                TrajetSimple t (f, villeD, villeA);
-                AjouterTrajet(&t);
-            } else if (nb > 1)
-            {
-                string villeD = Trajet::LireVilleDepart(f);
-                string villeA = Trajet::LireVilleArrivee(f);
-                TrajetCompose t (f, nb, villeD, villeA);
-                AjouterTrajet(&t);
+                int nb = Trajet::LireNbEtapes(f);
+                cout << "nb :" << nb << endl;
+                if (nb == 1)
+                {
+                    string villeD = Trajet::LireVilleDepart(f);
+                    string villeA = Trajet::LireVilleArrivee(f);
+                    TrajetSimple t (f, villeD, villeA);
+                    AjouterTrajet(&t);
+                } else if (nb > 1)
+                {
+                    string villeD = Trajet::LireVilleDepart(f);
+                    string villeA = Trajet::LireVilleArrivee(f);
+                    TrajetCompose t (f, nb, villeD, villeA);
+                    AjouterTrajet(&t);
+                } else
+                {
+                    cerr << "Le fichier a un mauvais format" <<  endl;
+                    return StatutChargement::MAUVAIS_FORMAT;
+                }
             } else
             {
-                cerr << "Le fichier a un mauvais format" <<  endl;
-                return StatutChargement::MAUVAIS_FORMAT;
+                f.get();
             }
 
         }

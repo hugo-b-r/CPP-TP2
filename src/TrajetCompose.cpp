@@ -128,25 +128,23 @@ TrajetCompose::TrajetCompose (ifstream& fluxFormateFichier, int taille_tableau, 
     cout << "Appel au constructeur de <TrajetCompose>" << std::endl;
   #endif
   trajets = new TrajetSimple[taille_tableau];
-
+    TrajetSimple* traj;
+    string moyen;
+    string vieilleVilleEtape;
+    string villeEtape;
     for (int i = 0; i < taille_tableau; i++) {
-      TrajetSimple* traj;
-      string moyen;
-      string villeEtape1;
-      string villeEtape2;
-      if (i==0){
+      if (i == 0) {
         getline(fluxFormateFichier,moyen,'>');
-        getline(fluxFormateFichier,villeEtape2,'>');
-        traj = new TrajetSimple(villeDep.c_str(), villeEtape2.c_str(), moyen.c_str());
-      } else if (i==taille_tableau-1){
-        villeEtape1=villeEtape2;
+        getline(fluxFormateFichier,villeEtape,'>');
+        traj = new TrajetSimple(villeDep.c_str(), villeEtape.c_str(), moyen.c_str());
+      } else if (i == taille_tableau-1) {
         getline(fluxFormateFichier,moyen,'\n');
-        traj = new TrajetSimple(villeEtape1.c_str(), villeArr.c_str(), moyen.c_str());
+        traj = new TrajetSimple(villeEtape.c_str(), villeArr.c_str(), moyen.c_str());
       } else {
-        villeEtape1=villeEtape2;
+        vieilleVilleEtape = villeEtape;
         getline(fluxFormateFichier,moyen,'>');
-        getline(fluxFormateFichier,villeEtape2,'>');
-        traj = new TrajetSimple(villeEtape1.c_str(), villeEtape2.c_str(), moyen.c_str());
+        getline(fluxFormateFichier,villeEtape,'>');
+        traj = new TrajetSimple(vieilleVilleEtape.c_str(), villeEtape.c_str(), moyen.c_str());
       }
         trajets[i] = *traj;
         delete traj;
