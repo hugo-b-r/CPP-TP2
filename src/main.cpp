@@ -6,6 +6,7 @@
     e-mail               : perrine.blouin-lauvergne@insa-lyon.fr, brhugo@proton.me
 *************************************************************************/
 
+#include "Trajet.h"
 #include <iostream>
 using namespace std;
 #include <cstring>
@@ -29,8 +30,19 @@ void AfficherMenu(bool afficher_menu)
     cout << "(2) Recherche de parcours" << endl;
     cout << "(3) Recherche de parcours constitué de plusieurs trajets enregistrés" << endl;
     cout << "(4) Sauvegarder le catalogue" << endl;
-    cout << "(5) Charger à la suite à parti d'un autre catalogue" << endl;
+    cout << "(5) Charger à la suite à partir d'un autre catalogue" << endl;
     cout << "(6) Quitter le logiciel" << endl;
+}
+
+
+void afficherModeInteractionFichier() {
+    cout << "Quels sont vos critères ?" << endl;
+    cout << "(0) Sans critère" << endl;
+    cout << "(1) Selon le type de trajets" << endl;
+    cout << "(2) Selon la ville de départ" << endl;
+    cout << "(3) Selon la ville d'arrivée" << endl;
+    cout << "(4) Selon une sélection (un intervalle) de trajet" << endl;
+    cout << "(5) Abandonner" << endl;
 }
 
 
@@ -52,12 +64,12 @@ void demanderAjoutTrajet(Catalogue & c)
         cout << "(0) Ajouter une ville" << endl;
         cout << "(1) Définir le moyen de transport" << endl;
         cout << "(2) Enregistre le trajet définition/Sortie" << endl;
-        int choix;
+        char choix;
         cin >> choix;
         cout << endl;
         // on gère chacun des cas
         switch (choix) {
-            case 0:
+            case '0':
                 // ajout d'une ville
                 cout << "Nom de la ville ?" << endl;
                 ville_tmp = new char[NB_CHAR_MAX_VILLE];
@@ -79,13 +91,13 @@ void demanderAjoutTrajet(Catalogue & c)
                 nb_villes+=1;
                 delete[] ville_tmp;
                 break;
-            case 1:
+            case '1':
                 // Définition du moyen de transport
                 moyen = new char[NB_CHAR_MAX_VILLE];
                 cout << "Nom du moyen de transport ?" << endl;
                 cin >> moyen;
                 break;
-            case 2:
+            case '2':
                 if (nb_villes <2) {
                     cout << "Il faut au moins 2 villes pour créer un trajet !" <<endl,
                     cout << "Le trajet n'est pas enregistré, veuillez réessayer." << endl;
@@ -123,6 +135,10 @@ void demanderAjoutTrajet(Catalogue & c)
                     delete[] moyen;
                     doitContinuer = false;
                 }
+                break;
+            default:
+                cout << "Mauvaise entrée, veuillez recommencer" << endl;
+                cout << endl;
                 break;
         }
     }
@@ -176,6 +192,138 @@ void demanderRechercheComplexe( const Catalogue & cata)
     cout << endl;
 }
 
+void demanderSauvegardeOuChargeSelonTypeTrajet(Catalogue& cata, string& chemin, bool chargement)
+{
+    bool doitContinuer = true;
+    while (doitContinuer)  {
+        cout << "Quel type de trajet ?" << endl;
+        cout << "(0) TrajetSimple" << endl;
+        cout << "(1)  TrajetCompose" << endl;
+        int choix;
+        cin >> choix;
+        switch (choix)
+        {
+            case 0:
+                if (chargement)
+                    cata.ChargerTypeTrajet(chemin, TypeTrajet::SIMPLE);
+                else
+                    cata.SauvergarderTypeTrajet(chemin, TypeTrajet::SIMPLE);
+                doitContinuer = false;
+                break;
+            case 1:
+                if (chargement)
+                    cata.ChargerTypeTrajet(chemin, TypeTrajet::COMPOSE);
+                else
+                    cata.SauvergarderTypeTrajet(chemin, TypeTrajet::COMPOSE);
+                doitContinuer = false;
+                break;
+            default:
+                cout << "Erreur de choix, le catalogue ne sera pas sauvegardé" << endl;
+        }
+    }
+}
+
+void demanderSauvegardeOuChargeSelonVille(Catalogue& cata, string& chemin, bool villeEstCelleDeDepart, bool chargement)
+{
+    string ville;
+    if (villeEstCelleDeDepart)
+        cout << "Quelle est la ville de départ qui servira de selecteur ?" << endl;
+    else
+        cout << "Quelle est la ville d'arrivée qui servira de selecteur ?" << endl;
+    cin >> ville;
+    if (chargement)
+        cata.ChargerVilleDepartOuArrivee(chemin, ville, villeEstCelleDeDepart);
+    else
+        cata.SauvergarderVilleDepartOuArrivee(chemin, ville, villeEstCelleDeDepart);
+}
+
+
+void demanderSauvegardeOuChargeSelonSelection(Catalogue& cata, string& chemin, bool chargement)
+{
+    bool doitContinuer = true;
+    while (doitContinuer)
+    {
+        int debut = 0, fin = 0;
+        cout << "Quel est l'indice de début ?" << endl;
+        cin >> debut;
+        cout << "Quel est l'indice de fin ?" << endl;
+        cin >> fin;
+
+        if (fin <= debut)
+        {
+            cout << "l'indice de fin doit être inférieur à celui du début ! Recommencez" << endl;
+        } else {
+            doitContinuer = false;
+            if (chargement)
+                cata.ChargerSelonSelection(chemin, debut, fin);
+            else
+                cata.SauvergarderSelonSelection(chemin, debut, fin);
+        }
+    }
+}
+
+
+
+void demanderSauvegardeOuCharge(Catalogue& cata, bool chargement)
+{
+
+    // Nom et chemin du fichier vers lequel on sauvegarde
+    if (chargement)
+        cout << "Depuis quel fichier voulezz-vous charger ?";
+    else
+        cout << "Vers quel fichier voulez-vous sauvegarder ?";
+    cout <<  "(chemin complet et extension de fichier, attention, il n'y a pas de vérification !)" << endl;
+
+    string chemin = "";
+    cin >> chemin;
+
+    bool doitContinuer = true;
+    while (doitContinuer)
+    {
+        // Mode de sauvegarde
+        afficherModeInteractionFichier();
+        int choix;
+        cin >> choix;
+        cout << endl;
+        switch (choix) {
+            // pas de critère
+            case 0:
+                cata.Sauvergarder(chemin);
+                doitContinuer = false;
+                break;
+            // selon le type de trajet
+            case 1:
+                // Affichage du catalogue
+                demanderSauvegardeOuChargeSelonTypeTrajet(cata, chemin, chargement);
+                doitContinuer = false;
+                break;
+            // Selon la ville de départ
+            case 2:
+                demanderSauvegardeOuChargeSelonVille(cata, chemin, true, chargement);
+                doitContinuer = false;
+                break;
+            // selon la ville d'arrivée
+            case 3:
+
+                demanderSauvegardeOuChargeSelonVille(cata, chemin, false, chargement);
+                doitContinuer = false;
+                break;
+            // selon une sélection de trajets
+            case 4:
+                demanderSauvegardeOuChargeSelonSelection(cata, chemin, chargement);
+                doitContinuer = false;
+                break;
+            case 5:
+                cout << "Abandon" << endl;
+                doitContinuer = false;
+                break;
+            default:
+                cout << "vous n'avez pas entré le bon choix, veuillez recommencer" << endl;
+                break;
+        }
+    }
+}
+
 int main() {
 
     bool doitContinuer = true;
@@ -204,6 +352,14 @@ int main() {
                 demanderRechercheComplexe(cata);
                 break;
             case 4:
+                // Recherche de parcours imbriqués
+                demanderSauvegardeOuCharge(cata, false);
+                break;
+            case 5:
+                // Recherche de parcours imbriqués
+                demanderSauvegardeOuCharge(cata, true);
+                break;
+            case 6:
                 // quitter le logiciel
                 doitContinuer = false;
                 break;

@@ -410,7 +410,7 @@ StatutSauvegarde Catalogue::SauvergarderSelonSelection(string cheminFichier, int
         return StatutSauvegarde::MAUVAIS_FICHIER;
     } else
     {
-        for (int i = 0; i < nbTrajets; i++)
+        for (int i = dep; i < arrivee; i++)
         {
             trajets[i]->FormaterPourFichier(of);
         }
