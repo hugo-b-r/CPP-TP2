@@ -373,9 +373,7 @@ StatutSauvegarde Catalogue::SauvergarderTypeTrajet(string cheminFichier, TypeTra
     {
         for (int i = 0; i < nbTrajets; i++)
         {
-            cout << "--------" << endl;
-            cout << typeid(trajets[i]).name() << endl;
-            cout << "--------" << endl;
+
             if (trajets[i]->Type() == type) {
                 trajets[i]->FormaterPourFichier(of);
             }
