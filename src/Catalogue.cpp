@@ -174,17 +174,18 @@ StatutChargement Catalogue::Charger(string cheminFichier)
         // tant qu'on n'a pas atteint la fin du fichier
         while (f.peek() != EOF) {
             int nb = Trajet::LireNbEtapes(f);
+            cout << "nb :" << nb << endl;
             if (nb == 1)
             {
                 string villeD = Trajet::LireVilleDepart(f);
                 string villeA = Trajet::LireVilleArrivee(f);
-                TrajetSimple t (f, villeA, villeD);
+                TrajetSimple t (f, villeD, villeA);
                 AjouterTrajet(&t);
             } else if (nb > 1)
             {
                 string villeD = Trajet::LireVilleDepart(f);
                 string villeA = Trajet::LireVilleArrivee(f);
-                TrajetCompose t (f, nb, villeA, villeD);
+                TrajetCompose t (f, nb, villeD, villeA);
                 AjouterTrajet(&t);
             } else
             {
@@ -214,13 +215,13 @@ StatutChargement Catalogue::ChargerTypeTrajet(string cheminFichier, TypeTrajet t
             {
                 string villeD = Trajet::LireVilleDepart(f);
                 string villeA = Trajet::LireVilleArrivee(f);
-                TrajetSimple t (f, villeA, villeD);
+                TrajetSimple t (f, villeD, villeA);
                 AjouterTrajet(&t);
             } else if (nb > 1 && type == TypeTrajet::COMPOSE)
             {
                 string villeD = Trajet::LireVilleDepart(f);
                 string villeA = Trajet::LireVilleArrivee(f);
-                TrajetCompose t (f, nb, villeA, villeD);
+                TrajetCompose t (f, nb, villeD, villeA);
                 AjouterTrajet(&t);
             } else
             {
@@ -253,11 +254,11 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
                 {
                     if (nb == 1) {
                         string villeA = Trajet::LireVilleArrivee(f);
-                        TrajetSimple t (f, villeA, villeD);
+                        TrajetSimple t (f, villeD, villeA);
                         AjouterTrajet(&t);
                     } else if (nb > 1) {
                         string villeA = Trajet::LireVilleArrivee(f);
-                        TrajetCompose t (f, nb, villeA, villeD);
+                        TrajetCompose t (f, nb, villeD, villeA);
                         AjouterTrajet(&t);
                     } else {
                         cerr << "Le fichier a un mauvais format" <<  endl;
@@ -276,10 +277,10 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
                 if (villeA == ville)
                 {
                     if (nb == 1) {
-                        TrajetSimple t (f, villeA, villeD);
+                        TrajetSimple t (f, villeD, villeA);
                         AjouterTrajet(&t);
                     } else if (nb > 1) {
-                        TrajetCompose t (f, nb, villeA, villeD);
+                        TrajetCompose t (f, nb, villeD, villeA);
                         AjouterTrajet(&t);
                     } else {
                         cerr << "Le fichier a un mauvais format" <<  endl;
@@ -321,13 +322,13 @@ StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep,
                 {
                     string villeD = Trajet::LireVilleDepart(f);
                     string villeA = Trajet::LireVilleArrivee(f);
-                    TrajetSimple t (f, villeA, villeD);
+                    TrajetSimple t (f, villeD, villeA);
                     AjouterTrajet(&t);
                 } else if (nb > 1)
                 {
                     string villeD = Trajet::LireVilleDepart(f);
                     string villeA = Trajet::LireVilleArrivee(f);
-                    TrajetCompose t (f, nb, villeA, villeD);
+                    TrajetCompose t (f, nb, villeD, villeA);
                     AjouterTrajet(&t);
                 } else
                 {

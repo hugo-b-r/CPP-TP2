@@ -140,16 +140,12 @@ TrajetSimple::TrajetSimple ( const char * uneVilleDepart, const char * uneVilleA
 
 TrajetSimple::TrajetSimple ( ifstream & flux, string villeA, string villeB )
 {
-    string nb_str;
-    getline(flux, nb_str, ':');
-    string uneVilleDepart, uneVilleArrivee, unMoyenDeTransport;
-    getline(flux, uneVilleDepart, '>');
-    getline(flux, uneVilleArrivee, ':');
+    string unMoyenDeTransport;
     getline(flux, unMoyenDeTransport, '\n');
-    villeDepart = new char[uneVilleDepart.size() + 1];
-    strcpy(villeDepart, uneVilleDepart.c_str());
-    villeArrivee = new char[uneVilleArrivee.size() + 1];
-    strcpy(villeArrivee, uneVilleArrivee.c_str());
+    villeDepart = new char[villeA.size() + 1];
+    strcpy(villeDepart, villeA.c_str());
+    villeArrivee = new char[villeB.size() + 1];
+    strcpy(villeArrivee, villeB.c_str());
     moyenDeTransport = new char[unMoyenDeTransport.size() + 1];
     strcpy(moyenDeTransport, unMoyenDeTransport.c_str());
 }

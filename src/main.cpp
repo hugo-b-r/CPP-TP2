@@ -198,7 +198,7 @@ void demanderSauvegardeOuChargeSelonTypeTrajet(Catalogue& cata, string& chemin, 
     while (doitContinuer)  {
         cout << "Quel type de trajet ?" << endl;
         cout << "(0) TrajetSimple" << endl;
-        cout << "(1)  TrajetCompose" << endl;
+        cout << "(1) TrajetCompose" << endl;
         int choix;
         cin >> choix;
         switch (choix)
@@ -269,7 +269,7 @@ void demanderSauvegardeOuCharge(Catalogue& cata, bool chargement)
 
     // Nom et chemin du fichier vers lequel on sauvegarde
     if (chargement)
-        cout << "Depuis quel fichier voulezz-vous charger ?";
+        cout << "Depuis quel fichier voulez-vous charger ?";
     else
         cout << "Vers quel fichier voulez-vous sauvegarder ?";
     cout <<  "(chemin complet et extension de fichier, attention, il n'y a pas de vérification !)" << endl;
@@ -288,7 +288,10 @@ void demanderSauvegardeOuCharge(Catalogue& cata, bool chargement)
         switch (choix) {
             // pas de critère
             case 0:
-                cata.Sauvergarder(chemin);
+                if (chargement)
+                    cata.Charger(chemin);
+                else
+                    cata.Sauvergarder(chemin);
                 doitContinuer = false;
                 break;
             // selon le type de trajet

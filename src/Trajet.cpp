@@ -35,7 +35,7 @@ int Trajet::LireNbEtapes(ifstream & flux)
 string Trajet::LireVilleDepart(ifstream & flux)
 {
     string villeDep;
-    getline(flux, villeDep, ':');
+    getline(flux, villeDep, '>');
     return villeDep;
 }
 
