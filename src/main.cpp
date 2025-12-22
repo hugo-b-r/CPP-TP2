@@ -28,7 +28,9 @@ void AfficherMenu(bool afficher_menu)
     cout << "(1) Affichage du catalogue courant" << endl;
     cout << "(2) Recherche de parcours" << endl;
     cout << "(3) Recherche de parcours constitué de plusieurs trajets enregistrés" << endl;
-    cout << "(4) Quitter le logiciel" << endl;
+    cout << "(4) Sauvegarder le catalogue" << endl;
+    cout << "(5) Charger à la suite à parti d'un autre catalogue" << endl;
+    cout << "(6) Quitter le logiciel" << endl;
 }
 
 
