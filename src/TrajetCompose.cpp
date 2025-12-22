@@ -114,7 +114,7 @@ TrajetCompose::TrajetCompose ( TrajetSimple * trajetsSimples, int taille_tableau
     }
 }
 
-TrajetCompose::TrajetCompose (ifstream& chaineFormatteeFichier, int taille_tableau, string villeDep, string villeArr) : nbTrajets(taille_tableau)
+TrajetCompose::TrajetCompose (ifstream& fluxFormateFichier, int taille_tableau, string villeDep, string villeArr) : nbTrajets(taille_tableau)
 // Initialise un trajet multi-segments, qui contiendra plusieurs TrajetSimple.
 // A partir d'un texte de format fichier de sauvegerde
 {
@@ -129,17 +129,17 @@ TrajetCompose::TrajetCompose (ifstream& chaineFormatteeFichier, int taille_table
       string villeEtape1;
       string villeEtape2;
       if (i==0){
-        getline(chaineFormatteeFichier,moyen,'>');
-        getline(chaineFormatteeFichier,villeEtape2,'>');
+        getline(fluxFormateFichier,moyen,'>');
+        getline(fluxFormateFichier,villeEtape2,'>');
         traj = new TrajetSimple(villeDep.c_str(), villeEtape2.c_str(), moyen.c_str());
       } else if (i==taille_tableau-1){
         villeEtape1=villeEtape2;
-        getline(chaineFormatteeFichier,moyen,'\n');
+        getline(fluxFormateFichier,moyen,'\n');
         traj = new TrajetSimple(villeEtape1.c_str(), villeArr.c_str(), moyen.c_str());
       } else {
         villeEtape1=villeEtape2;
-        getline(chaineFormatteeFichier,moyen,'>');
-        getline(chaineFormatteeFichier,villeEtape2,'>');
+        getline(fluxFormateFichier,moyen,'>');
+        getline(fluxFormateFichier,villeEtape2,'>');
         traj = new TrajetSimple(villeEtape1.c_str(), villeEtape2.c_str(), moyen.c_str());
       }
         trajets[i] = *traj;

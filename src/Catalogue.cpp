@@ -373,8 +373,8 @@ StatutSauvegarde Catalogue::SauvergarderTypeTrajet(string cheminFichier, TypeTra
     {
         for (int i = 0; i < nbTrajets; i++)
         {
-            if ((typeid(trajets[i]).name() == "TrajetSimple" && type == TypeTrajet::SIMPLE)
-                || (typeid(trajets[i]).name() == "TrajetCompose" && type == TypeTrajet::COMPOSE)) {
+            if ((strcmp(typeid(trajets[i]).name(), "TrajetSimple") == 0 && type == TypeTrajet::SIMPLE)
+                || (strcmp(typeid(trajets[i]).name(), "TrajetCompose")== 0 && type == TypeTrajet::COMPOSE)) {
                 trajets[i]->FormaterPourFichier(of);
             }
         }
