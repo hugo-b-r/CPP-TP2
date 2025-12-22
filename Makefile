@@ -45,11 +45,11 @@ map: $(TARGET)
 
 
 # édition des liens
-$(TARGET): $(OBJ) | $(BUILD_DIR)
+$(TARGET): $(OBJ) $(BUILD_DIR)
 	$(CC) $(OBJ) -o $@ $(LDFLAGS)
 
 # fichiers objets
-$(BUILD_DIR)/%.o: %.cpp
+$(BUILD_DIR)/%.o: %.cpp $(BUILD_DIR)
 	@echo $(@D)
 	mkdir -p $(@D)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
@@ -58,7 +58,7 @@ $(BUILD_DIR)/%.o: %.cpp
 test: $(TEST_TARGET)
 
 # édition des liens
-$(TEST_TARGET): $(OBJ_TEST) | $(BUILD_DIR)
+$(TEST_TARGET): $(OBJ_TEST) $(BUILD_DIR)
 	$(CC) $(OBJ_TEST) -o $@ $(LDFLAGS)
 
 clean:
