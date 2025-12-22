@@ -217,23 +217,32 @@ StatutChargement Catalogue::ChargerTypeTrajet(string cheminFichier, TypeTrajet t
     } else {
         // tant qu'on n'a pas atteint la fin du fichier
         while (f.peek() != EOF) {
-            int nb = Trajet::LireNbEtapes(f);
-            if (nb == 1 && type == TypeTrajet::SIMPLE)
+            if (f.peek() != '\n')
             {
-                string villeD = Trajet::LireVilleDepart(f);
-                string villeA = Trajet::LireVilleArrivee(f);
-                TrajetSimple t (f, villeD, villeA);
-                AjouterTrajet(&t);
-            } else if (nb > 1 && type == TypeTrajet::COMPOSE)
-            {
-                string villeD = Trajet::LireVilleDepart(f);
-                string villeA = Trajet::LireVilleArrivee(f);
-                TrajetCompose t (f, nb, villeD, villeA);
-                AjouterTrajet(&t);
+                int nb = Trajet::LireNbEtapes(f);
+                if (nb == 1 && type == TypeTrajet::SIMPLE)
+                {
+                    string villeD = Trajet::LireVilleDepart(f);
+                    string villeA = Trajet::LireVilleArrivee(f);
+                    TrajetSimple t (f, villeD, villeA);
+                    AjouterTrajet(&t);
+                } else if (nb > 1 && type == TypeTrajet::COMPOSE)
+                {
+                    string villeD = Trajet::LireVilleDepart(f);
+                    string villeA = Trajet::LireVilleArrivee(f);
+                    TrajetCompose t (f, nb, villeD, villeA);
+                    AjouterTrajet(&t);
+                } else if (nb >= 1) {
+                    while (f.peek() != '\n')
+                        f.get();
+                } else
+                {
+                    cerr << "Le fichier a un mauvais format" <<  endl;
+                    return StatutChargement::MAUVAIS_FORMAT;
+                }
             } else
             {
-                cerr << "Le fichier a un mauvais format" <<  endl;
-                return StatutChargement::MAUVAIS_FORMAT;
+                f.get();
             }
 
         }
