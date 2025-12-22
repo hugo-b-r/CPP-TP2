@@ -394,7 +394,10 @@ StatutSauvegarde Catalogue::SauvergarderVilleDepartOuArrivee(string cheminFichie
     {
         for (int i = 0; i < nbTrajets; i++)
         {
-            trajets[i]->FormaterPourFichier(of);
+            if ((depart && strcmp(trajets[i]->VilleDepart(), ville.c_str()) == 0)
+            || (!depart && strcmp(trajets[i]->VilleArrivee(), ville.c_str()) == 0)) {
+                    trajets[i]->FormaterPourFichier(of);
+                }
         }
     }
     return StatutSauvegarde::SUCCES;
