@@ -64,6 +64,8 @@ public:
 
     static string LireVilleArrivee(ifstream & flux);
 
+    virtual TypeTrajet Type() const = 0;
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 

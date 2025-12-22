@@ -11,6 +11,7 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include "Trajet.h"
 #include <fstream>
 #include <iostream>
 #include <cstring>
@@ -61,6 +62,13 @@ ofstream & TrajetSimple::FormaterPourFichier(ofstream & flux) const {
     flux << "1" << ":" << villeDepart << ">" << villeArrivee << ":" << moyenDeTransport << endl;
     return flux;
 } //----- Fin de Méthode
+
+
+TypeTrajet TrajetSimple::Type() const
+{
+    return TypeTrajet::SIMPLE;
+}
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )

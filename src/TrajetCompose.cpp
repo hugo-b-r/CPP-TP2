@@ -11,6 +11,7 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include "Trajet.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -67,6 +68,11 @@ ofstream& TrajetCompose::FormaterPourFichier(ofstream & flux) const
         }
     }
     return flux;
+}
+
+TypeTrajet TrajetCompose::Type() const
+{
+    return TypeTrajet::COMPOSE;
 }
 
 

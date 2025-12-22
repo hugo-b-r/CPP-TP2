@@ -62,6 +62,8 @@ public:
 
     virtual ofstream & FormaterPourFichier(ofstream & flux) const override;
 
+    virtual TypeTrajet Type() const override;
+
 
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetSimple & operator = ( const TrajetSimple & unTrajetSimple );
