@@ -264,22 +264,36 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
         {
             // tant qu'on n'a pas atteint la fin du fichier
             while (f.peek() != EOF) {
-                int nb = Trajet::LireNbEtapes(f);
-                string villeD = Trajet::LireVilleDepart(f);
-                if (villeD == ville)
+                if (f.peek() != '\n')
                 {
-                    if (nb == 1) {
-                        string villeA = Trajet::LireVilleArrivee(f);
-                        TrajetSimple t (f, villeD, villeA);
-                        AjouterTrajet(&t);
-                    } else if (nb > 1) {
-                        string villeA = Trajet::LireVilleArrivee(f);
-                        TrajetCompose t (f, nb, villeD, villeA);
-                        AjouterTrajet(&t);
+                    int nb = Trajet::LireNbEtapes(f);
+                    string villeD = Trajet::LireVilleDepart(f);
+                    if (villeD == ville)
+                    {
+                        if (nb == 1) {
+                            string villeA = Trajet::LireVilleArrivee(f);
+                            TrajetSimple t (f, villeD, villeA);
+                            AjouterTrajet(&t);
+                        } else if (nb > 1) {
+                            string villeA = Trajet::LireVilleArrivee(f);
+                            TrajetCompose t (f, nb, villeD, villeA);
+                            AjouterTrajet(&t);
+                        } else if (nb >= 1) {
+                            // saut de la ligne
+                            while (f.peek() != '\n')
+                                f.get();
+                        } else {
+                            cerr << "Le fichier a un mauvais format" <<  endl;
+                            return StatutChargement::MAUVAIS_FORMAT;
+                        }
                     } else {
-                        cerr << "Le fichier a un mauvais format" <<  endl;
-                        return StatutChargement::MAUVAIS_FORMAT;
+                        // saut de la ligne
+                        while (f.peek() != '\n')
+                            f.get();
                     }
+                } else {
+                   // saut de la ligne
+                    f.get();
                 }
             }
         } else
@@ -287,21 +301,35 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
 
             // tant qu'on n'a pas atteint la fin du fichier
             while (f.peek() != EOF) {
-                int nb = Trajet::LireNbEtapes(f);
-                string villeD = Trajet::LireVilleDepart(f);
-                string villeA = Trajet::LireVilleArrivee(f);
-                if (villeA == ville)
+                if (f.peek() != '\n')
                 {
-                    if (nb == 1) {
-                        TrajetSimple t (f, villeD, villeA);
-                        AjouterTrajet(&t);
-                    } else if (nb > 1) {
-                        TrajetCompose t (f, nb, villeD, villeA);
-                        AjouterTrajet(&t);
+                    int nb = Trajet::LireNbEtapes(f);
+                    string villeD = Trajet::LireVilleDepart(f);
+                    string villeA = Trajet::LireVilleArrivee(f);
+                    if (villeA == ville)
+                    {
+                        if (nb == 1) {
+                            TrajetSimple t (f, villeD, villeA);
+                            AjouterTrajet(&t);
+                        } else if (nb > 1) {
+                            TrajetCompose t (f, nb, villeD, villeA);
+                            AjouterTrajet(&t);
+                        } else if (nb >= 1) {
+                            // saut de la ligne
+                            while (f.peek() != '\n')
+                                f.get();
+                        } else {
+                            cerr << "Le fichier a un mauvais format" <<  endl;
+                            return StatutChargement::MAUVAIS_FORMAT;
+                        }
                     } else {
-                        cerr << "Le fichier a un mauvais format" <<  endl;
-                        return StatutChargement::MAUVAIS_FORMAT;
+                        // saut de la ligne
+                        while (f.peek() != '\n')
+                            f.get();
                     }
+                } else {
+                   // saut de la ligne
+                    f.get();
                 }
             }
 
@@ -315,6 +343,7 @@ StatutChargement Catalogue::ChargerVilleDepartOuArrivee(string cheminFichier, st
 StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep, int arrivee)
 {
     ifstream f;
+    f.open(cheminFichier, ios_base::in);
     int ligneActuelle = 0;
     if (!f.is_open())
     {
@@ -323,16 +352,19 @@ StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep,
     } else
     {
         // buffer inutile pour sauter les lignes
-        string buf;
-        while (ligneActuelle < dep && getline(f, buf))
+        while (ligneActuelle < dep)
         {
             // on va jusqu'à la fin de la ligne
             ++ligneActuelle;
+            //saut de la ligne
+            while (f.peek() != '\n')
+                cout << f.get() << endl;
         }
-        while (ligneActuelle < arrivee)
-        {
-            // tant qu'on n'a pas atteint la fin du fichier
-            while (f.peek() != EOF) {
+        // tant qu'on n'a pas atteint la fin du fichier
+        while (f.peek() != EOF && ligneActuelle < arrivee) {
+            cout << ligneActuelle <<", ," << arrivee << endl;
+            if (f.peek() != '\n')
+            {
                 int nb = Trajet::LireNbEtapes(f);
                 if (nb == 1)
                 {
@@ -340,17 +372,29 @@ StatutChargement Catalogue::ChargerSelonSelection(string cheminFichier, int dep,
                     string villeA = Trajet::LireVilleArrivee(f);
                     TrajetSimple t (f, villeD, villeA);
                     AjouterTrajet(&t);
+                    ++ligneActuelle;
+
                 } else if (nb > 1)
                 {
                     string villeD = Trajet::LireVilleDepart(f);
                     string villeA = Trajet::LireVilleArrivee(f);
                     TrajetCompose t (f, nb, villeD, villeA);
                     AjouterTrajet(&t);
+                    ++ligneActuelle;
+
+                } else if (nb >= 1)
+                {
+                    // saut de la ligne
+                    while (f.peek() != '\n')
+                        f.get();
                 } else
                 {
                     cerr << "Le fichier a un mauvais format" <<  endl;
                     return StatutChargement::MAUVAIS_FORMAT;
                 }
+            } else
+            {
+                f.get();
             }
         }
     }
